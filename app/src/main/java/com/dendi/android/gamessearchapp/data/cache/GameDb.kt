@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.dendi.android.gamessearchapp.core.Abstract
 import com.dendi.android.gamessearchapp.data.GameData
+import com.dendi.android.gamessearchapp.data.GameDataMapper
 
 /**
  * @author Dendy-Jr on 01.11.2021
@@ -19,5 +20,12 @@ data class GameDb(
     val thumbnail: String = "",
     @ColumnInfo(name = "title")
     val title: String = "",
-) : Abstract.Object<GameData, Abstract.Mapper.Empty>
-//todo fix
+) : Abstract.Object<GameData, GameDataMapper> {
+    override fun map(mapper: GameDataMapper): GameData {
+        return mapper.map(
+            id = id,
+            thumbnail = thumbnail,
+            title = title,
+        )
+    }
+}

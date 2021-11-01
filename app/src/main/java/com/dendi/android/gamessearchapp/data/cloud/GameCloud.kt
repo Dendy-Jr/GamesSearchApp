@@ -2,6 +2,7 @@ package com.dendi.android.gamessearchapp.data.cloud
 
 import com.dendi.android.gamessearchapp.core.Abstract
 import com.dendi.android.gamessearchapp.data.GameData
+import com.dendi.android.gamessearchapp.data.GameDataMapper
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -14,5 +15,12 @@ data class GameCloud(
     private val thumbnail: String,
     @SerializedName("title")
     private val title: String,
-) : Abstract.Object<GameData, Abstract.Mapper.Empty>
-//todo fix
+) : Abstract.Object<GameData, GameDataMapper> {
+    override fun map(mapper: GameDataMapper): GameData {
+        return mapper.map(
+            id = id,
+            thumbnail = thumbnail,
+            title = title,
+        )
+    }
+}
