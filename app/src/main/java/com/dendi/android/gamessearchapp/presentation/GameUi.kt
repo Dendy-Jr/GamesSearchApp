@@ -6,7 +6,9 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * @author Dendy-Jr on 01.11.2021
  * olehvynnytskyi@gmail.com
  */
-sealed class GameUi : Abstract.Object<Unit, Abstract.Mapper.Empty> {
+sealed class GameUi : Abstract.Object<Unit, UiResultMapper> {
+
+    override fun map(mapper: UiResultMapper) = Unit
 
     object Progress : GameUi()
 
@@ -14,8 +16,26 @@ sealed class GameUi : Abstract.Object<Unit, Abstract.Mapper.Empty> {
         private val id: Int,
         private val thumbnail: String,
         private val title: String,
-    ) : GameUi()
+    ) : GameUi() {
+        override fun map(mapper: UiResultMapper) {
+            mapper.map(
+                id,
+                thumbnail,
+                title)
+        }
+    }
 
-    data class Fail(private val message: String) : GameUi()
+    data class Fail(private val message: String) : GameUi() {
+        override fun map(mapper: UiResultMapper) = mapper.map(message)
+    }
+
 }
-//todo fix
+
+interface UiResultMapper : Abstract.Mapper {
+    fun map(
+        id: Int,
+        thumbnail: String,
+        title: String,
+    )
+    fun map(message: String)
+}
