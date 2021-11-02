@@ -1,5 +1,8 @@
 package com.dendi.android.gamessearchapp.domain
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
+import com.dendi.android.gamessearchapp.data.GameDataToDomainMapper
 import com.dendi.android.gamessearchapp.data.GamesDataToDomainMapper
 
 /**
@@ -10,13 +13,20 @@ interface GamesInteractor {
 
     suspend fun fetchGames(): GamesDomain
 
+    fun searchGame(searchQuery: String): LiveData<List<GameDomain>>
+
     class Base(
         private val gamesRepository: GamesRepository,
-        private val mapper: GamesDataToDomainMapper,
+        private val domainsMapper: GamesDataToDomainMapper,
+        private val domainMapper: GameDataToDomainMapper,
     ) : GamesInteractor {
-        override suspend fun fetchGames(): GamesDomain {
-            return gamesRepository.fetchGames().map(mapper)
+        override suspend fun fetchGames() = gamesRepository.fetchGames().map(domainsMapper)
 
-        }
+        override fun searchGame(searchQuery: String) =
+            gamesRepository.searchGame(searchQuery).map { games ->
+                games.map { game ->
+                    game.map(domainMapper)
+                }
+            }
     }
 }

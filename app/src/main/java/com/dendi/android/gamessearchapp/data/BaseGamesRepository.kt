@@ -1,5 +1,6 @@
 package com.dendi.android.gamessearchapp.data
 
+import androidx.lifecycle.map
 import com.dendi.android.gamessearchapp.data.cache.GamesCacheDataSource
 import com.dendi.android.gamessearchapp.data.cloud.GamesCloudDataSource
 import com.dendi.android.gamessearchapp.domain.GamesRepository
@@ -28,4 +29,11 @@ class BaseGamesRepository(
     } catch (e: Exception) {
         GamesData.Fail(e)
     }
+
+    override fun searchGame(searchQuery: String) =
+        gamesCacheDataSource.searchGame(searchQuery).map { games ->
+            games.map { game ->
+                game.map(mapper)
+            }
+        }
 }

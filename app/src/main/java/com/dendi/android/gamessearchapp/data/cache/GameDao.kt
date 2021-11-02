@@ -1,5 +1,6 @@
 package com.dendi.android.gamessearchapp.data.cache
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -17,4 +18,7 @@ interface GameDao {
 
     @Insert(entity = GameDb::class, onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveGamesToDb(games: List<GameDb>)
+
+    @Query("select * from game_table where title like :searchQuery")
+    fun searchGame(searchQuery: String): LiveData<List<GameDb>>
 }

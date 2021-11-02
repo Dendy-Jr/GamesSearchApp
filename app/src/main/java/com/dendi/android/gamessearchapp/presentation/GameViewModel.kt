@@ -1,9 +1,7 @@
 package com.dendi.android.gamessearchapp.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.dendi.android.gamessearchapp.domain.GameDomainToUiMapper
 import com.dendi.android.gamessearchapp.domain.GamesDomainToUiMapper
 import com.dendi.android.gamessearchapp.domain.GamesInteractor
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +14,8 @@ import kotlinx.coroutines.withContext
  */
 class GameViewModel(
     private val gamesInteractor: GamesInteractor,
-    private val mapper: GamesDomainToUiMapper,
+    private val domainsMapper: GamesDomainToUiMapper,
+    private val domainMapper: GameDomainToUiMapper,
     private val communication: GamesCommunication,
 ) : ViewModel() {
 
@@ -24,9 +23,17 @@ class GameViewModel(
         communication.map(listOf(GameUi.Progress))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = gamesInteractor.fetchGames()
-            val resultUi = resultDomain.map(mapper)
+            val resultUi = resultDomain.map(domainsMapper)
             withContext(Dispatchers.Main) {
                 resultUi.map(communication)
+            }
+        }
+    }
+
+    fun searchGame(searchQuery: String): LiveData<List<GameUi>> {
+        return gamesInteractor.searchGame(searchQuery).map { games ->
+            games.map { game ->
+                game.map(domainMapper)
             }
         }
     }

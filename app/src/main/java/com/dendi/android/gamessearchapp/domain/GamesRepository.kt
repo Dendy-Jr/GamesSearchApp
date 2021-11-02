@@ -1,5 +1,7 @@
 package com.dendi.android.gamessearchapp.domain
 
+import androidx.lifecycle.LiveData
+import com.dendi.android.gamessearchapp.data.GameData
 import com.dendi.android.gamessearchapp.data.GamesData
 
 /**
@@ -8,4 +10,6 @@ import com.dendi.android.gamessearchapp.data.GamesData
  */
 interface GamesRepository {
     suspend fun fetchGames(): GamesData
+
+    fun searchGame(searchQuery: String): LiveData<List<GameData>>
 }
