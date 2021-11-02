@@ -14,25 +14,18 @@ data class GameData(
     private val title: String,
 ) : Abstract.Object<GameDb, GameDataToDbMapper>,
     Data<GameDomain, GameDataToDomainMapper> {
-    override fun map(mapper: GameDataToDbMapper): GameDb {
-        return mapper.map(
-            id = id,
-            thumbnail = thumbnail,
-            title = title
-        )
-    }
+    override fun map(mapper: GameDataToDbMapper) = mapper.map(
+        id = id,
+        thumbnail = thumbnail,
+        title = title
+    )
 
-    override fun map(mapper: GameDataToDomainMapper): GameDomain {
-        return GameDomain(
-            id = id,
-            thumbnail = thumbnail,
-            title = title)
-    }
-
-
+    override fun map(mapper: GameDataToDomainMapper) = GameDomain(
+        id = id,
+        thumbnail = thumbnail,
+        title = title)
 }
 
 interface Data<T, M> : Abstract.Mapper {
     fun map(mapper: M): T
-    //todo make it better later
 }

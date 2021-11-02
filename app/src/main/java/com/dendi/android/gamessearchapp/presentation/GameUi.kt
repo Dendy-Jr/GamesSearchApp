@@ -17,18 +17,16 @@ sealed class GameUi : Abstract.Object<Unit, UiResultMapper> {
         private val thumbnail: String,
         private val title: String,
     ) : GameUi() {
-        override fun map(mapper: UiResultMapper) {
-            mapper.map(
-                id,
-                thumbnail,
-                title)
-        }
+        override fun map(mapper: UiResultMapper) = mapper.map(
+            id = id,
+            thumbnail = thumbnail,
+            title = title
+        )
     }
 
     data class Fail(private val message: String) : GameUi() {
         override fun map(mapper: UiResultMapper) = mapper.map(message)
     }
-
 }
 
 interface UiResultMapper : Abstract.Mapper {
@@ -37,5 +35,6 @@ interface UiResultMapper : Abstract.Mapper {
         thumbnail: String,
         title: String,
     )
+
     fun map(message: String)
 }

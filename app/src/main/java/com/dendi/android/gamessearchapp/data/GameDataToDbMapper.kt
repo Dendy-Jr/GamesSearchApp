@@ -19,12 +19,10 @@ interface GameDataToDbMapper : Abstract.Mapper {
             id: Int,
             thumbnail: String,
             title: String,
-        ): GameDb {
-            return GameDb(
-                id,
-                thumbnail,
-                title
-            )
-        }
+        ) = GameDb(
+            id = id,
+            thumbnail = thumbnail,
+            title = title
+        )
     }
 }

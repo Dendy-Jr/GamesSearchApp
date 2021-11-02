@@ -16,23 +16,18 @@ sealed class GamesDomain : Abstract.Object<GamesUi, GamesDomainToUiMapper> {
         private val games: List<GameData>,
         private val gameMapper: GameDataToDomainMapper,
     ) : GamesDomain() {
-        override fun map(mapper: GamesDomainToUiMapper): GamesUi {
-            return mapper.map(games.map {
-                it.map(gameMapper)
-            })
-        }
+        override fun map(mapper: GamesDomainToUiMapper) = mapper.map(games.map { game ->
+            game.map(gameMapper)
+        })
     }
 
     data class Fail(private val e: Exception) : GamesDomain() {
-        override fun map(mapper: GamesDomainToUiMapper): GamesUi {
-            return mapper.map(
-                when (e) {
-                    is UnknownHostException -> ErrorType.NO_CONNECTION
-                    is HttpException -> ErrorType.SERVICE_UNAVAILABLE
-                    else -> ErrorType.GENERIC_ERROR
-                }
-            )
-        }
+        override fun map(mapper: GamesDomainToUiMapper) = mapper.map(
+            when (e) {
+                is UnknownHostException -> ErrorType.NO_CONNECTION
+                is HttpException -> ErrorType.SERVICE_UNAVAILABLE
+                else -> ErrorType.GENERIC_ERROR
+            }
+        )
     }
-
 }

@@ -62,6 +62,7 @@ class GamesApp : Application() {
         val gameDomainToUiMapper = BaseGameDomainToUiMapper()
         val gamesDomainToUiMapper =
             BaseGamesDomainToUiMapper(resourceProvider, gameDomainToUiMapper)
+        val gameDataToDomainMapper = BaseGameDataToDomainMapper()
 
         val gamesCloudDataSource = GamesCloudDataSource.Base(gameService)
         val gamesCacheDataSource = GamesCacheDataSource.Base(gameDao, gameDataToDbMapper)
@@ -72,12 +73,12 @@ class GamesApp : Application() {
         )
 
         gamesInteractor = GamesInteractor.Base(gamesRepository,
-            gamesDataToDomain)
+            gamesDataToDomain, gameDataToDomainMapper)
 
         val gamesCommunication = GamesCommunication.Base()
 
         gameViewModel = GameViewModel(
-            gamesInteractor, gamesDomainToUiMapper, gamesCommunication
+            gamesInteractor, gamesDomainToUiMapper, gameDomainToUiMapper, gamesCommunication
         )
     }
 }

@@ -21,11 +21,10 @@ data class GameDb(
     @ColumnInfo(name = "title")
     val title: String = "",
 ) : Abstract.Object<GameData, GameDataMapper> {
-    override fun map(mapper: GameDataMapper): GameData {
-        return mapper.map(
-            id = id,
-            thumbnail = thumbnail,
-            title = title,
-        )
-    }
+    override fun map(mapper: GameDataMapper) = mapper.map(
+        id = id,
+        thumbnail = thumbnail,
+        title = title,
+    )
+
 }

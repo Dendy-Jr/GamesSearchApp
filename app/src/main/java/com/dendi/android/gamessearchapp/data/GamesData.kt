@@ -9,14 +9,10 @@ import com.dendi.android.gamessearchapp.domain.GamesDomain
  */
 sealed class GamesData : Abstract.Object<GamesDomain, GamesDataToDomainMapper> {
     data class Success(private val games: List<GameData>) : GamesData() {
-        override fun map(mapper: GamesDataToDomainMapper): GamesDomain {
-            return mapper.map(games)
-        }
+        override fun map(mapper: GamesDataToDomainMapper) = mapper.map(games)
     }
 
     data class Fail(private val e: Exception) : GamesData() {
-        override fun map(mapper: GamesDataToDomainMapper): GamesDomain {
-            return mapper.map(e)
-        }
+        override fun map(mapper: GamesDataToDomainMapper) = mapper.map(e)
     }
 }

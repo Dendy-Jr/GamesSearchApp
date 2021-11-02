@@ -11,11 +11,9 @@ class BaseGameDomainToUiMapper : GameDomainToUiMapper {
         id: Int,
         thumbnail: String,
         title: String,
-    ): GameUi {
-        return GameUi.Base(
-            id,
-            thumbnail,
-            title
-        )
-    }
+    ) = GameUi.Base(
+        id = id,
+        thumbnail = thumbnail,
+        title = title
+    )
 }

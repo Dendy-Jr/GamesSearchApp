@@ -14,11 +14,7 @@ class BaseGamesDomainToUiMapper(
     private val resourceProvider: ResourceProvider,
     private val gameMapper: GameDomainToUiMapper,
 ) : GamesDomainToUiMapper {
-    override fun map(games: List<GameDomain>): GamesUi {
-        return GamesUi.Success(games, gameMapper)
-    }
+    override fun map(games: List<GameDomain>) = GamesUi.Success(games, gameMapper)
 
-    override fun map(errorType: ErrorType): GamesUi {
-        return GamesUi.Fail(errorType, resourceProvider)
-    }
+    override fun map(errorType: ErrorType) = GamesUi.Fail(errorType, resourceProvider)
 }

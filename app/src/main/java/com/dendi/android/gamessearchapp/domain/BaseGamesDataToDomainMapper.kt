@@ -10,11 +10,7 @@ import com.dendi.android.gamessearchapp.data.GamesDataToDomainMapper
  */
 class BaseGamesDataToDomainMapper(private val gameMapper: GameDataToDomainMapper) :
     GamesDataToDomainMapper {
-    override fun map(games: List<GameData>): GamesDomain {
-        return GamesDomain.Success(games, gameMapper)
-    }
+    override fun map(games: List<GameData>) = GamesDomain.Success(games, gameMapper)
 
-    override fun map(e: Exception): GamesDomain {
-        return GamesDomain.Fail(e)
-    }
+    override fun map(e: Exception) = GamesDomain.Fail(e)
 }

@@ -17,11 +17,9 @@ sealed class GamesUi : Abstract.Object<Unit, GamesCommunication> {
         private val games: List<GameDomain>,
         private val gameMapper: GameDomainToUiMapper,
     ) : GamesUi() {
-        override fun map(mapper: GamesCommunication) {
-            return mapper.map(games.map {
-                it.map(gameMapper)
-            })
-        }
+        override fun map(mapper: GamesCommunication) = mapper.map(games.map {
+            it.map(gameMapper)
+        })
     }
 
     class Fail(

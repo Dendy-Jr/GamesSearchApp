@@ -18,12 +18,10 @@ interface GameDataMapper : Abstract.Mapper {
             id: Int,
             thumbnail: String,
             title: String,
-        ): GameData {
-            return GameData(
-                id,
-                thumbnail,
-                title
-            )
-        }
+        ) = GameData(
+            id = id,
+            thumbnail = thumbnail,
+            title = title
+        )
     }
 }

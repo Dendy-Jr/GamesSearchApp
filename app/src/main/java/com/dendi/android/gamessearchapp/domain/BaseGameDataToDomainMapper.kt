@@ -11,11 +11,9 @@ class BaseGameDataToDomainMapper : GameDataToDomainMapper {
         id: Int,
         thumbnail: String,
         title: String,
-    ): GameDomain {
-        return GameDomain(
-            id,
-            thumbnail,
-            title
-        )
-    }
+    ) = GameDomain(
+        id = id,
+        thumbnail = thumbnail,
+        title = title
+    )
 }
