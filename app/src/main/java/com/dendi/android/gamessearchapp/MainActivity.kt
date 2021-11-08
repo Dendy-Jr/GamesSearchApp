@@ -2,70 +2,68 @@ package com.dendi.android.gamessearchapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.dendi.android.gamessearchapp.core.GamesApp
+import android.os.Parcelable
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentResultListener
+import androidx.lifecycle.LifecycleOwner
 import com.dendi.android.gamessearchapp.databinding.ActivityMainBinding
-import com.dendi.android.gamessearchapp.presentation.GameAdapter
-import com.dendi.android.gamessearchapp.presentation.GameViewModel
+import com.dendi.android.gamessearchapp.presentation.core.Navigator
+import com.dendi.android.gamessearchapp.presentation.games.GamesFragment
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(), Navigator {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var gameAdapter: GameAdapter
-    private val gameViewModel: GameViewModel by lazy {
-        (application as GamesApp).gameViewModel
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        gameAdapter = GameAdapter(
-            object : GameAdapter.Retry {
-                override fun tryAgain() {
-                    gameViewModel.fetchGames()
-                }
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentContainer, GamesFragment())
+                .commit()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        back()
+        return true
+    }
+
+    override fun <T : Parcelable> publishResult(result: T) {
+        supportFragmentManager.setFragmentResult(
+            result.javaClass.name,
+            bundleOf(KEY_RESULT to result)
+        )
+    }
+
+    override fun <T : Parcelable> listenerResult(
+        clazz: Class<T>,
+        owner: LifecycleOwner,
+        listener: (T) -> Unit,
+    ) {
+        supportFragmentManager.setFragmentResultListener(
+            clazz.name,
+            owner,
+            FragmentResultListener { key, bundle ->
+                listener.invoke(bundle.getParcelable(KEY_RESULT)!!)
             }
         )
-        val recyclerView = binding.recyclerView
-
-        recyclerView.adapter = gameAdapter
-        recyclerView.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
-        gameViewModel.observe(this, {
-            gameAdapter.update(it)
-        })
-        gameViewModel.fetchGames()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.games_menu, menu)
-
-        val search = menu?.findItem(R.id.action_search)
-        val searchView = search?.actionView as SearchView
-        searchView.isSubmitButtonEnabled = true
-        searchView.setOnQueryTextListener(this)
-        return true
+    override fun backToHome() {
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
-    override fun onQueryTextSubmit(query: String?)= true
-
-
-    override fun onQueryTextChange(query: String?): Boolean {
-        if (query != null) {
-            searchGame(query)
-        }
-        return true
+    override fun back() {
+        onBackPressed()
     }
 
-    private fun searchGame(searchQuery: String) {
-        val search = "%$searchQuery%"
-        gameViewModel.searchGame(search).observe(this, { games ->
-            gameAdapter.update(games)
-        })
+    companion object {
+        @JvmStatic
+        private val KEY_RESULT = "RESULT"
     }
 }

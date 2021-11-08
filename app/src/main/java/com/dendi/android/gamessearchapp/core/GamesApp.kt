@@ -2,20 +2,28 @@ package com.dendi.android.gamessearchapp.core
 
 import android.app.Application
 import androidx.viewbinding.BuildConfig
-import com.dendi.android.gamessearchapp.data.BaseGamesRepository
-import com.dendi.android.gamessearchapp.data.GameDataMapper
-import com.dendi.android.gamessearchapp.data.GameDataToDbMapper
-import com.dendi.android.gamessearchapp.data.cache.GameDatabase
-import com.dendi.android.gamessearchapp.data.cache.GamesCacheDataSource
-import com.dendi.android.gamessearchapp.data.cloud.GameService
-import com.dendi.android.gamessearchapp.data.cloud.GamesCloudDataSource
-import com.dendi.android.gamessearchapp.domain.BaseGameDataToDomainMapper
-import com.dendi.android.gamessearchapp.domain.BaseGamesDataToDomainMapper
-import com.dendi.android.gamessearchapp.domain.GamesInteractor
-import com.dendi.android.gamessearchapp.presentation.BaseGameDomainToUiMapper
-import com.dendi.android.gamessearchapp.presentation.BaseGamesDomainToUiMapper
-import com.dendi.android.gamessearchapp.presentation.GameViewModel
-import com.dendi.android.gamessearchapp.presentation.GamesCommunication
+import com.dendi.android.gamessearchapp.data.games.BaseGamesRepository
+import com.dendi.android.gamessearchapp.data.core.GamesDatabase
+import com.dendi.android.gamessearchapp.data.detail.DetailRepositoryImpl
+import com.dendi.android.gamessearchapp.data.detail.DbObjectMapperBase
+import com.dendi.android.gamessearchapp.data.detail.DetailDataMapperBase
+import com.dendi.android.gamessearchapp.data.detail.cache.DetailCacheDataSource
+import com.dendi.android.gamessearchapp.data.detail.cloud.DetailCloudDataSource
+import com.dendi.android.gamessearchapp.data.detail.cloud.DetailService
+import com.dendi.android.gamessearchapp.data.games.DataGameMapper
+import com.dendi.android.gamessearchapp.data.games.DbGameMapper
+import com.dendi.android.gamessearchapp.data.games.cache.GamesCacheDataSource
+import com.dendi.android.gamessearchapp.data.games.cloud.GameService
+import com.dendi.android.gamessearchapp.data.games.cloud.GamesCloudDataSource
+import com.dendi.android.gamessearchapp.domain.detail.DetailDomainMapperBase
+import com.dendi.android.gamessearchapp.domain.detail.DetailInteractor
+import com.dendi.android.gamessearchapp.domain.detail.HandlerDomainMapperBase
+import com.dendi.android.gamessearchapp.domain.games.*
+import com.dendi.android.gamessearchapp.presentation.detail.DetailCommunication
+import com.dendi.android.gamessearchapp.presentation.detail.DetailUiMapperBase
+import com.dendi.android.gamessearchapp.presentation.detail.DetailViewModel
+import com.dendi.android.gamessearchapp.presentation.detail.HandlerUiMapperBase
+import com.dendi.android.gamessearchapp.presentation.games.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,8 +37,11 @@ import java.util.concurrent.TimeUnit
  */
 class GamesApp : Application() {
 
-    lateinit var gameViewModel: GameViewModel
-    lateinit var gamesInteractor: GamesInteractor
+    lateinit var gameViewModel: GamesViewModel
+    private lateinit var gamesInteractor: GamesInteractor
+
+    lateinit var detailViewModel: DetailViewModel
+    private lateinit var detailInteractor: DetailInteractor
 
     override fun onCreate() {
         super.onCreate()
@@ -53,32 +64,54 @@ class GamesApp : Application() {
             .build()
 
         val gameService = retrofit.create(GameService::class.java)
-        val gameDao = GameDatabase.database(this).gameDao()
+        val detailService = retrofit.create(DetailService::class.java)
+
+        val gameDao = GamesDatabase.database(this).gameDao()
+        val detailDao = GamesDatabase.database(this).detailDao()
+
         val resourceProvider = ResourceProvider.Base(this)
-        val gameDataMapper = GameDataMapper.Base()
-        val gameDataToDbMapper = GameDataToDbMapper.Base()
-        val gameDataToDomain = BaseGameDataToDomainMapper()
-        val gamesDataToDomain = BaseGamesDataToDomainMapper(gameDataToDomain)
-        val gameDomainToUiMapper = BaseGameDomainToUiMapper()
-        val gamesDomainToUiMapper =
-            BaseGamesDomainToUiMapper(resourceProvider, gameDomainToUiMapper)
-        val gameDataToDomainMapper = BaseGameDataToDomainMapper()
+
+        val gameDataMapper = DataGameMapper()
+        val detailDataMapper = DetailDataMapperBase()
+        val detailDomainMapperBase = DetailDomainMapperBase()
+        val handlerDomainBase = HandlerDomainMapperBase(detailDomainMapperBase)
+
+        val dbGameMapper = DbGameMapper()
+        val domainGameMapper = DomainGameMapper()
+        val domainGamesMapper = DomainGamesMapper(domainGameMapper)
+        val uiGameMapper = UiGameMapper()
+        val uiGamesMapper =
+            UiGamesMapper(uiGameMapper, resourceProvider)
+
+        val detailDbMapper = DbObjectMapperBase()
 
         val gamesCloudDataSource = GamesCloudDataSource.Base(gameService)
-        val gamesCacheDataSource = GamesCacheDataSource.Base(gameDao, gameDataToDbMapper)
+        val gamesCacheDataSource = GamesCacheDataSource.Base(gameDao, dbGameMapper)
+        val detailCloudDataSource = DetailCloudDataSource.Base(detailService)
+        val detailCacheDataSource = DetailCacheDataSource.Base(detailDao, detailDbMapper)
         val gamesRepository = BaseGamesRepository(
             gamesCloudDataSource,
             gamesCacheDataSource,
             gameDataMapper
         )
+        val detailUiMapper = DetailUiMapperBase()
+        val handlerUiMapper = HandlerUiMapperBase(detailUiMapper, resourceProvider)
+
+        val detailRepository =
+            DetailRepositoryImpl(detailCloudDataSource, detailCacheDataSource, detailDataMapper)
 
         gamesInteractor = GamesInteractor.Base(gamesRepository,
-            gamesDataToDomain, gameDataToDomainMapper)
+            domainGamesMapper, domainGameMapper)
+
+        detailInteractor = DetailInteractor.Base(detailRepository, handlerDomainBase)
 
         val gamesCommunication = GamesCommunication.Base()
+        val detailCommunication = DetailCommunication.Base()
 
-        gameViewModel = GameViewModel(
-            gamesInteractor, gamesDomainToUiMapper, gameDomainToUiMapper, gamesCommunication
+        gameViewModel = GamesViewModel(
+            gamesInteractor, uiGamesMapper, uiGameMapper, gamesCommunication
         )
+
+        detailViewModel = DetailViewModel(detailInteractor, detailCommunication, handlerUiMapper)
     }
 }

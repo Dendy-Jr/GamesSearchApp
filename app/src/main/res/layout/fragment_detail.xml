@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#011122">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#011122"
+            android:theme="@style/ThemeOverlay.Toobar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIconTint="@color/white"
+            app:titleTextColor="#FFFFFF" />
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+
+            <ImageView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="206dp"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="pin"
+                app:layout_constraintDimensionRatio="H,16:9" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/padding_top_16dp"
+            android:paddingBottom="@dimen/padding_bottom_8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/description"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_24sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/descriptionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_8dp"
+                    android:layout_marginEnd="@dimen/margin_end_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    tools:text="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter." />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_top_16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/margin_end_8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_swipe_Left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amarante"
+                        android:text="@string/swipe_left"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_swipe"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/swipe_left" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_genre_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="-55dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/genre"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_strategy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Strategy" />
+
+                <TextView
+                    android:id="@+id/tv_platform_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/platform"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_platform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Windows" />
+
+                <TextView
+                    android:id="@+id/tv_publisher_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/publisher"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_publisher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="David Schneider" />
+
+                <TextView
+                    android:id="@+id/tv_developer_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/developer"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_developer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="David Schneider" />
+
+                <TextView
+                    android:id="@+id/tv_release_date_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/release_date"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="2018-02-12" />
+
+                <TextView
+                    android:id="@+id/tv_minimum_system_requirements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_top_24dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/minimum_system_requirements"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_os_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/operating_system"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_os"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginEnd="@dimen/margin_end_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Windows XP, Vista, 7, 8, 10" />
+
+                <TextView
+                    android:id="@+id/tv_processor_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/processor"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_processor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginEnd="@dimen/margin_end_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Dual Core 3.0 GHz" />
+
+                <TextView
+                    android:id="@+id/tv_memory_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/memory"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_memory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="2 GB" />
+
+                <TextView
+                    android:id="@+id/tv_graphics_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/graphics"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_graphics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginEnd="@dimen/margin_end_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Intedl HD Graphics 4000 or equivalent" />
+
+                <TextView
+                    android:id="@+id/tv_storage_tools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:fontFamily="@font/amarante"
+                    android:text="@string/storage"
+                    android:textColor="#C80F3A"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_storage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_8dp"
+                    android:fontFamily="@font/amarante"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    tools:text="600 MB" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
