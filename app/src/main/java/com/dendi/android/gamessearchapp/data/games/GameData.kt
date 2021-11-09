@@ -12,7 +12,7 @@ data class GameData(
     private val id: Int,
     private val thumbnail: String,
     private val title: String,
-) : Abstract.Object.Cache.GameObject<GameDb> {
+) : Abstract.Object.MapToCache.GameObject<GameDb> {
     override fun map(mapper: Abstract.GameMapper<GameDomain>) = mapper.map(
         id = id, thumbnail = thumbnail, title = title
     )

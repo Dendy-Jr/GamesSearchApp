@@ -7,12 +7,12 @@ import com.dendi.android.gamessearchapp.domain.games.GamesDomain
  * @author Dendy-Jr on 01.11.2021
  * olehvynnytskyi@gmail.com
  */
-sealed class GamesData : Abstract.Object.Domain.GamesObject {
+sealed class GamesData : Abstract.Object.MapToDomain.GamesObject {
     data class Success(private val games: List<GameData>) : GamesData() {
-        override fun map(mapper: Abstract.GamesDomainMapper<GamesDomain>) = mapper.map(games)
+        override fun map(mapper: Abstract.GamesDataToDomainMapper<GamesDomain>) = mapper.map(games)
     }
 
     data class Fail(private val exception: Exception) : GamesData() {
-        override fun map(mapper: Abstract.GamesDomainMapper<GamesDomain>) = mapper.map(exception)
+        override fun map(mapper: Abstract.GamesDataToDomainMapper<GamesDomain>) = mapper.map(exception)
     }
 }

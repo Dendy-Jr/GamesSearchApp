@@ -17,7 +17,7 @@ data class ScreenshotDb(
     val id: Int,
     @ColumnInfo(name = "image")
     val image: String,
-) : Abstract.Object.Data.ScreenshotObject {
+) : Abstract.Object.MapToData.ScreenshotObject {
     override fun map(mapper: Abstract.ScreenshotMapper<ScreenshotData>) = mapper.map(
         id = id, image = image
     )

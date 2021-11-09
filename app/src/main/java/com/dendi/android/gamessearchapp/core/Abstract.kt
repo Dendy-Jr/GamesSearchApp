@@ -25,52 +25,52 @@ interface Abstract {
     interface Object<T, M : Mapper> {
         fun map(mapper: M): T
 
-        interface Data<T, M : Mapper> : Object<T, M> {
-            interface GameObject : Data<GameData, GameMapper<GameData>>
-            interface DetailObject : Data<DetailData, DetailDataMapper<DetailData>>
+        interface MapToData<T, M : Mapper> : Object<T, M> {
+            interface GameObject : MapToData<GameData, GameMapper<GameData>>
+            interface DetailObject : MapToData<DetailData, DetailDataMapper<DetailData>>
             interface SystemRequirementsObject :
-                Data<SystemRequirementsData, SystemRequirementsMapper<SystemRequirementsData>>
+                MapToData<SystemRequirementsData, SystemRequirementsMapper<SystemRequirementsData>>
 
-            interface ScreenshotObject : Data<ScreenshotData, ScreenshotMapper<ScreenshotData>>
+            interface ScreenshotObject : MapToData<ScreenshotData, ScreenshotMapper<ScreenshotData>>
         }
 
-        interface Cache {
-            interface GameObject<T> : Domain.GameObject {
+        interface MapToCache {
+            interface GameObject<T> : MapToDomain.GameObject {
                 fun map(mapper: GameMapper<T>): T
             }
 
-            interface SystemRequirementsObject<T> : Domain.SystemRequirementsObject {
+            interface SystemRequirementsObject<T> : MapToDomain.SystemRequirementsObject {
                 fun map(mapper: SystemRequirementsMapper<T>): T
             }
 
-            interface ScreenshotObject<T> : Domain.ScreenshotObject {
+            interface ScreenshotObject<T> : MapToDomain.ScreenshotObject {
                 fun map(mapper: ScreenshotMapper<T>): T
             }
         }
 
-        interface Domain<T, M : Mapper> : Object<T, M> {
-            interface GameObject : Domain<GameDomain, GameMapper<GameDomain>>
-            interface GamesObject : Domain<GamesDomain, GamesDomainMapper<GamesDomain>>
-            interface DetailObject : Domain<DetailDomain, DetailDomainMapper<DetailDomain>>
+        interface MapToDomain<T, M : Mapper> : Object<T, M> {
+            interface GameObject : MapToDomain<GameDomain, GameMapper<GameDomain>>
+            interface GamesObject : MapToDomain<GamesDomain, GamesDataToDomainMapper<GamesDomain>>
+            interface DetailObject : MapToDomain<DetailDomain, DetailDomainMapper<DetailDomain>>
             interface HandlerObject :
-                Domain<DetailHandlerDomain, HandlerDomainMapper<DetailHandlerDomain>>
+                MapToDomain<DetailHandlerDomain, HandlerDomainMapper<DetailHandlerDomain>>
 
             interface SystemRequirementsObject :
-                Domain<SystemRequirementsDomain, SystemRequirementsMapper<SystemRequirementsDomain>>
+                MapToDomain<SystemRequirementsDomain, SystemRequirementsMapper<SystemRequirementsDomain>>
 
             interface ScreenshotObject :
-                Domain<ScreenshotDomain, ScreenshotMapper<ScreenshotDomain>>
+                MapToDomain<ScreenshotDomain, ScreenshotMapper<ScreenshotDomain>>
         }
 
-        interface Ui<T, M : Mapper> : Object<T, M> {
-            interface GameObject : Ui<GameUi, GameMapper<GameUi>>
-            interface GamesObject : Ui<GamesUi, GamesUiMapper<GamesUi>>
-            interface DetailObject : Ui<DetailUi, DetailUiMapper<DetailUi>>
-            interface HandlerObject : Ui<DetailHandlerUi, HandlerUiMapper<DetailHandlerUi>>
+        interface MapToUi<T, M : Mapper> : Object<T, M> {
+            interface GameObject : MapToUi<GameUi, GameMapper<GameUi>>
+            interface GamesObject : MapToUi<GamesUi, GamesDomainToUiMapper<GamesUi>>
+            interface DetailObject : MapToUi<DetailUi, DetailUiMapper<DetailUi>>
+            interface HandlerObject : MapToUi<DetailHandlerUi, HandlerUiMapper<DetailHandlerUi>>
             interface SystemRequirementsObject :
-                Ui<SystemRequirementsUi, SystemRequirementsMapper<SystemRequirementsUi>>
+                MapToUi<SystemRequirementsUi, SystemRequirementsMapper<SystemRequirementsUi>>
 
-            interface ScreenshotObject : Ui<ScreenshotUi, ScreenshotMapper<ScreenshotUi>>
+            interface ScreenshotObject : MapToUi<ScreenshotUi, ScreenshotMapper<ScreenshotUi>>
         }
 
         interface UnitObject<M : Mapper> {
@@ -86,13 +86,13 @@ interface Abstract {
         fun map(id: Int, thumbnail: String, title: String): T
     }
 
-    interface GamesDomainMapper<T> : Mapper {
+    interface GamesDataToDomainMapper<T> : Mapper {
         fun map(games: List<GameData>): T
         fun map(exception: Exception): T
 
     }
 
-    interface GamesUiMapper<T> : Mapper {
+    interface GamesDomainToUiMapper<T> : Mapper {
         fun map(games: List<GameDomain>): T
         fun map(errorType: ErrorType): T
     }

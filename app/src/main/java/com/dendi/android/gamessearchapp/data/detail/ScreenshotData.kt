@@ -11,7 +11,7 @@ import com.dendi.android.gamessearchapp.domain.detail.ScreenshotDomain
 data class ScreenshotData(
     private val id: Int,
     private val image: String,
-) : Abstract.Object.Cache.ScreenshotObject<ScreenshotDb> {
+) : Abstract.Object.MapToCache.ScreenshotObject<ScreenshotDb> {
     override fun map(mapper: Abstract.ScreenshotMapper<ScreenshotDomain>) =
         mapper.map(id = id, image = image)
 

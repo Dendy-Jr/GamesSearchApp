@@ -41,7 +41,7 @@ data class DetailCloud(
     private val thumbnail: String,
     @SerializedName("title")
     private val title: String,
-) : Abstract.Object.Data.DetailObject {
+) : Abstract.Object.MapToData.DetailObject {
     override fun map(mapper: Abstract.DetailDataMapper<DetailData>) = mapper.map(
         description = description,
         developer = developer,

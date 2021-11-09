@@ -78,10 +78,10 @@ class GamesApp : Application() {
 
         val dbGameMapper = DbGameMapper()
         val domainGameMapper = DomainGameMapper()
-        val domainGamesMapper = DomainGamesMapper(domainGameMapper)
+        val domainGamesMapper = BaseGamesDataToDomainMapper(domainGameMapper)
         val uiGameMapper = UiGameMapper()
         val uiGamesMapper =
-            UiGamesMapper(uiGameMapper, resourceProvider)
+            BaseGamesDomainToUiMapper(resourceProvider,uiGameMapper)
 
         val detailDbMapper = DbObjectMapperBase()
 

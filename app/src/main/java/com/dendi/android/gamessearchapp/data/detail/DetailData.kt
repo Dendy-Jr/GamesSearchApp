@@ -27,7 +27,7 @@ data class DetailData(
     private val status: String,
     private val thumbnail: String,
     private val title: String,
-) : Abstract.Object.Domain.DetailObject,
+) : Abstract.Object.MapToDomain.DetailObject,
     DbObject<DetailData, DetailDb> {
     override fun map(mapper: Abstract.DetailDomainMapper<DetailDomain>) = mapper.map(
         description = description,

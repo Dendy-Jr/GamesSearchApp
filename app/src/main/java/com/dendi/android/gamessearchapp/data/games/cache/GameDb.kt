@@ -19,7 +19,7 @@ data class GameDb(
     val thumbnail: String,
     @ColumnInfo(name = "title")
     val title: String,
-) : Abstract.Object.Data.GameObject {
+) : Abstract.Object.MapToData.GameObject {
     override fun map(mapper: Abstract.GameMapper<GameData>) = mapper.map(
         id = id, thumbnail = thumbnail, title = title)
 }

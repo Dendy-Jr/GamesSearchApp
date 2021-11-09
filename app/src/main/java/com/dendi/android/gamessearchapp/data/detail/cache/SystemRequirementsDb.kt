@@ -25,7 +25,7 @@ data class SystemRequirementsDb(
     val processor: String,
     @ColumnInfo(name = "storage")
     val storage: String,
-) : Abstract.Object.Data.SystemRequirementsObject {
+) : Abstract.Object.MapToData.SystemRequirementsObject {
     override fun map(mapper: Abstract.SystemRequirementsMapper<SystemRequirementsData>) =
         mapper.map(
             id = id,

@@ -45,7 +45,7 @@ data class DetailDb(
     val thumbnail: String,
     @ColumnInfo(name = "title")
     val title: String,
-) : Abstract.Object.Data.DetailObject {
+) : Abstract.Object.MapToData.DetailObject {
     override fun map(mapper: Abstract.DetailDataMapper<DetailData>) = mapper.map(
         description = description,
         developer = developer,

@@ -12,7 +12,7 @@ data class GameDomain(
     private val id: Int,
     private val thumbnail: String,
     private val title: String,
-) : Abstract.Object.Ui.GameObject {
+) : Abstract.Object.MapToUi.GameObject {
     override fun map(mapper: Abstract.GameMapper<GameUi>) = mapper.map(
         id = id, thumbnail = thumbnail, title = title
     )

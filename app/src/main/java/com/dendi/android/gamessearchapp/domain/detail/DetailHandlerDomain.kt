@@ -11,7 +11,7 @@ import java.net.UnknownHostException
  * @author Dendy-Jr on 03.11.2021
  * olehvynnytskyi@gmail.com
  */
-sealed class DetailHandlerDomain : Abstract.Object.Ui.HandlerObject {
+sealed class DetailHandlerDomain : Abstract.Object.MapToUi.HandlerObject {
     data class Success(
         private val detail: DetailData,
         private val domainMapper: Abstract.DetailDomainMapper<DetailDomain>,

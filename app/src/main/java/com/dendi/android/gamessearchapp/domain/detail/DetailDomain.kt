@@ -25,7 +25,7 @@ data class DetailDomain(
     private val status: String,
     private val thumbnail: String,
     private val title: String,
-) : Abstract.Object.Ui.DetailObject {
+) : Abstract.Object.MapToUi.DetailObject {
     override fun map(mapper: Abstract.DetailUiMapper<DetailUi>) = mapper.map(
         description = description,
         developer = developer,

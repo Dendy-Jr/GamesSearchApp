@@ -16,7 +16,7 @@ interface GamesInteractor {
 
     class Base(
         private val gamesRepository: GamesRepository,
-        private val gamesDomainMapper: Abstract.GamesDomainMapper<GamesDomain>,
+        private val gamesDomainMapper: Abstract.GamesDataToDomainMapper<GamesDomain>,
         private val gameDomainMapper: Abstract.GameMapper<GameDomain>,
     ) : GamesInteractor {
         override suspend fun fetchGames() = gamesRepository.fetchGames().map(gamesDomainMapper)

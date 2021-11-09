@@ -15,7 +15,7 @@ data class GameCloud(
     private val thumbnail: String,
     @SerializedName("title")
     private val title: String,
-) : Abstract.Object.Data.GameObject {
+) : Abstract.Object.MapToData.GameObject {
     override fun map(mapper: Abstract.GameMapper<GameData>) = mapper.map(
         id = id, thumbnail = thumbnail, title = title
     )

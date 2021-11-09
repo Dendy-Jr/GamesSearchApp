@@ -15,7 +15,7 @@ data class SystemRequirementsData(
     private val os: String,
     private val processor: String,
     private val storage: String,
-) : Abstract.Object.Cache.SystemRequirementsObject<SystemRequirementsDb> {
+) : Abstract.Object.MapToCache.SystemRequirementsObject<SystemRequirementsDb> {
     override fun map(mapper: Abstract.SystemRequirementsMapper<SystemRequirementsDomain>) =
         mapper.map(
             id = id,

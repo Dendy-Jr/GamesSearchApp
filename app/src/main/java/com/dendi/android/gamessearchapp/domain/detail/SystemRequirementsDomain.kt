@@ -15,7 +15,7 @@ data class SystemRequirementsDomain(
     private val os: String,
     private val processor: String,
     private val storage: String,
-) : Abstract.Object.Ui.SystemRequirementsObject {
+) : Abstract.Object.MapToUi.SystemRequirementsObject {
     override fun map(mapper: Abstract.SystemRequirementsMapper<SystemRequirementsUi>) =
         mapper.map(
             id = id,

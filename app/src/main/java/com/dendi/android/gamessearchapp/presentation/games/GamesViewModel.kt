@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
  */
 class GamesViewModel(
     private val gamesInteractor: GamesInteractor,
-    private val gamesMapper: Abstract.GamesUiMapper<GamesUi>,
+    private val gamesMapper: Abstract.GamesDomainToUiMapper<GamesUi>,
     private val gameMapper: Abstract.GameMapper<GameUi>,
     private val gamesCommunication: GamesCommunication,
 ) : ViewModel() {

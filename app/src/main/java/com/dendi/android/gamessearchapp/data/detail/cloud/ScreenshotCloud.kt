@@ -13,7 +13,7 @@ data class ScreenshotCloud(
     val id: Int?,
     @SerializedName("image")
     val image: String?,
-) : Abstract.Object.Data.ScreenshotObject {
+) : Abstract.Object.MapToData.ScreenshotObject {
     override fun map(mapper: Abstract.ScreenshotMapper<ScreenshotData>) = mapper.map(
         id = id ?: 0,
         image = image ?: ""
