@@ -1,9 +1,10 @@
-package com.dendi.android.gamessearchapp.data
+package com.dendi.android.gamessearchapp.data.games
 
-import com.dendi.android.gamessearchapp.data.cache.GameDb
-import com.dendi.android.gamessearchapp.data.cache.GamesCacheDataSource
-import com.dendi.android.gamessearchapp.data.cloud.GameCloud
-import com.dendi.android.gamessearchapp.data.cloud.GamesCloudDataSource
+import androidx.lifecycle.LiveData
+import com.dendi.android.gamessearchapp.data.games.cache.GameDb
+import com.dendi.android.gamessearchapp.data.games.cache.GamesCacheDataSource
+import com.dendi.android.gamessearchapp.data.games.cloud.GameCloud
+import com.dendi.android.gamessearchapp.data.games.cloud.GamesCloudDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
@@ -128,6 +129,11 @@ class GamesRepositoryTest : BaseGamesRepositoryTest() {
         }
 
         override suspend fun saveGames(games: List<GameData>) {
+            // not used here
+        }
+
+        override fun searchGame(searchQuery: String): LiveData<List<GameDb>> {
+            TODO("Not yet implemented")
             // not used here
         }
     }

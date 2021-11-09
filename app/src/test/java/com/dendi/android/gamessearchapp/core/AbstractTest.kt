@@ -6,6 +6,7 @@ import org.junit.Test
 import java.lang.Exception
 
 /**
+ * Test for [Abstract]
  * @author Dendy-Jr on 01.11.2021
  * olehvynnytskyi@gmail.com
  */
