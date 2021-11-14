@@ -1,8 +1,9 @@
 package com.dendi.android.gamessearchapp.presentation.games
 
 import androidx.lifecycle.*
-import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.domain.games.GamesDomainStateToUiMapper
 import com.dendi.android.gamessearchapp.domain.games.GamesInteractor
+import com.dendi.android.gamessearchapp.presentation.core.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -13,35 +14,32 @@ import kotlinx.coroutines.withContext
  */
 class GamesViewModel(
     private val gamesInteractor: GamesInteractor,
-    private val gamesMapper: Abstract.GamesDomainToUiMapper<GamesUi>,
-    private val gameMapper: Abstract.GameMapper<GameUi>,
+    private val gamesMapper: GamesDomainStateToUiMapper<GamesUiState>,
     private val gamesCommunication: GamesCommunication,
-) : ViewModel() {
+) : BaseViewModel<GamesCommunication, GamesUiState>(gamesCommunication) {
 
     init {
         fetchGames()
     }
 
     fun fetchGames() {
-        gamesCommunication.map(listOf(GameUi.Progress))
+        gamesCommunication.map(GamesUiState.Base(listOf(GameUi.Progress)))
         viewModelScope.launch(Dispatchers.IO) {
-            val resultDomain = gamesInteractor.fetchGames()
+            val resultDomain = gamesInteractor.read()
             val resultUi = resultDomain.map(gamesMapper)
             withContext(Dispatchers.Main) {
-                resultUi.map(gamesCommunication)
+                gamesCommunication.map(resultUi)
             }
         }
     }
 
-    fun searchGame(searchQuery: String): LiveData<List<GameUi>> {
+    override fun saveScrollPosition(position: Int) = gamesInteractor.saveScrollPosition(position)
+
+    override fun scrollPosition() = gamesInteractor.scrollPosition()
+
+    fun searchGame(searchQuery: String): LiveData<GamesUiState> {
         return gamesInteractor.searchGame(searchQuery).map { games ->
-            games.map { game ->
-                game.map(gameMapper)
-            }
+            gamesMapper.map(games)
         }
-    }
-
-    fun observeGames(owner: LifecycleOwner, observer: Observer<List<GameUi>>) {
-        gamesCommunication.observe(owner, observer)
     }
 }
