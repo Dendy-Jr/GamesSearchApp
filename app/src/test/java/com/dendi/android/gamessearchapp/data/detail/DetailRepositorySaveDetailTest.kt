@@ -1,11 +1,13 @@
 package com.dendi.android.gamessearchapp.data.detail
 
 import com.dendi.android.gamessearchapp.data.detail.cache.DetailCacheDataSource
-import com.dendi.android.gamessearchapp.data.detail.cache.DetailDb
+import com.dendi.android.gamessearchapp.data.detail.cache.DetailCache
+import com.dendi.android.gamessearchapp.data.detail.cache.DetailDataToCacheMapper
 import com.dendi.android.gamessearchapp.data.detail.cloud.DetailCloud
 import com.dendi.android.gamessearchapp.data.detail.cloud.DetailCloudDataSource
 import com.dendi.android.gamessearchapp.data.detail.cloud.ScreenshotCloud
 import com.dendi.android.gamessearchapp.data.detail.cloud.SystemRequirementsCloud
+import com.dendi.android.gamessearchapp.domain.detail.BaseDetailDataToDomainMapper
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -20,21 +22,21 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
     fun test_save_detail() = runBlocking {
         val testCloudDataSource = TestDetailCloudDataSource()
         val testCacheDataSource = TestDetailCacheDataSource()
-        val repository = DetailRepositoryImpl(
+        val repository = BaseDetailRepository(
             testCloudDataSource,
             testCacheDataSource,
-            DetailDataMapperBase()
+            DetailDataMapper.Base()
         )
 
-        val actualCloud = repository.fetchDetail(452)
-        val expectedCloud = DetailHandlerData.Success(DetailData(
+        val actualCloud = repository.readId(452)
+        val expectedCloud = DataDetailState.Success(DetailData.Base(
             description = "Call of Duty: Warzone is both a standalone free-to-play...",
             developer = "Infinity Ward",
             freetogameProfileUrl = "https://www.freetogame.com/call-of-duty-warzone",
             gameUrl = "https://www.freetogame.com/open/call-of-duty-warzone",
             genre = "Shooter",
             id = 452,
-            systemRequirements = SystemRequirementsData(
+            systemRequirements = SystemRequirementsData.Base(
                 1,
                 graphics = "NVIDIA GeForce GTX 670 / GeForce GTX 1650 or Radeon HD 7950",
                 memory = "8GB RAM",
@@ -46,13 +48,13 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
             publisher = "Activision",
             releaseDate = "2020-03-10",
             screenshots = listOf(
-                ScreenshotData(1124,
+                ScreenshotData.Base(1124,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-1.jpg"),
-                ScreenshotData(1125,
+                ScreenshotData.Base(1125,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-2.jpg"),
-                ScreenshotData(1126,
+                ScreenshotData.Base(1126,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-3.jpg"),
-                ScreenshotData(1127,
+                ScreenshotData.Base(1127,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-4.jpg"),
 
                 ),
@@ -64,15 +66,15 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
 
         assertEquals(expectedCloud, actualCloud)
 
-        val actualCache = repository.fetchDetail(452)
-        val expectedCache = DetailHandlerData.Success(DetailData(
+        val actualCache = repository.readId(452)
+        val expectedCache = DataDetailState.Success(DetailData.Base(
             description = "Call of Duty: Warzone is both a standalone free-to-play...",
             developer = "Infinity Ward",
             freetogameProfileUrl = "https://www.freetogame.com/call-of-duty-warzone",
             gameUrl = "https://www.freetogame.com/open/call-of-duty-warzone",
             genre = "Shooter",
             id = 452,
-            systemRequirements = SystemRequirementsData(
+            systemRequirements = SystemRequirementsData.Base(
                 1,
                 graphics = "NVIDIA GeForce GTX 670 / GeForce GTX 1650 or Radeon HD 7950",
                 memory = "8GB RAM",
@@ -84,13 +86,13 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
             publisher = "Activision",
             releaseDate = "2020-03-10",
             screenshots = listOf(
-                ScreenshotData(1124,
+                ScreenshotData.Base(1124,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-1.jpg"),
-                ScreenshotData(1125,
+                ScreenshotData.Base(1125,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-2.jpg"),
-                ScreenshotData(1126,
+                ScreenshotData.Base(1126,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-3.jpg"),
-                ScreenshotData(1127,
+                ScreenshotData.Base(1127,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-4.jpg"),
 
                 ),
@@ -104,14 +106,14 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
     }
 
     private inner class TestDetailCloudDataSource : DetailCloudDataSource {
-        override suspend fun fetchDetail(id: Int) = DetailCloud(
+        override suspend fun readId(id: Int) = DetailCloud.Base(
             description = "Call of Duty: Warzone is both a standalone free-to-play...",
             developer = "Infinity Ward",
             freetogameProfileUrl = "https://www.freetogame.com/call-of-duty-warzone",
             gameUrl = "https://www.freetogame.com/open/call-of-duty-warzone",
             genre = "Shooter",
             id = 452,
-            systemRequirements = SystemRequirementsCloud(
+            systemRequirements = SystemRequirementsCloud.Base(
                 graphics = "NVIDIA GeForce GTX 670 / GeForce GTX 1650 or Radeon HD 7950",
                 memory = "8GB RAM",
                 os = "Windows 7 64-Bit (SP1) or Windows 10 64-Bit",
@@ -122,13 +124,13 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
             publisher = "Activision",
             releaseDate = "2020-03-10",
             screenshots = listOf(
-                ScreenshotCloud(1124,
+                ScreenshotCloud.Base(1124,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-1.jpg"),
-                ScreenshotCloud(1125,
+                ScreenshotCloud.Base(1125,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-2.jpg"),
-                ScreenshotCloud(1126,
+                ScreenshotCloud.Base(1126,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-3.jpg"),
-                ScreenshotCloud(1127,
+                ScreenshotCloud.Base(1127,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-4.jpg"),
 
                 ),
@@ -141,14 +143,14 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
 
     private inner class TestDetailCacheDataSource : DetailCacheDataSource {
 
-        private val detail = DetailData(
+        private val detail = DetailData.Base(
             description = "Call of Duty: Warzone is both a standalone free-to-play...",
             developer = "Infinity Ward",
             freetogameProfileUrl = "https://www.freetogame.com/call-of-duty-warzone",
             gameUrl = "https://www.freetogame.com/open/call-of-duty-warzone",
             genre = "Shooter",
             id = 452,
-            systemRequirements = SystemRequirementsData(
+            systemRequirements = SystemRequirementsData.Base(
                 id = 1,
                 graphics = "NVIDIA GeForce GTX 670 / GeForce GTX 1650 or Radeon HD 7950",
                 memory = "8GB RAM",
@@ -160,13 +162,13 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
             publisher = "Activision",
             releaseDate = "2020-03-10",
             screenshots = listOf(
-                ScreenshotData(1124,
+                ScreenshotData.Base(1124,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-1.jpg"),
-                ScreenshotData(1125,
+                ScreenshotData.Base(1125,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-2.jpg"),
-                ScreenshotData(1126,
+                ScreenshotData.Base(1126,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-3.jpg"),
-                ScreenshotData(1127,
+                ScreenshotData.Base(1127,
                     "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-4.jpg"),
 
                 ),
@@ -176,12 +178,12 @@ class DetailRepositorySaveDetailTest : BaseDetailRepositoryTest() {
             title = "Call Of Duty: Warzone"
         )
 
-        override suspend fun fetchDetail(id: Int): DetailDb {
-            return detail.map(detail)
+        override suspend fun readId(id: Int): DetailCache {
+            return detail.map(DetailDataToCacheMapper.Base())
         }
 
-        override suspend fun saveDetail(detail: DetailData) {
-            detail.map(detail)
+        override suspend fun save(detail: DetailData) {
+            detail
         }
     }
 }

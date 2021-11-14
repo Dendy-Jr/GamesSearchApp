@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
  * @author Dendy-Jr on 08.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DiffUtilCallback<T>(
+abstract class DiffUtilCallback<T>(
     private val oldList: List<T>,
     private val newList: List<T>,
-): DiffUtil.Callback() {
+) : DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
 
     override fun getNewListSize() = newList.size
@@ -19,6 +19,6 @@ class DiffUtilCallback<T>(
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition] == newList[newItemPosition]
+        return oldList[oldItemPosition]?.equals(newList[newItemPosition]) == true
     }
 }

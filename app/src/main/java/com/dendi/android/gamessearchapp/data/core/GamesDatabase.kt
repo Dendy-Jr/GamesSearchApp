@@ -7,14 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.dendi.android.gamessearchapp.data.detail.cache.*
 import com.dendi.android.gamessearchapp.data.games.cache.GameDao
-import com.dendi.android.gamessearchapp.data.games.cache.GameDb
+import com.dendi.android.gamessearchapp.data.games.cache.GameCache
 
 /**
  * @author Dendy-Jr on 01.11.2021
  * olehvynnytskyi@gmail.com
  */
 @Database(
-    entities = [GameDb::class, DetailDb::class, ScreenshotDb::class, SystemRequirementsDb::class],
+    entities = [GameCache.Base::class, DetailCache.Base::class, ScreenshotCache.Base::class, SystemRequirementsCache.Base::class],
     version = 1,
     exportSchema = false
 )

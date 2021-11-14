@@ -22,7 +22,9 @@ interface Navigator {
 
     fun backToHome()
 
+    fun startFragment(fragment: Fragment)
+
+    fun launchFragment(fromFragment: Fragment, toFragment: Fragment)
+
     fun back()
 }
-
-//todo use it in the future

@@ -9,5 +9,5 @@ import retrofit2.http.GET
  */
 interface GameService {
     @GET("games")
-    suspend fun fetchGames(): Response<List<GameCloud>>
+    suspend fun fetchGames(): Response<List<GameCloud.Base>>
 }

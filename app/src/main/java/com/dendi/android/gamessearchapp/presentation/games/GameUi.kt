@@ -1,38 +1,33 @@
 package com.dendi.android.gamessearchapp.presentation.games
 
-import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.presentation.core.ClickListener
 
 /**
  * @author Dendy-Jr on 01.11.2021
  * olehvynnytskyi@gmail.com
  */
 
-sealed class GameUi : Abstract.Object.UnitObject<Abstract.AdapterGameMapper> {
+interface GameUi {
 
-    override fun map(mapper: Abstract.AdapterGameMapper) = Unit
+    fun <T> map(mapper: GameUiMapper<T>) = mapper.map(0, "", "")
+    fun map(listener: ClickListener<Int>) = Unit
 
-    open fun map(listener: GamesAdapter.DetailOnClickListener) = Unit
-
-    object Progress : GameUi() {
-        override fun map(mapper: Abstract.AdapterGameMapper) = Unit
-    }
+    object Progress : GameUi
 
     data class Base(
         private var id: Int,
         private val thumbnail: String,
         private val title: String,
-    ) : GameUi() {
-        override fun map(mapper: Abstract.AdapterGameMapper) = mapper.map(
-            id = id, thumbnail = thumbnail, title = title)
+    ) : GameUi {
+        override fun <T> map(mapper: GameUiMapper<T>) =
+            mapper.map(id = id, thumbnail = thumbnail, title = title)
 
-        override fun map(listener: GamesAdapter.DetailOnClickListener) = listener.onClick(id)
+        override fun map(listener: ClickListener<Int>) = listener.click(id)
     }
 
-
-    data class Fail(private val message: String) : GameUi() {
-        override fun map(mapper: Abstract.AdapterGameMapper) {
-            mapper.map(message = message)
-        }
+    data class Fail(private val message: String) : GameUi {
+        override fun <T> map(mapper: GameUiMapper<T>) =
+            mapper.map(message)
     }
 }
 

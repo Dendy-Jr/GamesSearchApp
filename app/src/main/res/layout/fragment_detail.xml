@@ -92,7 +92,7 @@
                     tools:text="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter." />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewDetail"
+                    android:id="@+id/rvDetail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/margin_top_16dp" />
@@ -103,29 +103,29 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/margin_end_8dp"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_marginEnd="@dimen/margin_end_8dp"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/tv_swipe_Left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/amarante"
-                        android:text="@string/swipe_left"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_swipe_Left"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/amarante"-->
+<!--                        android:text="@string/swipe_left"-->
+<!--                        android:textColor="#FFFFFF"-->
+<!--                        android:textSize="12sp" />-->
 
-                    <ImageView
-                        android:id="@+id/iv_swipe"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/swipe_left" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/iv_swipe"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:src="@drawable/swipe_left" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
 
                 <TextView
@@ -315,7 +315,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:layout_marginTop="@dimen/margin_top_8dp"
+                    android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/graphics"
                     android:textColor="#C80F3A"

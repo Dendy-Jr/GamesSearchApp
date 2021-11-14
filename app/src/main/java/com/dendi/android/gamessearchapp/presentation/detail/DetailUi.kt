@@ -1,16 +1,29 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
-import com.dendi.android.gamessearchapp.core.Abstract
-
 
 /**
  * @author Dendy-Jr on 02.11.2021
  * olehvynnytskyi@gmail.com
  */
 
-interface DetailUi : Abstract.Object.UnitObject<Abstract.AdapterDetailMapper> {
+interface DetailUi {
 
-    override fun map(mapper: Abstract.AdapterDetailMapper) = Unit
+    fun <T> map(mapper: DetailUiMapper<T>): T =
+        mapper.map("",
+            "",
+            "",
+            "",
+            "",
+            0,
+            SystemRequirementsUi.Base.EMPTY,
+            "",
+            "",
+            "",
+            emptyList(),
+            "",
+            "",
+            "",
+            "")
 
     object Progress : DetailUi
 
@@ -21,17 +34,17 @@ interface DetailUi : Abstract.Object.UnitObject<Abstract.AdapterDetailMapper> {
         private val gameUrl: String,
         private val genre: String,
         private val id: Int,
-        private val systemRequirements: SystemRequirementsUi,
+        private val systemRequirements: SystemRequirementsUi.Base,
         private val platform: String,
         private val publisher: String,
         private val releaseDate: String,
-        private val screenshots: List<ScreenshotUi>,
+        private val screenshots: List<ScreenshotUi.Base>,
         private val shortDescription: String,
         private val status: String,
         private val thumbnail: String,
         private val title: String,
     ) : DetailUi {
-        override fun map(mapper: Abstract.AdapterDetailMapper) = mapper.map(
+        override fun <T> map(mapper: DetailUiMapper<T>) = mapper.map(
             description = description,
             developer = developer,
             freetogameProfileUrl = freetogameProfileUrl,
@@ -51,6 +64,6 @@ interface DetailUi : Abstract.Object.UnitObject<Abstract.AdapterDetailMapper> {
     }
 
     data class Fail(private val message: String) : DetailUi {
-        override fun map(mapper: Abstract.AdapterDetailMapper) = mapper.map(message)
+        override fun <T> map(mapper: DetailUiMapper<T>) = mapper.map(message)
     }
 }

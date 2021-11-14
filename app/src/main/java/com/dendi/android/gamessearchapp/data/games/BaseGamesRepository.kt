@@ -11,28 +11,28 @@ import com.dendi.android.gamessearchapp.domain.games.GamesRepository
  * olehvynnytskyi@gmail.com
  */
 class BaseGamesRepository(
-    private val gamesCloudDataSource: GamesCloudDataSource,
-    private val gamesCacheDataSource: GamesCacheDataSource,
-    private val mapper: Abstract.GameMapper<GameData>,
+    private val cloudDataSource: GamesCloudDataSource,
+    private val cacheDataSource: GamesCacheDataSource,
+    private val mapper: Abstract.ToGameMapper<GameData>,
 ) : GamesRepository {
-    override suspend fun fetchGames() = try {
-        val cacheList = gamesCacheDataSource.fetchGames()
+    override suspend fun read() = try {
+        val cacheList = cacheDataSource.read()
         if (cacheList.isEmpty()) {
-            val responseData = gamesCloudDataSource.fetchGames()
+            val responseData = cloudDataSource.read()
             val games = responseData.map {
                 it.map(mapper)
             }
-            gamesCacheDataSource.saveGames(games)
-            GamesData.Success(games)
+            cacheDataSource.save(games)
+            GamesDataState.Success(games)
         } else {
-            GamesData.Success(cacheList.map { it.map(mapper) })
+            GamesDataState.Success(cacheList.map { it.map(mapper) })
         }
     } catch (e: Exception) {
-        GamesData.Fail(e)
+        GamesDataState.Fail(e)
     }
 
     override fun searchGame(searchQuery: String) =
-        gamesCacheDataSource.searchGame(searchQuery).map { games ->
+        cacheDataSource.searchGame(searchQuery).map { games ->
             games.map { game ->
                 game.map(mapper)
             }

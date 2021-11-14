@@ -1,11 +1,10 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.viewModelScope
-import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.domain.detail.DetailDomainStateToUiMapper
 import com.dendi.android.gamessearchapp.domain.detail.DetailInteractor
+import com.dendi.android.gamessearchapp.presentation.core.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -17,21 +16,17 @@ import kotlinx.coroutines.withContext
 class DetailViewModel(
     private val detailInteractor: DetailInteractor,
     private val detailCommunication: DetailCommunication,
-    private val mapper: Abstract.HandlerUiMapper<DetailHandlerUi>,
-) : ViewModel() {
+    private val mapper: DetailDomainStateToUiMapper<DetailUiState>,
+) : BaseViewModel<DetailCommunication, DetailUi>(detailCommunication) {
 
     fun fetchDetail(id: Int) {
         detailCommunication.map(DetailUi.Progress)
         viewModelScope.launch(Dispatchers.IO) {
-            val resultDomain = detailInteractor.fetchDetail(id)
+            val resultDomain = detailInteractor.readId(id)
             val resultUi = resultDomain.map(mapper)
             withContext(Dispatchers.Main) {
                 resultUi.map(detailCommunication)
             }
         }
-    }
-
-    fun observeDetail(owner: LifecycleOwner, observer: Observer<DetailUi>) {
-        detailCommunication.observe(owner, observer)
     }
 }

@@ -1,32 +1,33 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
+
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.Abstract
-import com.dendi.android.gamessearchapp.core.GamesApp
 import com.dendi.android.gamessearchapp.databinding.FragmentDetailBinding
+import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 
 /**
  * @author Dendy-Jr on 04.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment<DetailViewModel>() {
 
+    override fun setRecyclerView() = binding.rvDetail
+    override fun viewModelClass() = DetailViewModel::class.java
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: DetailViewModel by lazy {
-        (requireActivity().application as GamesApp).detailViewModel
-    }
+    private lateinit var screenshotAdapter: ScreenshotsAdapter
 
-    private lateinit var screenshotAdapter: ScreenshotAdapter
+    private lateinit var sharedScroll: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,21 +37,28 @@ class DetailFragment : Fragment() {
         _binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbarDetail)
         (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        sharedScroll = requireContext().getSharedPreferences("scroll", Context.MODE_PRIVATE)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        screenshotAdapter = ScreenshotsAdapter()
         var id = 0
-
         val bundle: Bundle? = this.arguments
         if (arguments != null) {
             val detailId = bundle!!.getInt("id")
             id = detailId
         }
-        viewModel.observeDetail(this, { detail ->
-            detail.map(object : Abstract.AdapterDetailMapper {
+
+        setupObserve()
+        viewModel.fetchDetail(id)
+    }
+
+    private fun setupObserve() {
+        viewModel.observe(this, { detail ->
+            detail.map(object : DetailUiMapper<Unit> {
                 override fun map(
                     description: String,
                     developer: String,
@@ -58,11 +66,11 @@ class DetailFragment : Fragment() {
                     gameUrl: String,
                     genre: String,
                     id: Int,
-                    systemRequirements: SystemRequirementsUi,
+                    systemRequirements: SystemRequirementsUi.Base,
                     platform: String,
                     publisher: String,
                     releaseDate: String,
-                    screenshots: List<ScreenshotUi>,
+                    screenshots: List<ScreenshotUi.Base>,
                     shortDescription: String,
                     status: String,
                     thumbnail: String,
@@ -71,7 +79,7 @@ class DetailFragment : Fragment() {
                     with(binding) {
                         toolbarDetail.title = title
 
-                        Glide.with(this@DetailFragment)
+                        Glide.with(requireActivity())
                             .load(thumbnail)
                             .centerCrop()
                             .placeholder(R.drawable.image_loading)
@@ -79,7 +87,9 @@ class DetailFragment : Fragment() {
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .into(ivThumbnail)
 
-                        screenshotAdapter.update(screenshots)
+                        setAdapter(screenshotAdapter)
+
+                        ScreenshotsUi.Base(screenshots).map(screenshotAdapter)
 
                         descriptionTextView.text = description
                         tvStrategy.text = genre
@@ -111,18 +121,6 @@ class DetailFragment : Fragment() {
                 override fun map(message: String) = Unit
             })
         })
-        viewModel.fetchDetail(id)
-
-        setupRecyclerView()
-    }
-
-    private fun setupRecyclerView() {
-        screenshotAdapter = ScreenshotAdapter()
-        with(binding) {
-            recyclerViewDetail.adapter = screenshotAdapter
-            recyclerViewDetail.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        }
     }
 
     override fun onDestroyView() {
@@ -130,3 +128,10 @@ class DetailFragment : Fragment() {
         _binding = null
     }
 }
+
+
+
+
+
+
+

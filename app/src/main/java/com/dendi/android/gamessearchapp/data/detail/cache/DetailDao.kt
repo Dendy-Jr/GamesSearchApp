@@ -14,8 +14,8 @@ import androidx.room.Query
 interface DetailDao {
 
     @Query("select * from detail_table where id = :id")
-    suspend fun fetchDetail(id: Int): DetailDb
+    suspend fun fetchDetail(id: Int): DetailCache.Base
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveDetail(detail: DetailDb)
+    suspend fun saveDetail(detail: DetailCache.Base)
 }

@@ -6,7 +6,8 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * @author Dendy-Jr on 02.11.2021
  * olehvynnytskyi@gmail.com
  */
-class UiSystemRequirementsMapper : Abstract.SystemRequirementsMapper<SystemRequirementsUi> {
+class BaseSystemRequirementsUiMapper :
+    Abstract.SystemRequirementsMapper<SystemRequirementsUi.Base> {
     override fun map(
         id: Int,
         graphics: String,
@@ -14,7 +15,7 @@ class UiSystemRequirementsMapper : Abstract.SystemRequirementsMapper<SystemRequi
         os: String,
         processor: String,
         storage: String,
-    ) = SystemRequirementsUi(
+    ) = SystemRequirementsUi.Base(
         id, graphics = graphics, memory = memory, os = os, processor = processor, storage = storage
     )
 }

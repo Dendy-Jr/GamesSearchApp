@@ -8,17 +8,15 @@ import androidx.lifecycle.Observer
  * @author Dendy-Jr on 08.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface Communication<T>: Abstract.Mapper {
-    fun map(data: T)
-    fun observe(owner: LifecycleOwner, observer: Observer<T>)
+interface Communication<T> : Observe<T>, Abstract.Mapper.Data<T, Unit> {
 
-    abstract class Base<T> : Communication<T> {
+    abstract class Base<T : Any> : Communication<T> {
         private val liveData = MutableLiveData<T>()
         override fun map(data: T) {
-            liveData.value = data!!
+            liveData.value = data
         }
 
-        override fun observe(owner: LifecycleOwner, observer: Observer<T>) =
-            liveData.observe(owner, observer)
+        override fun observe(owner: LifecycleOwner, observe: Observer<T>) =
+            liveData.observe(owner, observe)
     }
 }

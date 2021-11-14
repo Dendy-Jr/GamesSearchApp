@@ -1,6 +1,7 @@
 package com.dendi.android.gamessearchapp.domain
 
 import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.core.ErrorType
 import com.dendi.android.gamessearchapp.data.games.GameData
 import com.dendi.android.gamessearchapp.domain.games.*
 import junit.framework.Assert.assertEquals
@@ -13,36 +14,36 @@ import java.net.UnknownHostException
  */
 class GamesDataToDomainMapperTest {
 
-    private val mapper = BaseGamesDataToDomainMapper(object : Abstract.GameMapper<GameDomain> {
+    private val mapper = BaseGamesDataStateToDomainMapper(object : Abstract.ToGameMapper<GameDomain> {
         override fun map(id: Int, thumbnail: String, title: String) =
-            GameDomain(id = id, thumbnail = thumbnail, title = title)
+            GameDomain.Base(id = id, thumbnail = thumbnail, title = title)
     })
 
     @Test
     fun test_success() {
         val actual = mapper.map(
             listOf(
-                GameData(1, "https://www.freetogame.com/g/1/thumbnail.jpg", "Dauntless"),
-                GameData(82, "https://www.freetogame.com/g/82/thumbnail.jpg", "Line of Sight")
+                GameData.Base(1, "https://www.freetogame.com/g/1/thumbnail.jpg", "Dauntless"),
+                GameData.Base(82, "https://www.freetogame.com/g/82/thumbnail.jpg", "Line of Sight")
             )
         )
 
         val data = listOf(
-            GameDomain(1, "https://www.freetogame.com/g/1/thumbnail.jpg", "Dauntless"),
-            GameDomain(82, "https://www.freetogame.com/g/82/thumbnail.jpg", "Line of Sight")
+            GameDomain.Base(1, "https://www.freetogame.com/g/1/thumbnail.jpg", "Dauntless"),
+            GameDomain.Base(82, "https://www.freetogame.com/g/82/thumbnail.jpg", "Line of Sight")
         )
 
-        val expected = GamesDomain.Success(data)
+        val expected = GamesDomainState.Success(data)
         assertEquals(expected, actual)
     }
 
     @Test
     fun test_fail() {
         var actual = mapper.map(UnknownHostException())
-        var expected = GamesDomain.Fail(ErrorType.NO_CONNECTION)
+        var expected = GamesDomainState.Fail(ErrorType.NO_CONNECTION)
         assertEquals(expected, actual)
         actual = mapper.map(IllegalAccessException())
-        expected = GamesDomain.Fail(ErrorType.GENERIC_ERROR)
+        expected = GamesDomainState.Fail(ErrorType.GENERIC_ERROR)
         assertEquals(expected, actual)
     }
 }

@@ -1,13 +1,13 @@
-package com.dendi.android.gamessearchapp.data.detail
+package com.dendi.android.gamessearchapp.data.detail.cache
 
 import com.dendi.android.gamessearchapp.core.Abstract
-import com.dendi.android.gamessearchapp.data.detail.cache.SystemRequirementsDb
 
 /**
  * @author Dendy-Jr on 02.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DbSystemRequirementsMapper : Abstract.SystemRequirementsMapper<SystemRequirementsDb> {
+class BaseSystemRequirementsCacheMapper :
+    Abstract.SystemRequirementsMapper<SystemRequirementsCache> {
     override fun map(
         id: Int,
         graphics: String,
@@ -15,7 +15,7 @@ class DbSystemRequirementsMapper : Abstract.SystemRequirementsMapper<SystemRequi
         os: String,
         processor: String,
         storage: String,
-    ) = SystemRequirementsDb(id,
+    ) = SystemRequirementsCache.Base(id,
         graphics = graphics,
         memory = memory,
         os = os,

@@ -1,4 +1,4 @@
-package com.dendi.android.gamessearchapp.domain.games
+package com.dendi.android.gamessearchapp.core
 
 /**
  * @author Dendy-Jr on 01.11.2021

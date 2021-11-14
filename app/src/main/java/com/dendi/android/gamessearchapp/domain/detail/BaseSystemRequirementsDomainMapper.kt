@@ -6,7 +6,8 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * @author Dendy-Jr on 02.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DomainSystemRequirementsMapper : Abstract.SystemRequirementsMapper<SystemRequirementsDomain> {
+class BaseSystemRequirementsDomainMapper :
+    Abstract.SystemRequirementsMapper<SystemRequirementsDomain> {
     override fun map(
         id: Int,
         graphics: String,
@@ -14,7 +15,7 @@ class DomainSystemRequirementsMapper : Abstract.SystemRequirementsMapper<SystemR
         os: String,
         processor: String,
         storage: String,
-    ) = SystemRequirementsDomain(
+    ) = SystemRequirementsDomain.Base(
         id = id,
         graphics = graphics,
         memory = memory,

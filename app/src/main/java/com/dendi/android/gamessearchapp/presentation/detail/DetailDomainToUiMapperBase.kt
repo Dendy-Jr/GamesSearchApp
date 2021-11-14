@@ -1,12 +1,12 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
-import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.domain.detail.DetailDomainToUiMapper
 
 /**
  * @author Dendy-Jr on 05.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DetailUiMapperBase : Abstract.DetailUiMapper<DetailUi> {
+class DetailDomainToUiMapperBase : DetailDomainToUiMapper<DetailUi.Base> {
     override fun map(
         description: String,
         developer: String,
@@ -14,11 +14,11 @@ class DetailUiMapperBase : Abstract.DetailUiMapper<DetailUi> {
         gameUrl: String,
         genre: String,
         id: Int,
-        systemRequirements: SystemRequirementsUi,
+        systemRequirements: SystemRequirementsUi.Base,
         platform: String,
         publisher: String,
         releaseDate: String,
-        screenshots: List<ScreenshotUi>,
+        screenshots: List<ScreenshotUi.Base>,
         shortDescription: String,
         status: String,
         thumbnail: String,

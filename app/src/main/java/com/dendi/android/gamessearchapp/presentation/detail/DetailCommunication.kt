@@ -8,6 +8,5 @@ import com.dendi.android.gamessearchapp.core.Communication
  * olehvynnytskyi@gmail.com
  */
 interface DetailCommunication : Communication<DetailUi> {
-
     class Base : Communication.Base<DetailUi>(), DetailCommunication
 }

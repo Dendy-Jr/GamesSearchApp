@@ -6,6 +6,6 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * @author Dendy-Jr on 02.11.2021
  * olehvynnytskyi@gmail.com
  */
-class UiScreenshotMapper : Abstract.ScreenshotMapper<ScreenshotUi> {
-    override fun map(id: Int, image: String) = ScreenshotUi(id = id, image = image)
+class BaseScreenshotUiMapper : Abstract.ScreenshotMapper<ScreenshotUi.Base> {
+    override fun map(id: Int, image: String) = ScreenshotUi.Base(id = id, image = image)
 }

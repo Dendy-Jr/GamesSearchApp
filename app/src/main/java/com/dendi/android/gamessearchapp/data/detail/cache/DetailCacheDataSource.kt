@@ -1,25 +1,22 @@
 package com.dendi.android.gamessearchapp.data.detail.cache
 
-import com.dendi.android.gamessearchapp.data.detail.DbObject
+import com.dendi.android.gamessearchapp.core.ReadById
+import com.dendi.android.gamessearchapp.core.Save
 import com.dendi.android.gamessearchapp.data.detail.DetailData
 
 /**
  * @author Dendy-Jr on 03.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface DetailCacheDataSource {
-
-    suspend fun fetchDetail(id: Int): DetailDb
-
-    suspend fun saveDetail(detail: DetailData)
+interface DetailCacheDataSource : Save<DetailData>, ReadById<DetailCache> {
 
     class Base(
         private val detailDao: DetailDao,
-        private val mapper: DbObject<DetailData, DetailDb>,
+        private val mapper: DetailDataToCacheMapper<DetailCache.Base>,
     ) : DetailCacheDataSource {
-        override suspend fun fetchDetail(id: Int) = detailDao.fetchDetail(id)
 
-        override suspend fun saveDetail(detail: DetailData) =
-            detailDao.saveDetail(mapper.map(detail))
+        override suspend fun save(data: DetailData) = detailDao.saveDetail(data.map(mapper))
+
+        override suspend fun readId(id: Int) = detailDao.fetchDetail(id)
     }
 }

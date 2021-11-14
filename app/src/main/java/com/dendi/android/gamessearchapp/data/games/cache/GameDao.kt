@@ -14,11 +14,11 @@ import androidx.room.Query
 interface GameDao {
 
     @Query("select * from game_table")
-    suspend fun fetchAllGames(): List<GameDb>
+    suspend fun fetchAllGames(): List<GameCache.Base>
 
-    @Insert(entity = GameDb::class, onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveGamesToDb(games: List<GameDb>)
+    @Insert(entity = GameCache.Base::class, onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveGamesToDb(games: List<GameCache.Base>)
 
     @Query("select * from game_table where title like :searchQuery")
-    fun searchGame(searchQuery: String): LiveData<List<GameDb>>
+    fun searchGame(searchQuery: String): LiveData<List<GameCache.Base>>
 }
