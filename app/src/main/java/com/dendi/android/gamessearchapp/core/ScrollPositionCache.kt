@@ -1,22 +1,26 @@
 package com.dendi.android.gamessearchapp.core
 
+import com.dendi.android.gamessearchapp.data.favorites.FavoritesScrollPositionCache
 import com.dendi.android.gamessearchapp.data.games.GamesScrollPositionCache
 
 /**
  * @author Dendy-Jr on 09.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface ScrollPositionCache : GamesScrollPositionCache {
+interface ScrollPositionCache : GamesScrollPositionCache, FavoritesScrollPositionCache {
 
     abstract class Abstract(provide: PreferenceProvide) : ScrollPositionCache {
 
         private val sharedPreferences by lazy { provide.provideSharedPreferences(fileName()) }
 
-        override fun saveGamesScrollPosition(position: Int) {
-            save(GAMES, position)
-        }
+        override fun saveGamesScrollPosition(position: Int) = save(GAMES, position)
+
+        override fun saveFavoritesScrollPosition(position: Int) = save(FAVORITES, position)
+
 
         override fun gamesScrollPosition() = get(GAMES)
+        override fun favoritesScrollPosition() = get(FAVORITES)
+
 
         protected abstract fun fileName(): String
         protected abstract fun keySuffix(): String
@@ -30,6 +34,7 @@ interface ScrollPositionCache : GamesScrollPositionCache {
 
         private companion object {
             const val GAMES = "GAMES"
+            const val FAVORITES = "FAVORITES"
         }
     }
 
