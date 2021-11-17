@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dendi.android.gamessearchapp.MainActivity
 import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.GamesApp
 
@@ -25,11 +25,10 @@ abstract class BaseFragment<T : BaseViewModel<*, *>> : Fragment() {
     }
 
     protected abstract fun setRecyclerView(): RecyclerView
-
     protected abstract fun viewModelClass(): Class<T>
     protected lateinit var viewModel: T
     private var hasScrolled = false
-    private lateinit var layoutManager: GridLayoutManager
+    private lateinit var layoutManager: LinearLayoutManager
     private var recyclerView: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,31 +41,23 @@ abstract class BaseFragment<T : BaseViewModel<*, *>> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val orientation = requireContext().resources.configuration.orientation
         layoutManager = when {
-            setRecyclerView() == view.findViewById(R.id.rvGames) && orientation ==
-                    Configuration.ORIENTATION_PORTRAIT -> GridLayoutManager(
-                requireContext(),
-                2)
-            setRecyclerView() == view.findViewById(R.id.rvGames) && orientation ==
-                    Configuration.ORIENTATION_LANDSCAPE -> GridLayoutManager(
-                requireContext(),
-                3)
-            setRecyclerView() == view.findViewById(R.id.rvDetail) && orientation ==
-                    Configuration.ORIENTATION_LANDSCAPE -> GridLayoutManager(
-                requireContext(),
-                2)
-
-            else -> GridLayoutManager(
-                requireContext(),
-                1)
+            setRecyclerView() == view.findViewById(R.id.rvScreenshot) && orientation ==
+                    Configuration.ORIENTATION_LANDSCAPE ->
+                GridLayoutManager(requireContext(), 2)
+            else -> LinearLayoutManager(requireContext())
         }
         recyclerView = setRecyclerView()
         recyclerView?.layoutManager = layoutManager
-        recyclerView?.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
+        recyclerView?.apply {
+            setHasFixedSize(true)
+            itemAnimator?.changeDuration = 0
+            addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
             )
-        )
+        }
     }
 
     private fun <T : ViewModel> viewModel(clazz: Class<T>, owner: ViewModelStoreOwner) =
@@ -79,9 +70,7 @@ abstract class BaseFragment<T : BaseViewModel<*, *>> : Fragment() {
 
     protected fun setAdapter(adapter: RecyclerView.Adapter<*>) {
         recyclerView?.adapter = adapter
-        recyclerView?.setHasFixedSize(true)
     }
-
 
     private fun itemsCount() = recyclerView?.adapter?.itemCount ?: 0
 

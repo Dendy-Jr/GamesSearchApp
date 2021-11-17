@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.dendi.android.gamessearchapp.data.detail.cache.*
+import com.dendi.android.gamessearchapp.data.favorites.FavoriteCache
+import com.dendi.android.gamessearchapp.data.favorites.FavoriteDao
 import com.dendi.android.gamessearchapp.data.games.cache.GameDao
 import com.dendi.android.gamessearchapp.data.games.cache.GameCache
 
@@ -14,7 +16,11 @@ import com.dendi.android.gamessearchapp.data.games.cache.GameCache
  * olehvynnytskyi@gmail.com
  */
 @Database(
-    entities = [GameCache.Base::class, DetailCache.Base::class, ScreenshotCache.Base::class, SystemRequirementsCache.Base::class],
+    entities = [GameCache.Base::class,
+        DetailCache.Base::class,
+        ScreenshotCache.Base::class,
+        SystemRequirementsCache.Base::class,
+        FavoriteCache.Base::class],
     version = 1,
     exportSchema = false
 )
@@ -22,6 +28,7 @@ import com.dendi.android.gamessearchapp.data.games.cache.GameCache
 abstract class GamesDatabase : RoomDatabase() {
     abstract fun gameDao(): GameDao
     abstract fun detailDao(): DetailDao
+    abstract fun favoriteDao(): FavoriteDao
 
     companion object {
         private var instance: GamesDatabase? = null

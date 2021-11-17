@@ -15,12 +15,26 @@ interface GameData : Abstract.DataObject {
         private val id: Int,
         private val thumbnail: String,
         private val title: String,
+        private val genre: String,
+        private val releaseDate: String,
     ) : GameData {
         override fun <T> map(mapper: Abstract.ToGameMapper<T>) =
-            mapper.map(id = id, thumbnail = thumbnail, title = title)
+            mapper.map(
+                id = id,
+                thumbnail = thumbnail,
+                title = title,
+                genre = genre,
+                releaseDate = releaseDate
+            )
 
         override fun <T : Abstract.CacheObject> map(mapper: Abstract.ToGameMapper<T>) =
-            mapper.map(id = id, thumbnail = thumbnail, title = title)
+            mapper.map(
+                id = id,
+                thumbnail = thumbnail,
+                title = title,
+                genre = genre,
+                releaseDate = releaseDate
+            )
     }
 }
 

@@ -1,12 +1,12 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -14,6 +14,8 @@ import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.Abstract
 import com.dendi.android.gamessearchapp.databinding.FragmentDetailBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
+import com.dendi.android.gamessearchapp.presentation.favorites.FavoriteUi
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * @author Dendy-Jr on 04.11.2021
@@ -21,13 +23,41 @@ import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
  */
 class DetailFragment : BaseFragment<DetailViewModel>() {
 
-    override fun setRecyclerView() = binding.rvDetail
+    override fun setRecyclerView() = binding.rvScreenshot
     override fun viewModelClass() = DetailViewModel::class.java
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var screenshotAdapter: ScreenshotsAdapter
 
-    private lateinit var sharedScroll: SharedPreferences
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            requireContext(),
+            R.anim.rotate_open_anim
+        )
+    }
+
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            requireContext(),
+            R.anim.rotate_close_anim
+        )
+    }
+
+    private val fromButton: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            requireContext(),
+            R.anim.from_bottom_anim
+        )
+    }
+
+    private val toButton: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            requireContext(),
+            R.anim.to_bottom_anim
+        )
+    }
+
+    private var clicked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +67,6 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
         _binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbarDetail)
         (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        sharedScroll = requireContext().getSharedPreferences("scroll", Context.MODE_PRIVATE)
         return binding.root
     }
 
@@ -54,6 +83,10 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
 
         setupObserve()
         viewModel.fetchDetail(id)
+
+        binding.fabAction.setOnClickListener {
+            onAddButtonClick()
+        }
     }
 
     private fun setupObserve() {
@@ -77,7 +110,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
                     title: String,
                 ) {
                     with(binding) {
-                        toolbarDetail.title = title
+                        toolbarDetailTitle.text = title
 
                         Glide.with(requireActivity())
                             .load(thumbnail)
@@ -88,8 +121,26 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
                             .into(ivThumbnail)
 
                         setAdapter(screenshotAdapter)
-
                         ScreenshotsUi.Base(screenshots).map(screenshotAdapter)
+
+                        addGameToFavorite(
+                            FavoriteUi.Base(
+                                id,
+                                thumbnail,
+                                title,
+                                platform,
+                                developer
+                            ), title
+                        )
+                        deleteGameFromFavorite(
+                            FavoriteUi.Base(
+                                id,
+                                thumbnail,
+                                title,
+                                platform,
+                                developer
+                            ), title
+                        )
 
                         descriptionTextView.text = description
                         tvStrategy.text = genre
@@ -121,6 +172,70 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
                 override fun map(message: String) = Unit
             })
         })
+    }
+
+    private fun addGameToFavorite(game: FavoriteUi.Base, title: String) {
+        with(binding) {
+            fabAddFavorite.setOnClickListener {
+                viewModel.saveToFavorite(game)
+                Snackbar.make(it, "$title added to favorites", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun deleteGameFromFavorite(game: FavoriteUi.Base, title: String) {
+        with(binding) {
+            fabDeleteFavorite.setOnClickListener {
+                viewModel.deleteFromFavorite(game)
+                Snackbar.make(it, "$title deleted from favorites", Snackbar.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+
+    private fun onAddButtonClick() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        setClickable(clicked)
+        clicked = !clicked
+    }
+
+    private fun setAnimation(clicked: Boolean) {
+        with(binding) {
+            if (!clicked) {
+                fabAddFavorite.startAnimation(fromButton)
+                fabDeleteFavorite.startAnimation(fromButton)
+                fabAction.startAnimation(rotateOpen)
+            } else {
+                fabAddFavorite.startAnimation(toButton)
+                fabDeleteFavorite.startAnimation(toButton)
+                fabAction.startAnimation(rotateClose)
+            }
+        }
+    }
+
+    private fun setVisibility(clicked: Boolean) {
+        with(binding) {
+            if (!clicked) {
+                fabAddFavorite.visibility = View.VISIBLE
+                fabDeleteFavorite.visibility = View.VISIBLE
+            } else {
+                fabAddFavorite.visibility = View.INVISIBLE
+                fabDeleteFavorite.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun setClickable(clicked: Boolean) {
+        with(binding) {
+            if (!clicked) {
+                fabAddFavorite.isClickable = true
+                fabDeleteFavorite.isClickable = true
+            } else {
+                fabAddFavorite.isClickable = false
+                fabDeleteFavorite.isClickable = false
+            }
+        }
     }
 
     override fun onDestroyView() {

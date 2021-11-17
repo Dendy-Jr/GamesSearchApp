@@ -7,8 +7,18 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 class BaseToGameUiMapper : Abstract.ToGameMapper<GameUi> {
-    override fun map(id: Int, thumbnail: String, title: String) = GameUi.Base(
-        id = id,
-        thumbnail = thumbnail,
-        title = title)
+    override fun map(
+        id: Int,
+        thumbnail: String,
+        title: String,
+        genre: String,
+        releaseDate: String
+    ) =
+        GameUi.Base(
+            id = id,
+            thumbnail = thumbnail,
+            title = title,
+            genre = genre,
+            releaseDate = releaseDate
+        )
 }

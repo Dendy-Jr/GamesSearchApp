@@ -19,6 +19,6 @@ abstract class DiffUtilCallback<T>(
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition]?.equals(newList[newItemPosition]) == true
+        return oldList[oldItemPosition] == newList[newItemPosition]
     }
 }

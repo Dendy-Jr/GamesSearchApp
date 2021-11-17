@@ -11,7 +11,7 @@ import com.dendi.android.gamessearchapp.core.Observe
  * olehvynnytskyi@gmail.com
  */
 abstract class BaseViewModel<E : Communication<T>, T>(
-    private val communication: E,
+    protected val communication: E,
 ) : ViewModel(), ScrollPosition, Observe<T> {
 
     override fun observe(owner: LifecycleOwner, observe: Observer<T>) =

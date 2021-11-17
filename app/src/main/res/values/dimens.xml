@@ -12,4 +12,7 @@
     <dimen name="margin_top_8dp">8dp</dimen>
     <dimen name="margin_top_24dp">24dp</dimen>
     <dimen name="margin_bottom_8dp">8dp</dimen>
+    <dimen name="layout_margin_16dp">16dp</dimen>
+    <dimen name="margin_end_16dp">16dp</dimen>
+    <dimen name="text_size_40sp">40sp</dimen>
 </resources>

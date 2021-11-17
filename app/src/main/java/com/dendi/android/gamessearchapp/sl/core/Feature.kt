@@ -9,4 +9,6 @@ sealed class Feature {
     object Games: Feature()
 
     object Detail: Feature()
+
+    object Favorites: Feature()
 }

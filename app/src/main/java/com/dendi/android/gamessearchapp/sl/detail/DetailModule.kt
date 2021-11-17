@@ -7,7 +7,9 @@ import com.dendi.android.gamessearchapp.data.detail.cache.DetailCacheDataSource
 import com.dendi.android.gamessearchapp.data.detail.cache.DetailDataToCacheMapper
 import com.dendi.android.gamessearchapp.data.detail.cloud.DetailCloudDataSource
 import com.dendi.android.gamessearchapp.data.detail.cloud.DetailService
+import com.dendi.android.gamessearchapp.data.favorites.BaseFavoriteCacheMapper
 import com.dendi.android.gamessearchapp.domain.detail.*
+import com.dendi.android.gamessearchapp.domain.favorites.BaseFavoriteDomainMapper
 import com.dendi.android.gamessearchapp.presentation.detail.BaseDetailDomainStateToUiMapper
 import com.dendi.android.gamessearchapp.presentation.detail.DetailCommunication
 import com.dendi.android.gamessearchapp.presentation.detail.DetailDomainToUiMapperBase
@@ -30,6 +32,7 @@ class DetailModule(private val coreModule: CoreModule) : BaseModule<DetailViewMo
                 ),
                 DetailCacheDataSource.Base(
                     coreModule.detailDao,
+                    coreModule.favoriteDao,
                     DetailDataToCacheMapper.Base()
                 ),
                 DetailDataMapper.Base()
@@ -37,6 +40,7 @@ class DetailModule(private val coreModule: CoreModule) : BaseModule<DetailViewMo
             BaseDetailDataToDomainMapper(
                 DetailDataToDomainMapper.Base()
             ),
+            BaseFavoriteCacheMapper()
         )
 
         val communication = DetailCommunication.Base()
@@ -47,7 +51,8 @@ class DetailModule(private val coreModule: CoreModule) : BaseModule<DetailViewMo
             BaseDetailDomainStateToUiMapper(
                 coreModule.resourceProvider,
                 DetailDomainToUiMapperBase()
-            )
+            ),
+            BaseFavoriteDomainMapper()
         )
     }
 }

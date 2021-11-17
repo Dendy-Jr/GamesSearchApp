@@ -13,33 +13,28 @@ import kotlinx.coroutines.withContext
  * olehvynnytskyi@gmail.com
  */
 class GamesViewModel(
-    private val gamesInteractor: GamesInteractor,
-    private val gamesMapper: GamesDomainStateToUiMapper<GamesUiState>,
-    private val gamesCommunication: GamesCommunication,
-) : BaseViewModel<GamesCommunication, GamesUiState>(gamesCommunication) {
-
-    init {
-        fetchGames()
-    }
+    private val interactor: GamesInteractor,
+    private val mapper: GamesDomainStateToUiMapper<GamesUiState>,
+    communication: GamesCommunication,
+) : BaseViewModel<GamesCommunication, GamesUiState>(communication) {
 
     fun fetchGames() {
-        gamesCommunication.map(GamesUiState.Base(listOf(GameUi.Progress)))
+        communication.map(GamesUiState.Base(listOf(GameUi.Progress)))
         viewModelScope.launch(Dispatchers.IO) {
-            val resultDomain = gamesInteractor.read()
-            val resultUi = resultDomain.map(gamesMapper)
+            val resultDomain = interactor.read()
+            val resultUi = resultDomain.map(mapper)
             withContext(Dispatchers.Main) {
-                gamesCommunication.map(resultUi)
+                communication.map(resultUi)
             }
         }
     }
 
-    override fun saveScrollPosition(position: Int) = gamesInteractor.saveScrollPosition(position)
-
-    override fun scrollPosition() = gamesInteractor.scrollPosition()
-
     fun searchGame(searchQuery: String): LiveData<GamesUiState> {
-        return gamesInteractor.searchGame(searchQuery).map { games ->
-            gamesMapper.map(games)
+        return interactor.searchGame(searchQuery).map { games ->
+            mapper.map(games)
         }
     }
+
+    override fun saveScrollPosition(position: Int) = interactor.saveScrollPosition(position)
+    override fun scrollPosition() = interactor.scrollPosition()
 }

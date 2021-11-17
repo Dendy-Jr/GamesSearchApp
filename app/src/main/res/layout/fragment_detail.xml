@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#011122">
+    android:background="#FFF1E1">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -17,11 +17,23 @@
             android:id="@+id/toolbar_detail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#011122"
+            android:background="#04365E"
             android:theme="@style/ThemeOverlay.Toobar"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:navigationIconTint="@color/white"
-            app:titleTextColor="#FFFFFF" />
+            app:navigationIconTint="#54ACFF"
+            app:titleTextColor="#54ACFF" >
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/toolbar_detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#54ACFF"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_size_24sp"
+                android:text="" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -71,10 +83,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:layout_marginTop="@dimen/margin_top_16dp"
+                    android:layout_marginTop="@dimen/margin_top_8dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/description"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_24sp"
                     android:textStyle="bold" />
 
@@ -87,12 +99,12 @@
                     android:layout_marginTop="@dimen/margin_top_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="16sp"
                     tools:text="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter." />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvDetail"
+                    android:id="@+id/rvScreenshot"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/margin_top_16dp" />
@@ -103,31 +115,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:layout_marginEnd="@dimen/margin_end_8dp"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tv_swipe_Left"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:fontFamily="@font/amarante"-->
-<!--                        android:text="@string/swipe_left"-->
-<!--                        android:textColor="#FFFFFF"-->
-<!--                        android:textSize="12sp" />-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/iv_swipe"-->
-<!--                        android:layout_width="40dp"-->
-<!--                        android:layout_height="40dp"-->
-<!--                        android:src="@drawable/swipe_left" />-->
-
-<!--                </LinearLayout>-->
-
-
                 <TextView
                     android:id="@+id/tv_genre_tools"
                     android:layout_width="wrap_content"
@@ -136,7 +123,7 @@
                     android:layout_marginTop="-55dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/genre"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -145,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Strategy" />
 
@@ -157,7 +144,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/platform"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -166,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Windows" />
 
@@ -178,7 +165,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/publisher"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -187,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="David Schneider" />
 
@@ -199,7 +186,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/developer"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -208,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="David Schneider" />
 
@@ -220,7 +207,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/release_date"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -229,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="2018-02-12" />
 
@@ -241,7 +228,7 @@
                     android:layout_marginTop="@dimen/margin_top_24dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/minimum_system_requirements"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_24sp"
                     android:textStyle="bold" />
 
@@ -253,7 +240,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/operating_system"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -263,7 +250,7 @@
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Windows XP, Vista, 7, 8, 10" />
 
@@ -275,7 +262,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/processor"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -285,7 +272,7 @@
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Dual Core 3.0 GHz" />
 
@@ -297,7 +284,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/memory"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -306,7 +293,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="2 GB" />
 
@@ -318,7 +305,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/graphics"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -328,7 +315,7 @@
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Intedl HD Graphics 4000 or equivalent" />
 
@@ -340,7 +327,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/storage"
-                    android:textColor="#C80F3A"
+                    android:textColor="#1D3C45"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -349,7 +336,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:fontFamily="@font/amarante"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#D2601A"
                     android:textSize="16sp"
                     tools:text="600 MB" />
 
@@ -357,6 +344,51 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="160dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:srcCompat="@drawable/ic_add_favorite_fab"
+        app:tint="@android:color/white"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_delete_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="90dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:srcCompat="@drawable/ic_remove_favorite_fab"
+        app:tint="@android:color/white"
+        tools:visibility="visible" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#1A237E"
+        app:layout_anchor="@id/nestedScrollView"
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/ic_add_fab"
+        app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

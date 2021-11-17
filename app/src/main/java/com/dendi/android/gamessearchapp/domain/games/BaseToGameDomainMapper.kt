@@ -7,7 +7,14 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 class BaseToGameDomainMapper : Abstract.ToGameMapper<GameDomain> {
-    override fun map(id: Int, thumbnail: String, title: String) = GameDomain.Base(
-        id, thumbnail = thumbnail, title = title
-    )
+    override fun map(
+        id: Int,
+        thumbnail: String,
+        title: String,
+        genre: String,
+        releaseDate: String
+    ) =
+        GameDomain.Base(
+            id = id, thumbnail = thumbnail, title = title, genre = genre, releaseDate = releaseDate
+        )
 }

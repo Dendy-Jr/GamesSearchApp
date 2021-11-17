@@ -1,11 +1,8 @@
 package com.dendi.android.gamessearchapp.presentation.games
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.Retry
-import com.dendi.android.gamessearchapp.databinding.FailFullscreenBinding
-import com.dendi.android.gamessearchapp.databinding.GameLayoutBinding
-import com.dendi.android.gamessearchapp.databinding.ProgressFullscreenBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseAdapter
 import com.dendi.android.gamessearchapp.presentation.core.BaseViewHolder
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
@@ -20,7 +17,6 @@ class GamesAdapter(
     private val listener: ClickListener<Int>,
 ) : BaseAdapter<GameUi, BaseViewHolder<GameUi>>() {
 
-
     override fun getItemViewType(position: Int) = when (list[position]) {
         is GameUi.Base -> 0
         is GameUi.Fail -> 1
@@ -29,12 +25,10 @@ class GamesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
-        0 -> GamesViewHolder.Base(GameLayoutBinding.inflate(LayoutInflater.from(parent.context)),
-            listener)
-        1 -> GamesViewHolder.Error(FailFullscreenBinding.inflate(LayoutInflater.from(parent.context)),
-            retry)
-        else -> BaseViewHolder.FullScreenProgress(ProgressFullscreenBinding.inflate(LayoutInflater.from(
-            parent.context)))
+        0 -> GamesViewHolder.Base(R.layout.game_item.makeView(parent), listener)
+        1 -> GamesViewHolder.Error(R.layout.fail_fullscreen.makeView(parent), retry)
+        2 -> BaseViewHolder.FullScreenProgress(R.layout.progress_fullscreen.makeView(parent))
+        else -> throw IllegalStateException("unknown viewType $viewType")
     }
 
     override fun diffUtilCallback(list: ArrayList<GameUi>, data: List<GameUi>) =

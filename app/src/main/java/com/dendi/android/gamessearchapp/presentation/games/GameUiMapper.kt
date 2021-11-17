@@ -7,6 +7,7 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 interface GameUiMapper<T> : Abstract.Mapper {
-    fun map(id: Int, thumbnail: String, title: String): T
+    fun map(id: Int, thumbnail: String, title: String, genre: String, releaseDate: String): T
+
     fun map(message: String): T
 }

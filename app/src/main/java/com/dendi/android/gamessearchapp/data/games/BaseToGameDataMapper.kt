@@ -7,7 +7,14 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 class BaseToGameDataMapper : Abstract.ToGameMapper<GameData> {
-    override fun map(id: Int, thumbnail: String, title: String) = GameData.Base(
-        id = id, thumbnail = thumbnail, title = title
-    )
+    override fun map(
+        id: Int,
+        thumbnail: String,
+        title: String,
+        genre: String,
+        releaseDate: String
+    ) =
+        GameData.Base(
+            id = id, thumbnail = thumbnail, title = title, genre = genre, releaseDate = releaseDate
+        )
 }

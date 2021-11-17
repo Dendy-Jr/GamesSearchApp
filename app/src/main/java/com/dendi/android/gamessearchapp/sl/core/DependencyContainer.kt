@@ -1,6 +1,7 @@
 package com.dendi.android.gamessearchapp.sl.core
 
 import com.dendi.android.gamessearchapp.sl.detail.DetailModule
+import com.dendi.android.gamessearchapp.sl.favorites.FavoritesModule
 import com.dendi.android.gamessearchapp.sl.games.GamesModule
 
 /**
@@ -18,6 +19,7 @@ interface DependencyContainer {
         override fun module(feature: Feature): BaseModule<*> = when (feature) {
             is Feature.Games -> GamesModule(coreModule)
             is Feature.Detail -> DetailModule(coreModule)
+            is Feature.Favorites -> FavoritesModule(coreModule)
         }
     }
 }

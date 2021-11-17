@@ -5,6 +5,7 @@ import com.dendi.android.gamessearchapp.core.ResourceProvider
 import com.dendi.android.gamessearchapp.core.ScrollPositionCache
 import com.dendi.android.gamessearchapp.data.core.GamesDatabase
 import com.dendi.android.gamessearchapp.data.detail.cache.DetailDao
+import com.dendi.android.gamessearchapp.data.favorites.FavoriteDao
 import com.dendi.android.gamessearchapp.data.games.cache.GameDao
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,6 +24,7 @@ class CoreModule {
     lateinit var client: OkHttpClient
     lateinit var gameDao: GameDao
     lateinit var detailDao: DetailDao
+    lateinit var favoriteDao: FavoriteDao
     lateinit var scrollPositionCache: ScrollPositionCache
 
     fun init(context: Context) {
@@ -43,6 +45,7 @@ class CoreModule {
         resourceProvider = ResourceProvider.Base(context)
         gameDao = GamesDatabase.database(context).gameDao()
         detailDao = GamesDatabase.database(context).detailDao()
+        favoriteDao = GamesDatabase.database(context).favoriteDao()
 
         scrollPositionCache = ScrollPositionCache.Base(resourceProvider)
     }

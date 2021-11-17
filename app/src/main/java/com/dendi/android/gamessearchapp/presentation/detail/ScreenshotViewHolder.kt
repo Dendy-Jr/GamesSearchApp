@@ -6,7 +6,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.Abstract
-import com.dendi.android.gamessearchapp.databinding.ScreenshotListBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseViewHolder
 
 /**
@@ -15,8 +14,9 @@ import com.dendi.android.gamessearchapp.presentation.core.BaseViewHolder
  */
 abstract class ScreenshotViewHolder(view: View) : BaseViewHolder<ScreenshotUi>(view) {
 
-    class Base(private val binding: ScreenshotListBinding) :
-        BaseViewHolder<ScreenshotUi>(binding.root) {
+    class Base(view: View) :
+        BaseViewHolder<ScreenshotUi>(view) {
+        private val screenshot: ImageView = itemView.findViewById(R.id.screenshot)
         override fun bind(item: ScreenshotUi) {
             item.map(object : Abstract.ScreenshotMapper<Unit> {
                 override fun map(id: Int, image: String) {
@@ -26,7 +26,7 @@ abstract class ScreenshotViewHolder(view: View) : BaseViewHolder<ScreenshotUi>(v
                         .placeholder(R.drawable.image_loading)
                         .error(R.drawable.not_found_image)
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(binding.screenshot)
+                        .into(screenshot)
                 }
             })
         }

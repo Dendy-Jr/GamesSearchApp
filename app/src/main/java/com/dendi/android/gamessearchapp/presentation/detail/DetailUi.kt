@@ -1,5 +1,7 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
+import com.dendi.android.gamessearchapp.core.Abstract
+
 
 /**
  * @author Dendy-Jr on 02.11.2021
@@ -9,7 +11,8 @@ package com.dendi.android.gamessearchapp.presentation.detail
 interface DetailUi {
 
     fun <T> map(mapper: DetailUiMapper<T>): T =
-        mapper.map("",
+        mapper.map(
+            "",
             "",
             "",
             "",
@@ -23,9 +26,12 @@ interface DetailUi {
             "",
             "",
             "",
-            "")
+            ""
+        )
 
     object Progress : DetailUi
+
+    fun <T> map(mapper: Abstract.FavoriteMapper<T>) = mapper.map(0, "", "", "", "")
 
     data class Base(
         private val description: String,
@@ -61,6 +67,12 @@ interface DetailUi {
             thumbnail = thumbnail,
             title = title
         )
+
+        override fun <T> map(mapper: Abstract.FavoriteMapper<T>): T =
+            mapper.map(
+                id, thumbnail = thumbnail, title = title, platform = platform,
+                developer = developer
+            )
     }
 
     data class Fail(private val message: String) : DetailUi {

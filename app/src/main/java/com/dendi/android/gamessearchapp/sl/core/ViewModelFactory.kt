@@ -3,6 +3,7 @@ package com.dendi.android.gamessearchapp.sl.core
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dendi.android.gamessearchapp.presentation.detail.DetailViewModel
+import com.dendi.android.gamessearchapp.presentation.favorites.FavoritesViewModel
 import com.dendi.android.gamessearchapp.presentation.games.GamesViewModel
 
 /**
@@ -16,6 +17,7 @@ class ViewModelFactory(
     private val featuresByClass = HashMap<Class<*>, Feature>().apply {
         put(GamesViewModel::class.java, Feature.Games)
         put(DetailViewModel::class.java, Feature.Detail)
+        put(FavoritesViewModel::class.java, Feature.Favorites)
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

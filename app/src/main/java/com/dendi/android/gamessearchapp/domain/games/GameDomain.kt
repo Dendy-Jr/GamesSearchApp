@@ -15,8 +15,16 @@ interface GameDomain {
         private val id: Int,
         private val thumbnail: String,
         private val title: String,
+        private val genre: String,
+        private val releaseDate: String,
     ) : GameDomain {
         override fun <T> map(mapper: Abstract.ToGameMapper<T>) =
-            mapper.map(id, thumbnail = thumbnail, title = title)
+            mapper.map(
+                id,
+                thumbnail = thumbnail,
+                title = title,
+                genre = genre,
+                releaseDate = releaseDate
+            )
     }
 }

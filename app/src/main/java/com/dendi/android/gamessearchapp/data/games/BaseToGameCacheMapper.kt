@@ -8,7 +8,14 @@ import com.dendi.android.gamessearchapp.data.games.cache.GameCache
  * olehvynnytskyi@gmail.com
  */
 class BaseToGameCacheMapper : Abstract.ToGameMapper<GameCache.Base> {
-    override fun map(id: Int, thumbnail: String, title: String) = GameCache.Base(
-        id = id, thumbnail = thumbnail, title = title
-    )
+    override fun map(
+        id: Int,
+        thumbnail: String,
+        title: String,
+        genre: String,
+        releaseDate: String
+    ) =
+        GameCache.Base(
+            id = id, thumbnail = thumbnail, title = title, genre = genre, releaseDate = releaseDate
+        )
 }

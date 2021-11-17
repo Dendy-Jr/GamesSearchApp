@@ -1,5 +1,8 @@
 package com.dendi.android.gamessearchapp.presentation.core
 
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dendi.android.gamessearchapp.core.ListMapper
@@ -27,6 +30,9 @@ abstract class BaseAdapter<E, T : BaseViewHolder<E>> :
         holder.bind(list[position])
 
     override fun getItemCount() = list.size
+
+    protected fun Int.makeView(parent: ViewGroup): View =
+        LayoutInflater.from(parent.context).inflate(this, parent, false)
 }
 
 interface ClickListener<T> {

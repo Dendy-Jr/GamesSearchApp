@@ -35,7 +35,7 @@ interface Abstract {
     }
 
     interface ToGameMapper<T> : Mapper {
-        fun map(id: Int, thumbnail: String, title: String): T
+        fun map(id: Int, thumbnail: String, title: String, genre: String, releaseDate: String): T
     }
 
     interface SystemRequirementsMapper<T> : Mapper {
@@ -51,5 +51,9 @@ interface Abstract {
 
     interface ScreenshotMapper<T> : Mapper {
         fun map(id: Int, image: String): T
+    }
+
+    interface FavoriteMapper<T> : Mapper {
+        fun map(id: Int, thumbnail: String, title: String, platform: String, developer: String): T
     }
 }

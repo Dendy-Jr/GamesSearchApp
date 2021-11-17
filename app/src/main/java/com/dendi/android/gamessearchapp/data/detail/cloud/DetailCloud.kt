@@ -67,3 +67,4 @@ interface DetailCloud : Abstract.CloudObject {
         )
     }
 }
+

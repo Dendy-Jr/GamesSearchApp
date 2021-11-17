@@ -12,6 +12,7 @@ import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
 import com.dendi.android.gamessearchapp.presentation.core.navigator
 import com.dendi.android.gamessearchapp.presentation.detail.DetailFragment
+import com.dendi.android.gamessearchapp.presentation.favorites.FavoritesFragment
 
 /**
  * @author Dendy-Jr on 04.11.2021
@@ -48,7 +49,7 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
                     val fragment = DetailFragment().apply {
                         arguments = bundleOf("id" to item)
                     }
-                    navigator().launchFragment(this@GamesFragment, fragment)
+                    navigator().launchFragment(fragment)
                 }
             })
 
@@ -61,6 +62,7 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
             games.map(gamesAdapter)
             scrollTo()
         })
+        viewModel.fetchGames()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -69,6 +71,14 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
         val searchView = searchItem.actionView as SearchView
         searchView.isSubmitButtonEnabled = true
         searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_favorites) {
+            navigator().launchFragment(FavoritesFragment())
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onQueryTextSubmit(query: String?) = true
@@ -85,7 +95,6 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
         viewModel.searchGame(searchQuery).observe(this, { games ->
             games.map(gamesAdapter)
         })
-
     }
 
     override fun onDestroyView() {
