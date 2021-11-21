@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/games_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,10 +10,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_list"
@@ -20,6 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#FFC464"
             android:theme="@style/ThemeOverlay.Toobar"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIconTint="#000000"
             app:titleTextColor="#000000">
 
@@ -27,9 +26,9 @@
                 android:id="@+id/toolbar_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_24sp"
+                android:text="@string/app_name"
                 android:textColor="#000000"
-                android:text="@string/app_name" />
+                android:textSize="@dimen/text_size_24sp" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -37,13 +36,28 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvGames"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/game_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#FFC464"
+        android:src="@drawable/ic_baseline_filter_list_24"
+        app:tint="#000000" />
+
+    <include
+        android:id="@+id/progress_games"
+        android:visibility="visible"
+        layout="@layout/progress_fullscreen" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -31,6 +31,5 @@ interface DetailInteractor : ScrollPosition, ReadById<DetailDomainState> {
 
         override suspend fun readId(id: Int) =
             detailRepository.readId(id).map(detailDomainMapper)
-
     }
 }

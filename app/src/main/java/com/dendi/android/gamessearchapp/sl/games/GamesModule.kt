@@ -47,7 +47,8 @@ class GamesModule(
                 coreModule.resourceProvider,
                 BaseToGameUiMapper()
             ),
-            communication
+            communication,
+            coreModule.dataStoreFilter
         )
     }
 }

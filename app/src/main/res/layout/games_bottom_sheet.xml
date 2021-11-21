@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_genreType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/amarante"
+        android:text="@string/genre_type"
+        android:textColor="#151B20"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/scrollView_genreType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_genreType">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/genre_chips_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:animationCache="true"
+                android:isScrollContainer="true"
+                app:selectionRequired="true"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/all"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/mmorpg"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mmorpg"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/shooter"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shooter"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/strategy"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/strategy"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/moba"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/moba"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/racing"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/racing"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sports"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sports"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/social"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/social"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/card"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/card"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/battle_royale"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/battle_royale"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/mmo"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mmo"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/fantasy"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fantasy"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/action_rpg"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action"
+                    app:chipBackgroundColor="#00E5FF" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/fighting"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fighting"
+                    app:chipBackgroundColor="#00E5FF" />
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

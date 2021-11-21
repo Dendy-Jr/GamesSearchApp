@@ -7,6 +7,7 @@ import com.dendi.android.gamessearchapp.data.core.GamesDatabase
 import com.dendi.android.gamessearchapp.data.detail.cache.DetailDao
 import com.dendi.android.gamessearchapp.data.favorites.FavoriteDao
 import com.dendi.android.gamessearchapp.data.games.cache.GameDao
+import com.dendi.android.gamessearchapp.presentation.games.filter.DataStoreFilter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,6 +27,7 @@ class CoreModule {
     lateinit var detailDao: DetailDao
     lateinit var favoriteDao: FavoriteDao
     lateinit var scrollPositionCache: ScrollPositionCache
+    lateinit var dataStoreFilter: DataStoreFilter
 
     fun init(context: Context) {
 
@@ -46,6 +48,7 @@ class CoreModule {
         gameDao = GamesDatabase.database(context).gameDao()
         detailDao = GamesDatabase.database(context).detailDao()
         favoriteDao = GamesDatabase.database(context).favoriteDao()
+        dataStoreFilter = DataStoreFilter(resourceProvider)
 
         scrollPositionCache = ScrollPositionCache.Base(resourceProvider)
     }

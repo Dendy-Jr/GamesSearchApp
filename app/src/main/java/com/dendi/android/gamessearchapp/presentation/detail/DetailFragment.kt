@@ -2,6 +2,7 @@ package com.dendi.android.gamessearchapp.presentation.detail
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.dendi.android.gamessearchapp.databinding.FragmentDetailBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.favorites.FavoriteUi
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 /**
  * @author Dendy-Jr on 04.11.2021
@@ -72,6 +74,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progress_detail.visibility = View.VISIBLE
 
         screenshotAdapter = ScreenshotsAdapter()
         var id = 0
@@ -91,6 +94,13 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
 
     private fun setupObserve() {
         viewModel.observe(this, { detail ->
+
+            if (detail is DetailUi.Progress) {
+                progress_detail.visibility = View.VISIBLE
+            } else {
+                progress_detail.visibility = View.GONE
+            }
+
             detail.map(object : DetailUiMapper<Unit> {
                 override fun map(
                     description: String,
@@ -123,24 +133,8 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
                         setAdapter(screenshotAdapter)
                         ScreenshotsUi.Base(screenshots).map(screenshotAdapter)
 
-                        addGameToFavorite(
-                            FavoriteUi.Base(
-                                id,
-                                thumbnail,
-                                title,
-                                platform,
-                                developer
-                            ), title
-                        )
-                        deleteGameFromFavorite(
-                            FavoriteUi.Base(
-                                id,
-                                thumbnail,
-                                title,
-                                platform,
-                                developer
-                            ), title
-                        )
+                        addGameToFavorite(FavoriteUi.Base(id, thumbnail, title), title)
+                        deleteGameFromFavorite(FavoriteUi.Base(id, thumbnail, title), title)
 
                         descriptionTextView.text = description
                         tvStrategy.text = genre
