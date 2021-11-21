@@ -7,18 +7,6 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 class BaseFavoriteDomainMapper : Abstract.FavoriteMapper<FavoriteDomain.Base> {
-    override fun map(
-        id: Int,
-        thumbnail: String,
-        title: String,
-        platform: String,
-        developer: String
-    ) =
-        FavoriteDomain.Base(
-            id = id,
-            thumbnail = thumbnail,
-            title = title,
-            platform = platform,
-            developer = developer
-        )
+    override fun map(id: Int, thumbnail: String, title: String) =
+        FavoriteDomain.Base(id = id, thumbnail = thumbnail, title = title)
 }

@@ -14,11 +14,12 @@ import com.dendi.android.gamessearchapp.presentation.core.BaseDomainToUiMapper
 class BaseGamesDomainStateToUiMapper(
     resourceProvider: ResourceProvider,
     private val mapper: Abstract.ToGameMapper<GameUi>,
-) : BaseDomainToUiMapper<List<GameDomain>, GamesUiState>(resourceProvider),
-    GamesDomainStateToUiMapper<GamesUiState> {
-    override fun map(data: List<GameDomain>) =
-        GamesUiState.Base(data.map { it.map(mapper) })
+) : BaseDomainToUiMapper<List<GameDomain>, List<GameUi>>(resourceProvider),
+    GamesDomainStateToUiMapper<List<GameUi>> {
+
+    override fun map(data: List<GameDomain>) = data.map { it.map(mapper) }
 
     override fun map(errorType: ErrorType) =
-        GamesUiState.Base(mutableListOf(GameUi.Fail(errorMessage(errorType))))
+        listOf(GameUi.Fail(errorMessage(errorType)))
+
 }

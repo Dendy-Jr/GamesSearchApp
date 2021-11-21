@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="?colorSurface"
     app:strokeColor="?colorOnSurface"
+    app:cardCornerRadius="10dp"
     app:strokeWidth="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

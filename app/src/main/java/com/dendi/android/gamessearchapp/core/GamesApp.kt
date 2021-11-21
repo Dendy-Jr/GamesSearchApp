@@ -31,5 +31,5 @@ class GamesApp : Application() {
     }
 
     fun <T : ViewModel> viewModel(modelClass: Class<T>, owner: ViewModelStoreOwner): T =
-        ViewModelProvider(owner, factory).get(modelClass)
+        ViewModelProvider(owner, factory)[modelClass]
 }

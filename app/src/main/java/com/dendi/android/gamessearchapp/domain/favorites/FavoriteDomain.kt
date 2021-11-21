@@ -13,18 +13,9 @@ interface FavoriteDomain {
     class Base(
         private val id: Int,
         private val thumbnail: String,
-        private val title: String,
-        private val platform: String,
-        private val developer: String,
+        private val title: String
     ) : FavoriteDomain {
         override fun <T> map(mapper: Abstract.FavoriteMapper<T>) =
-            mapper.map(
-                id = id,
-                thumbnail = thumbnail,
-                title = title,
-                platform = platform,
-                developer = developer
-            )
-
+            mapper.map(id = id, thumbnail = thumbnail, title = title)
     }
 }

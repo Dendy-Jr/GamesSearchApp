@@ -21,19 +21,10 @@ interface FavoriteCache : Abstract.CacheObject {
         @ColumnInfo(name = "thumbnail")
         val thumbnail: String,
         @ColumnInfo(name = "title")
-        val title: String,
-        @ColumnInfo(name = "platform")
-        val platform: String,
-        @ColumnInfo(name = "developer")
-        val developer: String,
+        val title: String
     ) : FavoriteCache {
         override fun <T> map(mapper: Abstract.FavoriteMapper<T>) =
-            mapper.map(
-                id = id,
-                thumbnail = thumbnail,
-                title = title,
-                platform = platform,
-                developer = developer
-            )
+            mapper.map(id = id, thumbnail = thumbnail, title = title)
     }
+
 }

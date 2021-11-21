@@ -12,5 +12,6 @@ sealed class GamesUiState {
 
     data class Base(private val games: List<GameUi>) : GamesUiState() {
         override fun map(mapper: ListMapper<GameUi>) = mapper.map(games)
+
     }
 }

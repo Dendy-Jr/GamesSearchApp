@@ -54,6 +54,6 @@ interface Abstract {
     }
 
     interface FavoriteMapper<T> : Mapper {
-        fun map(id: Int, thumbnail: String, title: String, platform: String, developer: String): T
+        fun map(id: Int, thumbnail: String, title: String): T
     }
 }

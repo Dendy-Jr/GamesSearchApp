@@ -20,14 +20,12 @@ class GamesAdapter(
     override fun getItemViewType(position: Int) = when (list[position]) {
         is GameUi.Base -> 0
         is GameUi.Fail -> 1
-        is GameUi.Progress -> 2
-        else -> -1
+        else -> 2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
         0 -> GamesViewHolder.Base(R.layout.game_item.makeView(parent), listener)
         1 -> GamesViewHolder.Error(R.layout.fail_fullscreen.makeView(parent), retry)
-        2 -> BaseViewHolder.FullScreenProgress(R.layout.progress_fullscreen.makeView(parent))
         else -> throw IllegalStateException("unknown viewType $viewType")
     }
 

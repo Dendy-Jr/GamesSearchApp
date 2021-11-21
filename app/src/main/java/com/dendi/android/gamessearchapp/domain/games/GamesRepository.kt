@@ -12,4 +12,5 @@ import com.dendi.android.gamessearchapp.data.games.GamesDataState
 interface GamesRepository : Read<GamesDataState> {
 
     fun searchGame(searchQuery: String): LiveData<List<GameData>>
+
 }

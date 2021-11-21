@@ -1,9 +1,11 @@
-package com.dendi.android.gamessearchapp.data.detail.cache
+package com.dendi.android.gamessearchapp.data.core
 
 import androidx.room.TypeConverter
+import com.dendi.android.gamessearchapp.data.detail.cache.ScreenshotCache
+import com.dendi.android.gamessearchapp.data.detail.cache.SystemRequirementsCache
+import com.dendi.android.gamessearchapp.data.games.cache.GameCache
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.util.*
 
 /**
  * @author Dendy-Jr on 02.11.2021
@@ -34,15 +36,4 @@ class Convertors {
         val type = object : TypeToken<SystemRequirementsCache.Base>() {}.type
         return Gson().fromJson(json, type)
     }
-
-    @TypeConverter
-    fun fromDate(value: Long?): Date? {
-        return value?.let { Date(it) }
-    }
-
-    @TypeConverter
-    fun toDate(date: Date?): Long? {
-        return date?.time
-    }
-
 }

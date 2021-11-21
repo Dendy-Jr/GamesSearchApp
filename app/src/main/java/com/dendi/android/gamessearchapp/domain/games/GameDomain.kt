@@ -26,5 +26,7 @@ interface GameDomain {
                 genre = genre,
                 releaseDate = releaseDate
             )
+
+
     }
 }

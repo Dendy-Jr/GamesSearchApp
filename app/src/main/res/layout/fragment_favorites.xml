@@ -18,7 +18,7 @@
             android:id="@+id/toolbar_favorites"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#C6D7EB"
+            android:background="#301B28"
             android:theme="@style/ThemeOverlay.Toobar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIconTint="@color/white"
@@ -28,7 +28,7 @@
                 android:id="@+id/toolbar_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FF6E40"
+                android:textColor="#B6452C"
                 android:textSize="@dimen/text_size_24sp"
                 android:text="@string/favorites" />
 
@@ -46,6 +46,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBar"
         tools:listitem="@layout/favorite_item"/>
+
+    <include
+        android:id="@+id/progress_favorites"
+        android:visibility="gone"
+        layout="@layout/progress_fullscreen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

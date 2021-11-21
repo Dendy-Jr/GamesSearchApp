@@ -1,7 +1,6 @@
 package com.dendi.android.gamessearchapp.presentation.favorites
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
 import com.dendi.android.gamessearchapp.presentation.core.navigator
 import com.dendi.android.gamessearchapp.presentation.detail.DetailFragment
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 /**
  * @author Dendy-Jr on 14.11.2021
@@ -24,6 +24,8 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
     private lateinit var favoritesAdapter: FavoritesAdapter
+
+    private var favoritesList: List<FavoriteUi> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +40,7 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progress_favorites.visibility = View.VISIBLE
         favoritesAdapter = FavoritesAdapter(object : ClickListener<Int> {
             override fun click(item: Int) {
                 val fragment = DetailFragment().apply {
@@ -52,16 +55,22 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>() {
 
     private fun setupObserver() {
         viewModel.observe(this, { games ->
-            games.map(favoritesAdapter)
+            favoritesList = games
+            checkProgress()
+            favoritesAdapter.map(games)
             scrollTo()
-            Log.d("TAG", "FavoritesFragment onViewCreated")
         })
         viewModel.fetchFavorites()
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("TAG", "FavoritesFragment onPause")
+    private fun checkProgress() {
+        favoritesList.map { game ->
+            if (game is FavoriteUi.Progress) {
+                progress_favorites.visibility = View.VISIBLE
+            } else {
+                progress_favorites.visibility = View.GONE
+            }
+        }
     }
 
     override fun onDestroyView() {

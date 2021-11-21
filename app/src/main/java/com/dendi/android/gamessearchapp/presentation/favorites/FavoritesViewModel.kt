@@ -16,15 +16,14 @@ class FavoritesViewModel(
     private val interactor: FavoritesInteractor,
     communication: FavoritesCommunication,
     private val mapper: Abstract.FavoriteMapper<FavoriteUi>,
-) : BaseViewModel<FavoritesCommunication, FavoritesList>(communication) {
-
+) : BaseViewModel<FavoritesCommunication, List<FavoriteUi>>(communication) {
 
     fun fetchFavorites() {
-        communication.map(FavoritesList.Base(listOf(FavoriteUi.Progress)))
+        communication.map(listOf(FavoriteUi.Progress))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.read()
             withContext(Dispatchers.Main) {
-                communication.map(FavoritesList.Base(resultDomain.map { it.map(mapper) }))
+                communication.map(resultDomain.map { it.map(mapper) })
             }
         }
     }

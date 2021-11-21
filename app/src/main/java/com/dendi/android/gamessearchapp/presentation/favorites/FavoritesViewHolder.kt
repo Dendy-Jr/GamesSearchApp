@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.Abstract
@@ -20,8 +21,6 @@ abstract class FavoritesViewHolder(view: View) : BaseViewHolder<FavoriteUi>(view
         BaseViewHolder<FavoriteUi>(view) {
         private val titleFavorite: TextView = itemView.findViewById(R.id.title_favorite)
         private val thumbnailFavorite: ImageView = itemView.findViewById(R.id.thumbnail_favorite)
-        private val platformFavorite: TextView = itemView.findViewById(R.id.platform_favorite)
-        private val developerFavorite: TextView = itemView.findViewById(R.id.developer_favorite)
 
         override fun bind(item: FavoriteUi) {
             item.map(object : Abstract.FavoriteMapper<Unit> {
@@ -29,15 +28,13 @@ abstract class FavoritesViewHolder(view: View) : BaseViewHolder<FavoriteUi>(view
                     id: Int,
                     thumbnail: String,
                     title: String,
-                    platform: String,
-                    developer: String
                 ) {
+
                     titleFavorite.text = title
-                    platformFavorite.text = platform
-                    developerFavorite.text = developer
                     Glide.with(itemView)
                         .load(thumbnail)
                         .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .placeholder(R.drawable.image_loading)
                         .error(R.drawable.not_found_image)
                         .transition(DrawableTransitionOptions.withCrossFade())

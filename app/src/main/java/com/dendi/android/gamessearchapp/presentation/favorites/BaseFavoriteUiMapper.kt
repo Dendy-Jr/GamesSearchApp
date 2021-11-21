@@ -7,15 +7,6 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 class BaseFavoriteUiMapper : Abstract.FavoriteMapper<FavoriteUi> {
-    override fun map(
-        id: Int,
-        thumbnail: String,
-        title: String,
-        platform: String,
-        developer: String
-    ) =
-        FavoriteUi.Base(
-            id = id, thumbnail = thumbnail, title = title, platform = platform,
-            developer = developer
-        )
+    override fun map(id: Int, thumbnail: String, title: String) =
+        FavoriteUi.Base(id = id, thumbnail = thumbnail, title = title)
 }

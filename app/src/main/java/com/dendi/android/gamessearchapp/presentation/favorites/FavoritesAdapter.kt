@@ -15,17 +15,8 @@ class FavoritesAdapter(
     private val listener: ClickListener<Int>,
 ) : BaseAdapter<FavoriteUi, BaseViewHolder<FavoriteUi>>() {
 
-    override fun getItemViewType(position: Int) = when (list[position]) {
-        is FavoriteUi.Base -> 0
-        is FavoriteUi.Progress -> 1
-        else -> -1
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
-        0 -> FavoritesViewHolder.Base(R.layout.favorite_item.makeView(parent), listener)
-        1 -> BaseViewHolder.FullScreenProgress(R.layout.progress_fullscreen.makeView(parent))
-        else -> throw IllegalStateException("unknown viewType $viewType")
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+      FavoritesViewHolder.Base(R.layout.favorite_item.makeView(parent), listener)
 
     override fun diffUtilCallback(list: ArrayList<FavoriteUi>, data: List<FavoriteUi>) =
         FavoritesDiffUtilCallback(list, data)
@@ -34,5 +25,4 @@ class FavoritesAdapter(
         oldList: List<FavoriteUi>,
         newList: List<FavoriteUi>,
     ) : DiffUtilCallback<FavoriteUi>(oldList, newList)
-
 }

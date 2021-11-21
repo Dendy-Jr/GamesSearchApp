@@ -9,28 +9,19 @@ import com.dendi.android.gamessearchapp.presentation.core.ClickListener
  */
 interface FavoriteUi {
 
-    fun <T> map(mapper: Abstract.FavoriteMapper<T>) =
-        mapper.map(0, "", "", "", "")
+    fun <T> map(mapper: Abstract.FavoriteMapper<T>) = mapper.map(-1, "", "")
 
     fun map(listener: ClickListener<Int>) = Unit
 
     object Progress : FavoriteUi
 
     data class Base(
-        private var id: Int,
+        private val id: Int,
         private val thumbnail: String,
-        private val title: String,
-        private val platform: String,
-        private val developer: String,
+        private val title: String
     ) : FavoriteUi {
         override fun <T> map(mapper: Abstract.FavoriteMapper<T>) =
-            mapper.map(
-                id = id,
-                thumbnail = thumbnail,
-                title = title,
-                platform = platform,
-                developer = developer
-            )
+            mapper.map(id = id, thumbnail = thumbnail, title = title)
 
         override fun map(listener: ClickListener<Int>) = listener.click(id)
     }
