@@ -15,10 +15,9 @@ interface ResourceProvider : PreferenceProvide {
 
     fun getString(@StringRes id: Int): String
 
-
     class Base(private val context: Context) : ResourceProvider {
 
-        private val Context.dataStore by preferencesDataStore("PREFERENCES_NAME")
+        private val Context.dataStore by preferencesDataStore(PREFERENCES_NAME)
 
         override fun getString(id: Int) = context.getString(id)
 
@@ -27,6 +26,10 @@ interface ResourceProvider : PreferenceProvide {
 
         override fun provideDataStore(name: String): DataStore<Preferences> {
             return context.dataStore
+        }
+
+        private companion object {
+            const val PREFERENCES_NAME = "PREFERENCES_NAME"
         }
     }
 }

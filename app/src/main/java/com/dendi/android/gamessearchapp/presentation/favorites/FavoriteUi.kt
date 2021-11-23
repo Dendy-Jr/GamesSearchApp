@@ -9,7 +9,7 @@ import com.dendi.android.gamessearchapp.presentation.core.ClickListener
  */
 interface FavoriteUi {
 
-    fun <T> map(mapper: Abstract.FavoriteMapper<T>) = mapper.map(-1, "", "")
+    fun <T> map(mapper: Abstract.FavoriteMapper<T>) = mapper.map(0, "", "")
 
     fun map(listener: ClickListener<Int>) = Unit
 

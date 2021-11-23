@@ -3,7 +3,6 @@ package com.dendi.android.gamessearchapp.data.core
 import androidx.room.TypeConverter
 import com.dendi.android.gamessearchapp.data.detail.cache.ScreenshotCache
 import com.dendi.android.gamessearchapp.data.detail.cache.SystemRequirementsCache
-import com.dendi.android.gamessearchapp.data.games.cache.GameCache
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

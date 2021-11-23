@@ -53,7 +53,7 @@ class CoreModule {
         scrollPositionCache = ScrollPositionCache.Base(resourceProvider)
     }
 
-    fun <T> networkService(clazz: Class<T>) = retrofit.create(clazz)
+    fun <T> networkService(clazz: Class<T>): T = retrofit.create(clazz)
 
     private companion object {
         const val BASE_URL = "https://www.freetogame.com/api/"

@@ -21,6 +21,7 @@ class GamesViewModel(
     private val dataStoreFilter: DataStoreFilter
 ) : BaseViewModel<GamesCommunication, List<GameUi>>(communication) {
 
+
     fun fetchGames() {
         communication.map(listOf(GameUi.Progress))
         viewModelScope.launch(Dispatchers.IO) {

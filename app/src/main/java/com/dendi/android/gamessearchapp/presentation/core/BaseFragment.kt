@@ -4,14 +4,11 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dendi.android.gamessearchapp.R
-import com.dendi.android.gamessearchapp.core.GamesApp
 
 
 /**
@@ -19,10 +16,6 @@ import com.dendi.android.gamessearchapp.core.GamesApp
  * olehvynnytskyi@gmail.com
  */
 abstract class BaseFragment<T : BaseViewModel<*, *>> : Fragment() {
-
-    private val activity by lazy {
-        requireActivity() as MainActivity
-    }
 
     protected abstract fun setRecyclerView(): RecyclerView
     protected abstract fun viewModelClass(): Class<T>
@@ -34,7 +27,7 @@ abstract class BaseFragment<T : BaseViewModel<*, *>> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        viewModel = viewModel(viewModelClass(), this)
+        viewModel = (requireActivity() as BaseActivity).viewModel(viewModelClass(), this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,9 +56,6 @@ abstract class BaseFragment<T : BaseViewModel<*, *>> : Fragment() {
             )
         }
     }
-
-    private fun <T : ViewModel> viewModel(clazz: Class<T>, owner: ViewModelStoreOwner) =
-        (activity.application as GamesApp).viewModel(clazz, owner)
 
     override fun onPause() {
         super.onPause()

@@ -73,14 +73,6 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
         viewModel.fetchGames()
     }
 
-//    private fun setupObserver() {
-//        viewModel.observe(this, { games ->
-//            gameUiState = games
-//            gamesAdapter.map(gameUiState)
-//            scrollTo()
-//        })
-//    }
-
     private fun setupGenreType() {
         viewModel.observe(this, { games ->
             gamesList = games
@@ -88,7 +80,7 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
                 viewModel.readGenreType().collect { genreType ->
                     gamesAdapter.map(gamesList.filter { game ->
                         gameUi = game
-                        checkStateGame()
+                        checkProgressState(gameUi!!)
 
                         when (genreType) {
                             GenreType.MMORPG -> game.matches(GenreType.MMORPG.value)
@@ -114,8 +106,7 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
         })
     }
 
-    private fun checkStateGame() {
-        progress_games.visibility = View.VISIBLE
+    private fun checkProgressState(gameUi: GameUi) {
         if (gameUi is GameUi.Progress) {
             progress_games.visibility = View.VISIBLE
         } else {

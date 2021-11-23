@@ -40,7 +40,6 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progress_favorites.visibility = View.VISIBLE
         favoritesAdapter = FavoritesAdapter(object : ClickListener<Int> {
             override fun click(item: Int) {
                 val fragment = DetailFragment().apply {

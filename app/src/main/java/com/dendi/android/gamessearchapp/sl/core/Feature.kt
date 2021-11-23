@@ -6,9 +6,10 @@ package com.dendi.android.gamessearchapp.sl.core
  */
 sealed class Feature {
 
-    object Games: Feature()
+    object Games : Feature()
 
-    object Detail: Feature()
+    object Detail : Feature()
 
-    object Favorites: Feature()
+    object Favorites : Feature()
+
 }

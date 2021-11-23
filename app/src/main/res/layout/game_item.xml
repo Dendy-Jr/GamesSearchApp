@@ -7,14 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="?colorSurface"
-    app:strokeColor="?colorOnSurface"
     app:cardCornerRadius="10dp"
+    app:strokeColor="?colorOnSurface"
     app:strokeWidth="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="#e5e5dc"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#e5e5dc">
 
         <TextView
             android:id="@+id/title"

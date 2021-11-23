@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/thumbnail_favorite"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="4dp"
             app:layout_constraintDimensionRatio="H,16:9"
             android:adjustViewBounds="true"
