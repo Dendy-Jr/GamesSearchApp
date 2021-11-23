@@ -21,17 +21,17 @@
             android:theme="@style/ThemeOverlay.Toobar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIconTint="#FFFFFF"
-            app:titleTextColor="#FFFFFF" >
+            app:titleTextColor="#FFFFFF">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/toolbar_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#336B87"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:textSize="@dimen/text_size_24sp"
-                android:text="" />
+                android:maxLines="1"
+                android:text=""
+                android:textColor="#336B87"
+                android:textSize="@dimen/text_size_24sp" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -346,11 +346,26 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/margin_end_16dp"
+        android:layout_marginBottom="230dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:srcCompat="@drawable/icons_share"
+        app:tint="@color/white"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/margin_end_16dp"
         android:layout_marginBottom="160dp"
         android:clickable="true"
         android:focusable="true"
@@ -365,7 +380,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/margin_end_16dp"
         android:layout_marginBottom="90dp"
         android:clickable="true"
         android:focusable="true"
@@ -392,8 +407,8 @@
 
     <include
         android:id="@+id/progress_detail"
-        android:visibility="gone"
-        layout="@layout/progress_fullscreen" />
+        layout="@layout/progress_fullscreen"
+        android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

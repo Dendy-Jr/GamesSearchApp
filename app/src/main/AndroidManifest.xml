@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dendi.android.gamessearchapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,10 +9,13 @@
         android:name=".core.GamesApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="GamesSearchApp"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GamesSearchApp">
+        android:theme="@style/Theme.GamesSearchApp"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="n">
         <activity
             android:name=".presentation.core.MainActivity"
             android:exported="true">
@@ -21,6 +25,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.core.deeplink.DeeplinkActivity"
+            android:exported="true"
+            android:launchMode="singleInstance">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:host="*" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+            </intent-filter>
+
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

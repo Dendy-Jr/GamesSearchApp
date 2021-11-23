@@ -46,4 +46,5 @@
     <string name="loading_progress">Loading…</string>
     <string name="platform_lower">platform:</string>
     <string name="developer_lower">developer:</string>
+    <string name="appGithub">https://github.com/Dendy-Jr/GamesSearchApp</string>
 </resources>
