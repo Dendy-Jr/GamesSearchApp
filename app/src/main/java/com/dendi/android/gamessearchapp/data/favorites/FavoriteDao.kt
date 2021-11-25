@@ -8,7 +8,7 @@ import androidx.room.*
  */
 
 @Dao
-interface FavoriteDao {
+interface FavoriteDao{
 
     @Query("select * from favorite_table")
     suspend fun fetchFavorites(): List<FavoriteCache.Base>

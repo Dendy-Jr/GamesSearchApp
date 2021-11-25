@@ -52,7 +52,8 @@ class DetailModule(private val coreModule: CoreModule) : BaseModule<DetailViewMo
                 coreModule.resourceProvider,
                 DetailDomainToUiMapperBase()
             ),
-            BaseFavoriteDomainMapper()
+            BaseFavoriteDomainMapper(),
+            coreModule.resourceProvider
         )
     }
 }

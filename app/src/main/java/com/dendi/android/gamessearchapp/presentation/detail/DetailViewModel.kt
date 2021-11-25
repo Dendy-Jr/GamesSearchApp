@@ -3,6 +3,7 @@ package com.dendi.android.gamessearchapp.presentation.detail
 
 import androidx.lifecycle.viewModelScope
 import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.core.ResourceProvider
 import com.dendi.android.gamessearchapp.domain.detail.DetailDomainStateToUiMapper
 import com.dendi.android.gamessearchapp.domain.detail.DetailInteractor
 import com.dendi.android.gamessearchapp.domain.favorites.FavoriteDomain
@@ -21,7 +22,8 @@ class DetailViewModel(
     communication: DetailCommunication,
     private val mapper: DetailDomainStateToUiMapper<DetailUiState>,
     private val favoriteMapper: Abstract.FavoriteMapper<FavoriteDomain.Base>,
-) : BaseViewModel<DetailCommunication, DetailUi>(communication) {
+    resourceProvider: ResourceProvider
+) : BaseViewModel<DetailCommunication, DetailUi>(communication, resourceProvider) {
 
     fun saveToFavorite(game: FavoriteUi.Base) =
         viewModelScope.launch(Dispatchers.IO) {

@@ -3,7 +3,6 @@ package com.dendi.android.gamessearchapp.domain.games
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.dendi.android.gamessearchapp.core.Abstract
-import com.dendi.android.gamessearchapp.core.Read
 import com.dendi.android.gamessearchapp.data.games.GamesScrollPositionCache
 import com.dendi.android.gamessearchapp.presentation.core.ScrollPosition
 
@@ -11,7 +10,11 @@ import com.dendi.android.gamessearchapp.presentation.core.ScrollPosition
  * @author Dendy-Jr on 01.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface GamesInteractor : ScrollPosition, Read<GamesDomainState> {
+interface GamesInteractor : ScrollPosition {
+
+    suspend fun fetchGames(category: String, sort: String): GamesDomainState
+
+    suspend fun readDataFromDb(): GamesDomainState
 
     fun searchGame(searchQuery: String): LiveData<List<GameDomain>>
 
@@ -27,7 +30,8 @@ interface GamesInteractor : ScrollPosition, Read<GamesDomainState> {
 
         override fun scrollPosition() = scrollPosition.gamesScrollPosition()
 
-        override suspend fun read() = gamesRepository.read().map(gamesDomainMapper)
+        override suspend fun fetchGames(category: String, sort: String) =
+            gamesRepository.fetchGames(category, sort).map(gamesDomainMapper)
 
         override fun searchGame(searchQuery: String) =
             gamesRepository.searchGame(searchQuery).map { games ->
@@ -35,5 +39,8 @@ interface GamesInteractor : ScrollPosition, Read<GamesDomainState> {
                     game.map(gameDomainMapper)
                 }
             }
+
+        override suspend fun readDataFromDb() =
+            gamesRepository.readDataFromDb().map(gamesDomainMapper)
     }
 }

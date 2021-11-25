@@ -9,5 +9,5 @@ import com.dendi.android.gamessearchapp.domain.favorites.FavoritesRepository
 class BaseFavoritesRepository(
     private val cacheDataSource: FavoritesCacheDataSource,
 ) : FavoritesRepository {
-    override suspend fun read() = cacheDataSource.read()
+    override suspend fun show() = cacheDataSource.show()
 }

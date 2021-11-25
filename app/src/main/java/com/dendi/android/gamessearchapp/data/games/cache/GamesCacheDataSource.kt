@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import com.dendi.android.gamessearchapp.core.Abstract
 import com.dendi.android.gamessearchapp.core.Read
 import com.dendi.android.gamessearchapp.core.Save
+import com.dendi.android.gamessearchapp.core.Show
 import com.dendi.android.gamessearchapp.data.games.GameData
 
 /**
  * @author Dendy-Jr on 01.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface GamesCacheDataSource : Save<List<GameData>>, Read<List<GameCache>> {
+interface GamesCacheDataSource : Save<List<GameData>>, Show<List<GameCache>> {
 
     fun searchGame(searchQuery: String): LiveData<List<GameCache.Base>>
 
@@ -26,6 +27,6 @@ interface GamesCacheDataSource : Save<List<GameData>>, Read<List<GameCache>> {
         override suspend fun save(data: List<GameData>) =
             gameDao.saveGamesToDb(data.map { it.map(mapper) })
 
-        override suspend fun read() = gameDao.fetchAllGames()
+        override suspend fun show() = gameDao.fetchAllGames()
     }
 }

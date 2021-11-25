@@ -3,7 +3,6 @@ package com.dendi.android.gamessearchapp.presentation.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.core.Constants.ID
 import com.dendi.android.gamessearchapp.databinding.FragmentDetailBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.favorites.FavoriteUi
@@ -81,7 +81,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
         var id = 0
         val bundle: Bundle? = this.arguments
         if (arguments != null) {
-            val detailId = bundle!!.getInt("id")
+            val detailId = bundle!!.getInt(ID)
             id = detailId
         }
 

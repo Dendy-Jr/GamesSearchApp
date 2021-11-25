@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import com.dendi.android.gamessearchapp.core.Constants.ID
 import com.dendi.android.gamessearchapp.databinding.FragmentFavoritesBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
@@ -43,7 +44,7 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>() {
         favoritesAdapter = FavoritesAdapter(object : ClickListener<Int> {
             override fun click(item: Int) {
                 val fragment = DetailFragment().apply {
-                    arguments = bundleOf("id" to item)
+                    arguments = bundleOf(ID to item)
                 }
                 navigator().launchFragment(fragment)
             }

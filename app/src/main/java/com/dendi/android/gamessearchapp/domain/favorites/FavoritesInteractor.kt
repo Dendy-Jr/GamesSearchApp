@@ -1,7 +1,7 @@
 package com.dendi.android.gamessearchapp.domain.favorites
 
 import com.dendi.android.gamessearchapp.core.Abstract
-import com.dendi.android.gamessearchapp.core.Read
+import com.dendi.android.gamessearchapp.core.Show
 import com.dendi.android.gamessearchapp.data.favorites.BaseFavoritesRepository
 import com.dendi.android.gamessearchapp.data.favorites.FavoritesScrollPositionCache
 import com.dendi.android.gamessearchapp.presentation.core.ScrollPosition
@@ -10,7 +10,7 @@ import com.dendi.android.gamessearchapp.presentation.core.ScrollPosition
  * @author Dendy-Jr on 14.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface FavoritesInteractor : ScrollPosition, Read<List<FavoriteDomain>> {
+interface FavoritesInteractor : ScrollPosition, Show<List<FavoriteDomain>> {
 
     class Base(
         private val favoritesRepository: BaseFavoritesRepository,
@@ -23,7 +23,7 @@ interface FavoritesInteractor : ScrollPosition, Read<List<FavoriteDomain>> {
 
         override fun scrollPosition() = scrollPosition.favoritesScrollPosition()
 
-        override suspend fun read() =
-            favoritesRepository.read().map { it.map(mapperDomain) }
+        override suspend fun show() =
+            favoritesRepository.show().map { it.map(mapperDomain) }
     }
 }

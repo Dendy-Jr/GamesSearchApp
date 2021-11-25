@@ -1,6 +1,6 @@
 package com.dendi.android.gamessearchapp.presentation.games
 
-import com.dendi.android.gamessearchapp.core.Matcher
+import android.util.Log
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
 
 /**
@@ -8,16 +8,19 @@ import com.dendi.android.gamessearchapp.presentation.core.ClickListener
  * olehvynnytskyi@gmail.com
  */
 
-interface GameUi : Matcher<String> {
+interface GameUi {
 
     fun <T> map(mapper: GameUiMapper<T>) =
         mapper.map(0, "", "", "", "")
 
     fun map(listener: ClickListener<Int>) = Unit
 
-    override fun matches(arg: String) = false
+    object Progress : GameUi {
+        init {
+            Log.d("TAG", "GameUi Progress")
+        }
+    }
 
-    object Progress : GameUi
 
     data class Base(
         private var id: Int,
@@ -37,12 +40,18 @@ interface GameUi : Matcher<String> {
 
         override fun map(listener: ClickListener<Int>) = listener.click(id)
 
-        override fun matches(arg: String) = arg == genre
+        init {
+            Log.d("TAG", "GameUi Base")
+        }
     }
 
     data class Fail(private val message: String) : GameUi {
         override fun <T> map(mapper: GameUiMapper<T>) =
             mapper.map(message)
+
+        init {
+            Log.d("TAG", "GameUi Fail")
+        }
     }
 }
 

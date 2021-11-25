@@ -37,7 +37,7 @@ abstract class BaseFragment<T : BaseViewModel<*, *>> : Fragment() {
             setRecyclerView() == view.findViewById(R.id.rvScreenshot) && orientation ==
                     Configuration.ORIENTATION_LANDSCAPE ->
                 GridLayoutManager(requireContext(), 2)
-            setRecyclerView() == view.findViewById(R.id.rvFavorites ) && orientation ==
+            setRecyclerView() == view.findViewById(R.id.rvFavorites) && orientation ==
                     Configuration.ORIENTATION_PORTRAIT ->
                 GridLayoutManager(requireContext(), 2)
 

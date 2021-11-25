@@ -1,5 +1,6 @@
 package com.dendi.android.gamessearchapp.core
 
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -13,4 +14,6 @@ interface PreferenceProvide {
     fun provideSharedPreferences(name: String): SharedPreferences
 
     fun provideDataStore(name: String): DataStore<Preferences>
+
+    fun provideContext(): Context
 }

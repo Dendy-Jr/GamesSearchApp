@@ -15,18 +15,17 @@ class BaseGamesRepository(
     private val cacheDataSource: GamesCacheDataSource,
     private val mapper: Abstract.ToGameMapper<GameData>,
 ) : GamesRepository {
-    override suspend fun read() = try {
-        val cacheList = cacheDataSource.read()
-        if (cacheList.isEmpty()) {
-            val responseData = cloudDataSource.read()
-            val games = responseData.map {
-                it.map(mapper)
-            }
-            cacheDataSource.save(games)
-            GamesDataState.Success(games)
-        } else {
-            GamesDataState.Success(cacheList.map { it.map(mapper) })
+
+    override suspend fun readDataFromDb() =
+        GamesDataState.Success(cacheDataSource.show().map { it.map(mapper) })
+
+    override suspend fun fetchGames(category: String, sort: String): GamesDataState = try {
+        val responseData = cloudDataSource.fetchGames(category, sort)
+        val games = responseData.map {
+            it.map(mapper)
         }
+        cacheDataSource.save(games)
+        GamesDataState.Success(games)
     } catch (e: Exception) {
         GamesDataState.Fail(e)
     }

@@ -2,6 +2,7 @@ package com.dendi.android.gamessearchapp.presentation.favorites
 
 import androidx.lifecycle.viewModelScope
 import com.dendi.android.gamessearchapp.core.Abstract
+import com.dendi.android.gamessearchapp.core.ResourceProvider
 import com.dendi.android.gamessearchapp.domain.favorites.FavoritesInteractor
 import com.dendi.android.gamessearchapp.presentation.core.BaseViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,12 +17,13 @@ class FavoritesViewModel(
     private val interactor: FavoritesInteractor,
     communication: FavoritesCommunication,
     private val mapper: Abstract.FavoriteMapper<FavoriteUi>,
-) : BaseViewModel<FavoritesCommunication, List<FavoriteUi>>(communication) {
+    resourceProvider: ResourceProvider
+) : BaseViewModel<FavoritesCommunication, List<FavoriteUi>>(communication, resourceProvider) {
 
     fun fetchFavorites() {
-        communication.map(listOf(FavoriteUi.Progress))
+//        communication.map(listOf(FavoriteUi.Progress))
         viewModelScope.launch(Dispatchers.IO) {
-            val resultDomain = interactor.read()
+            val resultDomain = interactor.show()
             withContext(Dispatchers.Main) {
                 communication.map(resultDomain.map { it.map(mapper) })
             }

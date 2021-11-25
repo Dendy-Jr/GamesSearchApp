@@ -28,6 +28,8 @@ interface ResourceProvider : PreferenceProvide {
             return context.dataStore
         }
 
+        override fun provideContext() = context
+
         private companion object {
             const val PREFERENCES_NAME = "PREFERENCES_NAME"
         }

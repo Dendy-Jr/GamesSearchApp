@@ -43,12 +43,11 @@ class GamesModule(
 
         return GamesViewModel(
             gamesInterceptor,
-            BaseGamesDomainStateToUiMapper(
-                coreModule.resourceProvider,
-                BaseToGameUiMapper()
+            BaseGamesDomainStateToUiMapper(coreModule.resourceProvider,BaseToGameUiMapper()
             ),
             communication,
-            coreModule.dataStoreFilter
+            coreModule.dataStoreFilter,
+            coreModule.resourceProvider
         )
     }
 }

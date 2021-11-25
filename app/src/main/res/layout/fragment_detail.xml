@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#011122">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -17,7 +17,7 @@
             android:id="@+id/toolbar_detail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#90AFC5"
+            android:background="#011122"
             android:theme="@style/ThemeOverlay.Toobar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIconTint="#FFFFFF"
@@ -30,7 +30,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text=""
-                android:textColor="#336B87"
+                android:textColor="@color/white"
                 android:textSize="@dimen/text_size_24sp" />
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -86,7 +86,7 @@
                     android:layout_marginTop="@dimen/margin_top_8dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/description"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_24sp"
                     android:textStyle="bold" />
 
@@ -123,7 +123,7 @@
                     android:layout_marginTop="-55dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/genre"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -144,7 +144,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/platform"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -165,7 +165,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/publisher"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -186,7 +186,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/developer"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -207,7 +207,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/release_date"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -228,7 +228,7 @@
                     android:layout_marginTop="@dimen/margin_top_24dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/minimum_system_requirements"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_24sp"
                     android:textStyle="bold" />
 
@@ -240,7 +240,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/operating_system"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -262,7 +262,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/processor"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -284,7 +284,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/memory"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -305,7 +305,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/graphics"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -327,7 +327,7 @@
                     android:layout_marginTop="@dimen/margin_top_16dp"
                     android:fontFamily="@font/amarante"
                     android:text="@string/storage"
-                    android:textColor="#F78B2D"
+                    android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
 
                 <TextView
@@ -399,11 +399,11 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="#90AFC5"
+        app:backgroundTint="#C80F3A"
         app:layout_anchor="@id/nestedScrollView"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_add_fab"
-        app:tint="#336B87" />
+        app:tint="@color/white" />
 
     <include
         android:id="@+id/progress_detail"

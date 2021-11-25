@@ -35,7 +35,8 @@ class FavoritesModule(
         return FavoritesViewModel(
             favoritesInteractor,
             communication,
-            BaseFavoriteUiMapper()
+            BaseFavoriteUiMapper(),
+            coreModule.resourceProvider
         )
     }
 }
