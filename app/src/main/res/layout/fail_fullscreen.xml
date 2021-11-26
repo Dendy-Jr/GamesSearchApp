@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/messageError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/no_connection_message"
+        android:fontFamily="@font/amarante"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"/>
+
+    <Button
+        android:id="@+id/tryAgainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_8dp"
+        android:text="@string/try_again"/>
+
+</LinearLayout>
