@@ -1,9 +1,7 @@
 package com.dendi.android.gamessearchapp.presentation.favorites
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.dendi.android.gamessearchapp.core.Constants.ID
@@ -18,29 +16,19 @@ import kotlinx.android.synthetic.main.fragment_favorites.*
  * @author Dendy-Jr on 14.11.2021
  * olehvynnytskyi@gmail.com
  */
-class FavoritesFragment : BaseFragment<FavoritesViewModel>() {
+class FavoritesFragment : BaseFragment<FavoritesViewModel, FragmentFavoritesBinding>(FragmentFavoritesBinding::inflate) {
 
-    override fun setRecyclerView() = binding.rvFavorites
+    override fun setRecyclerView() = viewBinding.rvFavorites
     override fun viewModelClass() = FavoritesViewModel::class.java
-    private var _binding: FragmentFavoritesBinding? = null
-    private val binding get() = _binding!!
     private lateinit var favoritesAdapter: FavoritesAdapter
 
     private var favoritesList: List<FavoriteUi> = listOf()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbarFavorites)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(viewBinding.toolbarFavorites)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         favoritesAdapter = FavoritesAdapter(object : ClickListener<Int> {
             override fun click(item: Int) {
                 val fragment = DetailFragment().apply {
@@ -71,10 +59,5 @@ class FavoritesFragment : BaseFragment<FavoritesViewModel>() {
                 progress_favorites.visibility = View.GONE
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

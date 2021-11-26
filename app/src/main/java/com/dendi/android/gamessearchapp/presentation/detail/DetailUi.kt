@@ -1,6 +1,5 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
-import android.util.Log
 
 
 /**
@@ -29,11 +28,7 @@ interface DetailUi {
             ""
         )
 
-    object Progress : DetailUi {
-        init {
-            Log.d("TAG", "DetailUi Progress")
-        }
-    }
+    object Progress : DetailUi
 
     data class Base(
         private val description: String,
@@ -69,15 +64,10 @@ interface DetailUi {
             thumbnail = thumbnail,
             title = title
         )
-        init {
-            Log.d("TAG", "DetailUi Base")
-        }
     }
 
     data class Fail(private val message: String) : DetailUi {
         override fun <T> map(mapper: DetailUiMapper<T>) = mapper.map(message)
-        init {
-            Log.d("TAG", "DetailUi Fail")
-        }
+
     }
 }

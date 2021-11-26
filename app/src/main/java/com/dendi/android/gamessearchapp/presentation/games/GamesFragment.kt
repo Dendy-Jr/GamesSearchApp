@@ -29,12 +29,12 @@ import kotlinx.coroutines.launch
  * olehvynnytskyi@gmail.com
  */
 
-class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextListener {
+class GamesFragment :
+    BaseFragment<GamesViewModel, FragmentGamesBinding>(FragmentGamesBinding::inflate),
+    SearchView.OnQueryTextListener {
 
-    override fun setRecyclerView() = binding.rvGames
+    override fun setRecyclerView() = viewBinding.rvGames
     override fun viewModelClass() = GamesViewModel::class.java
-    private var _binding: FragmentGamesBinding? = null
-    private val binding get() = _binding!!
     private lateinit var gamesAdapter: GamesAdapter
     private var category = SHARED_CATEGORY_DEFAULT
     private var sort = SHARED_SORT_DEFAULT
@@ -47,27 +47,16 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
         // TODO: 11/25/2021  
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentGamesBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbarList)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        resourceProvider.provideSharedPreferences("").edit().putString("","").apply()
-        // TODO: 11/25/2021
+        (activity as AppCompatActivity?)!!.setSupportActionBar(viewBinding.toolbarList)
 
         sharedSort = requireContext().getSharedPreferences(SHARED_PREF_SORT, Context.MODE_PRIVATE)
         sharedCategory =
             requireContext().getSharedPreferences(SHARED_PREF_CATEGORY, Context.MODE_PRIVATE)
 
-        binding.fabFilter.setOnClickListener {
+        checkConnect()
+        viewBinding.fabFilter.setOnClickListener {
             val gamesBottomSheet: GamesBottomSheet by lazy { GamesBottomSheet() }
             gamesBottomSheet.show(parentFragmentManager, GAMES_BOTTOM_SHEET)
         }
@@ -118,6 +107,12 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
         }
     }
 
+    private fun checkConnect() {
+        if (!viewModel.hasConnect) {
+            viewBinding.fabFilter.visibility = View.GONE
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.games_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
@@ -148,11 +143,6 @@ class GamesFragment : BaseFragment<GamesViewModel>(), SearchView.OnQueryTextList
         viewModel.searchGame(searchQuery).observe(this, { games ->
             games.map(gamesAdapter)
         })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     companion object {

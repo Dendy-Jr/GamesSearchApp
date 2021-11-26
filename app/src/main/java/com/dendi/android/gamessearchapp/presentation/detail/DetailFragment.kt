@@ -3,9 +3,7 @@ package com.dendi.android.gamessearchapp.presentation.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -25,12 +23,11 @@ import kotlinx.android.synthetic.main.fragment_detail.*
  * @author Dendy-Jr on 04.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DetailFragment : BaseFragment<DetailViewModel>() {
+class DetailFragment :
+    BaseFragment<DetailViewModel, FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
-    override fun setRecyclerView() = binding.rvScreenshot
+    override fun setRecyclerView() = viewBinding.rvScreenshot
     override fun viewModelClass() = DetailViewModel::class.java
-    private var _binding: FragmentDetailBinding? = null
-    private val binding get() = _binding!!
     private lateinit var screenshotAdapter: ScreenshotsAdapter
 
     private val rotateOpen: Animation by lazy {
@@ -63,19 +60,10 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
 
     private var clicked = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbarDetail)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(viewBinding.toolbarDetail)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         screenshotAdapter = ScreenshotsAdapter()
         var id = 0
@@ -88,7 +76,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
         setupObserve()
         viewModel.fetchDetail(id)
 
-        binding.fabAction.setOnClickListener {
+        viewBinding.fabAction.setOnClickListener {
             onAddButtonClick()
         }
     }
@@ -116,8 +104,9 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
 
                     setAdapter(screenshotAdapter)
                     ScreenshotsUi.Base(screenshots).map(screenshotAdapter)
+                    checkProgressState(detail)
 
-                    with(binding) {
+                    with(viewBinding) {
                         toolbarDetailTitle.text = title
 
                         Glide.with(requireContext())
@@ -161,8 +150,6 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
 
                 override fun map(message: String) = Unit
             })
-
-            checkProgressState(detail)
         })
     }
 
@@ -175,7 +162,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
     }
 
     private fun shareGame(title: String, shortDescription: String, gameUrl: String) {
-        binding.fabShare.setOnClickListener {
+        viewBinding.fabShare.setOnClickListener {
             val sendIntent = Intent(Intent.ACTION_SEND).apply {
                 putExtra(
                     Intent.EXTRA_TEXT,
@@ -190,7 +177,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
     }
 
     private fun addGameToFavorite(game: FavoriteUi.Base, title: String) {
-        with(binding) {
+        with(viewBinding) {
             fabAddFavorite.setOnClickListener {
                 viewModel.saveToFavorite(game)
                 Snackbar.make(it, "$title added to favorites", Snackbar.LENGTH_SHORT).show()
@@ -199,7 +186,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
     }
 
     private fun deleteGameFromFavorite(game: FavoriteUi.Base, title: String) {
-        with(binding) {
+        with(viewBinding) {
             fabDeleteFavorite.setOnClickListener {
                 viewModel.deleteFromFavorite(game)
                 Snackbar.make(it, "$title deleted from favorites", Snackbar.LENGTH_SHORT).show()
@@ -215,7 +202,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
     }
 
     private fun setAnimation(clicked: Boolean) {
-        with(binding) {
+        with(viewBinding) {
             if (!clicked) {
                 fabAddFavorite.startAnimation(fromButton)
                 fabDeleteFavorite.startAnimation(fromButton)
@@ -231,7 +218,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
     }
 
     private fun setVisibility(clicked: Boolean) {
-        with(binding) {
+        with(viewBinding) {
             if (!clicked) {
                 fabAddFavorite.visibility = View.VISIBLE
                 fabDeleteFavorite.visibility = View.VISIBLE
@@ -245,7 +232,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
     }
 
     private fun setClickable(clicked: Boolean) {
-        with(binding) {
+        with(viewBinding) {
             if (!clicked) {
                 fabAddFavorite.isClickable = true
                 fabDeleteFavorite.isClickable = true
@@ -256,10 +243,5 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
                 fabShare.isClickable = false
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

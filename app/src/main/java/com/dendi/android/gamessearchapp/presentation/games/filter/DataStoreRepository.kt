@@ -17,11 +17,11 @@ import okio.IOException
 class DataStoreRepository(resourceProvider: ResourceProvider) {
 
     private val dataStore: DataStore<Preferences> =
-        resourceProvider.provideDataStore("PREFERENCES_NAME")
+        resourceProvider.provideDataStore(PREFERENCES_NAME)
 
     private object PreferenceKey {
-        val GAMES_CATEGORY = stringPreferencesKey("gamesCategory")
-        val GAMES_SORT = stringPreferencesKey("gamesSort")
+        val GAMES_CATEGORY = stringPreferencesKey(DATA_STORE_GAMES_CATEGORY)
+        val GAMES_SORT = stringPreferencesKey(DATA_STORE_GAMES_SORT)
     }
 
     suspend fun saveGamesSort(gamesSort: GamesSort) {
@@ -165,4 +165,10 @@ class DataStoreRepository(resourceProvider: ResourceProvider) {
                 else -> GamesCategory.MMORPG
             }
         }
+
+    private companion object {
+        const val PREFERENCES_NAME = "PREFERENCES_NAME"
+        const val DATA_STORE_GAMES_CATEGORY = "DATA_STORE_GAMES_CATEGORY"
+        const val DATA_STORE_GAMES_SORT = "DATA_STORE_GAMES_SORT"
+    }
 }

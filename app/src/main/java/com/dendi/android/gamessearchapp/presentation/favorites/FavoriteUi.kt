@@ -1,6 +1,5 @@
 package com.dendi.android.gamessearchapp.presentation.favorites
 
-import android.util.Log
 import com.dendi.android.gamessearchapp.core.Abstract
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
 
@@ -14,24 +13,16 @@ interface FavoriteUi {
 
     fun map(listener: ClickListener<Int>) = Unit
 
-    object Progress : FavoriteUi {
-        init {
-            Log.d("TAG", "FavoriteUi Progress")
-        }
-    }
+    object Progress : FavoriteUi
 
     data class Base(
         private val id: Int,
         private val thumbnail: String,
-        private val title: String
+        private val title: String,
     ) : FavoriteUi {
         override fun <T> map(mapper: Abstract.FavoriteMapper<T>) =
             mapper.map(id = id, thumbnail = thumbnail, title = title)
 
         override fun map(listener: ClickListener<Int>) = listener.click(id)
-
-        init {
-            Log.d("TAG", "FavoriteUi Base")
-        }
     }
 }

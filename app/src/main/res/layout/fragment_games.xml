@@ -54,10 +54,5 @@
         android:src="@drawable/ic_baseline_filter_list_24"
         app:tint="#000000" />
 
-<!--    <include-->
-<!--        android:id="@+id/progress_games"-->
-<!--        android:visibility="gone"-->
-<!--        layout="@layout/progress_fullscreen" />-->
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

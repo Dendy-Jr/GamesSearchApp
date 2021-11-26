@@ -24,18 +24,15 @@ interface GameCache : Abstract.CacheObject {
         val thumbnail: String,
         @ColumnInfo(name = "title")
         val title: String,
-        @ColumnInfo(name = "genre")
-        val genre: String,
-        @ColumnInfo(name = "release_date")
-        val releaseDate: String,
+        @ColumnInfo(name = "short_description")
+        val shortDescription: String,
     ) : GameCache {
         override fun <T> map(mapper: Abstract.ToGameMapper<T>) =
             mapper.map(
                 id = id,
                 thumbnail = thumbnail,
                 title = title,
-                genre = genre,
-                releaseDate = releaseDate
+                shortDescription = shortDescription
             )
     }
 }

@@ -11,14 +11,12 @@ class BaseToGameUiMapper : Abstract.ToGameMapper<GameUi> {
         id: Int,
         thumbnail: String,
         title: String,
-        genre: String,
-        releaseDate: String
+        shortDescription: String,
     ) =
         GameUi.Base(
             id = id,
             thumbnail = thumbnail,
             title = title,
-            genre = genre,
-            releaseDate = releaseDate
+            shortDescription = shortDescription
         )
 }

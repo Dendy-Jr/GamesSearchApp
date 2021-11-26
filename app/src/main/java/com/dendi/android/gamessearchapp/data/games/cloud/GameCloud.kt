@@ -20,18 +20,15 @@ interface GameCloud : Abstract.CloudObject {
         private val thumbnail: String,
         @SerializedName("title")
         private val title: String,
-        @SerializedName("genre")
-        private val genre: String,
-        @SerializedName("release_date")
-        private val releaseDate: String,
+        @SerializedName("short_description")
+        private val shortDescription: String,
     ) : GameCloud {
         override fun <T> map(mapper: Abstract.ToGameMapper<T>) =
             mapper.map(
                 id,
                 thumbnail = thumbnail,
                 title = title,
-                genre = genre,
-                releaseDate = releaseDate
+                shortDescription = shortDescription
             )
     }
 }

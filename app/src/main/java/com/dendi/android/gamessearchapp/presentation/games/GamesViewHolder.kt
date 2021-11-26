@@ -22,17 +22,15 @@ abstract class GamesViewHolder(view: View) : BaseViewHolder<GameUi>(view) {
 
         private val titleView = itemView.findViewById<TextView>(R.id.title)
         private val thumbnailView = itemView.findViewById<ImageView>(R.id.thumbnail_iv)
-        private val genreView = itemView.findViewById<TextView>(R.id.genre)
-        private val releaseDateView = itemView.findViewById<TextView>(R.id.release_date)
+        private val shortDescriptionView = itemView.findViewById<TextView>(R.id.shortDescription_tv)
 
         override fun bind(item: GameUi) {
             item.map(object : GameUiMapper<Unit> {
                 override fun map(
-                    id: Int, thumbnail: String, title: String, genre: String, releaseDate: String
+                    id: Int, thumbnail: String, title: String, shortDescription: String,
                 ) {
                     titleView.text = title
-                    genreView.text = genre
-                    releaseDateView.text = releaseDate
+                    shortDescriptionView.text = shortDescription
 
                     Glide.with(itemView)
                         .load(thumbnail)
@@ -60,8 +58,7 @@ abstract class GamesViewHolder(view: View) : BaseViewHolder<GameUi>(view) {
                     id: Int,
                     thumbnail: String,
                     title: String,
-                    genre: String,
-                    releaseDate: String
+                    shortDescription: String,
                 ) = Unit
 
                 override fun map(message: String) {

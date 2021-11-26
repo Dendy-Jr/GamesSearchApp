@@ -12,10 +12,9 @@ class BaseToGameCacheMapper : Abstract.ToGameMapper<GameCache.Base> {
         id: Int,
         thumbnail: String,
         title: String,
-        genre: String,
-        releaseDate: String
+        shortDescription: String,
     ) =
         GameCache.Base(
-            id = id, thumbnail = thumbnail, title = title, genre = genre, releaseDate = releaseDate
+            id = id, thumbnail = thumbnail, title = title, shortDescription = shortDescription
         )
 }

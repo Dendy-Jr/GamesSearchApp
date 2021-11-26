@@ -21,16 +21,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start_8dp"
-            android:layout_marginTop="@dimen/margin_top_8dp"
             android:layout_marginEnd="@dimen/margin_end_8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:ellipsize="end"
             android:fontFamily="@font/amarante"
             android:textColor="#26495c"
             android:textSize="@dimen/text_size_16sp"
             android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/thumbnail_iv"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/thumbnail_iv"
             tools:text="Lineage 2" />
 
         <ImageView
@@ -39,35 +42,27 @@
             android:layout_height="90dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,16:9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
             tools:background="@drawable/ic_launcher_background" />
 
         <TextView
-            android:id="@+id/genre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start_8dp"
-            android:layout_marginBottom="@dimen/margin_bottom_8dp"
-            android:fontFamily="@font/amarante"
-            android:textColor="#c4a35a"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/thumbnail_iv"
-            tools:text="MMORPG" />
-
-        <TextView
-            android:id="@+id/release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/shortDescription_tv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="@dimen/margin_end_8dp"
-            android:layout_marginBottom="@dimen/margin_bottom_8dp"
+            android:layout_marginStart="@dimen/margin_start_8dp"
             android:fontFamily="@font/amarante"
             android:textColor="#c66d3d"
+            android:textSize="12sp"
+            android:maxLines="5"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="2019-05-21" />
+            app:layout_constraintStart_toEndOf="@id/thumbnail_iv"
+            tools:text="A 3v3 2D battle arena Developed by Ronimo games." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

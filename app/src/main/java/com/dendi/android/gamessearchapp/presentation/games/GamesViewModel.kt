@@ -24,14 +24,17 @@ class GamesViewModel(
     resourceProvider: ResourceProvider,
 ) : BaseViewModel<GamesCommunication, GamesUiState>(communication, resourceProvider) {
 
+    var hasConnect = true
+
     fun fetchGames(category: String, sort: String) {
         if (checkForInternet()) {
+            hasConnect = true
             readDataFromNetwork(category = category, sort = sort)
         } else {
+            hasConnect = false
             readDataFromDb()
         }
     }
-
 
     private fun readDataFromNetwork(category: String, sort: String) {
         communication.map(GamesUiState.Base(listOf(GameUi.Progress)))

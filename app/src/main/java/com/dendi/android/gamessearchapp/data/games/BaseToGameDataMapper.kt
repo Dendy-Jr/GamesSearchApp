@@ -11,10 +11,9 @@ class BaseToGameDataMapper : Abstract.ToGameMapper<GameData> {
         id: Int,
         thumbnail: String,
         title: String,
-        genre: String,
-        releaseDate: String
+        shortDescription: String,
     ) =
         GameData.Base(
-            id = id, thumbnail = thumbnail, title = title, genre = genre, releaseDate = releaseDate
+            id = id, thumbnail = thumbnail, title = title, shortDescription = shortDescription
         )
 }
