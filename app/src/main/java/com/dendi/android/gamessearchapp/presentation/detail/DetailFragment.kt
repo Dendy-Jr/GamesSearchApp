@@ -7,12 +7,12 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dendi.android.gamessearchapp.R
 import com.dendi.android.gamessearchapp.core.Abstract
-import com.dendi.android.gamessearchapp.core.Constants.ID
 import com.dendi.android.gamessearchapp.databinding.FragmentDetailBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.favorites.FavoriteUi
@@ -29,6 +29,8 @@ class DetailFragment :
     override fun setRecyclerView() = viewBinding.rvScreenshot
     override fun viewModelClass() = DetailViewModel::class.java
     private lateinit var screenshotAdapter: ScreenshotsAdapter
+
+    private val args by navArgs<DetailFragmentArgs>()
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -66,15 +68,9 @@ class DetailFragment :
         (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         screenshotAdapter = ScreenshotsAdapter()
-        var id = 0
-        val bundle: Bundle? = this.arguments
-        if (arguments != null) {
-            val detailId = bundle!!.getInt(ID)
-            id = detailId
-        }
 
         setupObserve()
-        viewModel.fetchDetail(id)
+        viewModel.fetchDetail(args.detailId)
 
         viewBinding.fabAction.setOnClickListener {
             onAddButtonClick()

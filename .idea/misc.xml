@@ -16,17 +16,17 @@
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.27794871794871795" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/font/amarante.xml" value="0.1" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout-v28/progress_fullscreen.xml" value="0.26614583333333336" />
-        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/deeplink_activity.xml" value="0.264" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/deeplink_layout.xml" value="0.2" />
-        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/fail_fullscreen.xml" value="0.264" />
+        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/fail_fullscreen.xml" value="0.4" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/favorite_item.xml" value="0.264" />
-        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/fragment_detail.xml" value="0.264" />
+        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/fragment_detail.xml" value="0.4" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/fragment_favorites.xml" value="0.2" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/fragment_games.xml" value="0.264" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/fragment_webview.xml" value="0.1" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/game_favorite.xml" value="0.264" />
-        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/game_item.xml" value="0.42805755395683454" />
+        <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/game_item.xml" value="0.4166666666666667" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/game_layout.xml" value="0.4" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/games_bottom_sheet.xml" value="0.25" />
         <entry key="..\:/Users/Oleh/AndroidStudioProjects/GamesSearchApp/app/src/main/res/layout/games_layout.xml" value="0.26614583333333336" />

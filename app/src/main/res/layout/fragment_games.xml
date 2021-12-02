@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/games_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".presentation.games.GamesFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -50,8 +51,8 @@
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="#FFC464"
         android:src="@drawable/ic_baseline_filter_list_24"
+        app:backgroundTint="#FFC464"
         app:tint="#000000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
