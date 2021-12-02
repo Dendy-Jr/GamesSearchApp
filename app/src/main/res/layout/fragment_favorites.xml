@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    tools:context=".presentation.favorites.FavoritesFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -22,15 +23,15 @@
             android:theme="@style/ThemeOverlay.Toobar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIconTint="@color/white"
-            app:titleTextColor="#FFFFFF" >
+            app:titleTextColor="#FFFFFF">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/toolbar_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/favorites"
                 android:textColor="#B6452C"
-                android:textSize="@dimen/text_size_24sp"
-                android:text="@string/favorites" />
+                android:textSize="@dimen/text_size_24sp" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -45,12 +46,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBar"
-        tools:listitem="@layout/favorite_item"/>
+        tools:listitem="@layout/favorite_item" />
 
     <include
         android:id="@+id/progress_favorites"
-        android:visibility="gone"
-        layout="@layout/progress_fullscreen" />
+        layout="@layout/progress_fullscreen"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

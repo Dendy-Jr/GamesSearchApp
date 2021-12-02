@@ -5,7 +5,8 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#011122">
+    android:background="#011122"
+    tools:context=".presentation.detail.DetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -84,7 +85,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_8dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/description"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_24sp"
@@ -98,7 +98,6 @@
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="16sp"
                     tools:text="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter." />
@@ -121,7 +120,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="-55dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/genre"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -131,7 +129,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Strategy" />
@@ -142,7 +139,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/platform"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -152,7 +148,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Windows" />
@@ -163,7 +158,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/publisher"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -173,7 +167,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="David Schneider" />
@@ -184,7 +177,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/developer"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -194,7 +186,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="David Schneider" />
@@ -205,7 +196,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/release_date"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -215,7 +205,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="2018-02-12" />
@@ -226,7 +215,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/margin_top_24dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/minimum_system_requirements"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_24sp"
@@ -238,7 +226,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/operating_system"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -249,7 +236,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Windows XP, Vista, 7, 8, 10" />
@@ -260,7 +246,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/processor"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -271,7 +256,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Dual Core 3.0 GHz" />
@@ -282,7 +266,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/memory"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -292,7 +275,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="2 GB" />
@@ -303,7 +285,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/graphics"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -314,7 +295,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginEnd="@dimen/margin_end_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="Intedl HD Graphics 4000 or equivalent" />
@@ -325,7 +305,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
                     android:layout_marginTop="@dimen/margin_top_16dp"
-                    android:fontFamily="@font/amarante"
                     android:text="@string/storage"
                     android:textColor="#C80F3A"
                     android:textSize="@dimen/text_size_16sp" />
@@ -335,7 +314,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_start_8dp"
-                    android:fontFamily="@font/amarante"
                     android:textColor="#E4B600"
                     android:textSize="16sp"
                     tools:text="600 MB" />
