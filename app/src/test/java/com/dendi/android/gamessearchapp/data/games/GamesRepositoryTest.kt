@@ -1,14 +1,13 @@
 package com.dendi.android.gamessearchapp.data.games
 
-import androidx.lifecycle.LiveData
-import com.dendi.android.gamessearchapp.data.games.cache.GameCache
 import com.dendi.android.gamessearchapp.data.games.cache.GamesCacheDataSource
-import com.dendi.android.gamessearchapp.data.games.cloud.GameCloud
 import com.dendi.android.gamessearchapp.data.games.cloud.GamesCloudDataSource
+import com.dendi.android.gamessearchapp.domain.games.GamesRepository
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
-import java.net.UnknownHostException
 
 /**
  * @author Dendy-Jr on 01.11.2021
@@ -16,125 +15,61 @@ import java.net.UnknownHostException
  */
 class GamesRepositoryTest : BaseGamesRepositoryTest() {
 
-    private val unknownHostException = UnknownHostException()
+    private val mapper = TestToGameMapper()
+    private lateinit var repository: GamesRepository
 
-    @Test
-    fun test_no_connection_cache() = runBlocking {
-        val testCloudDataSource = TestGamesCloudDataSource(false)
-        val testCacheDataSource = TestGamesCacheDataSource(false)
-        val repository = BaseGamesRepository(
-            testCloudDataSource,
-            testCacheDataSource,
-            TestToGameMapper()
-        )
-
-        val actual = repository.read()
-        val expected = GamesDataState.Fail(unknownHostException)
-
-        Assert.assertEquals(expected, actual)
+    @Before
+    fun setUp() {
+        val cloudDataSource = GamesCloudDataSource.Test()
+        val cacheDataSource = GamesCacheDataSource.Test(BaseToGameCacheMapper())
+        repository = TestGamesRepository(cloudDataSource, cacheDataSource, mapper)
     }
 
     @Test
-    fun test_cloud_success_no_cache() = runBlocking {
-        val testCloudDataSource = TestGamesCloudDataSource(true)
-        val testCacheDataSource = TestGamesCacheDataSource(false)
-        val repository = BaseGamesRepository(
-            testCloudDataSource,
-            testCacheDataSource,
-            TestToGameMapper())
+    fun test_fetching_games() = runBlocking {
+        val expected = GamesDataState.Test(listOf(
+            GameData.Base(1,
+                "https://www.freetogame.com/g/1/thumbnail.jpg",
+                "Dauntless",
+                "A free-to-play, co-op ac…ilar to Monster Hunter."),
+            GameData.Base(2,
+                "https://www.freetogame.com/g/2/thumbnail.jpg",
+                "World of Tanks",
+                "If you like blowing up t…ou will love this game!"),
+            GameData.Base(3,
+                "https://www.freetogame.com/g/3/thumbnail.jpg",
+                "A cooperative free-to-pl…stunning sci-fi world. ",
+                "Warframe")
+        ))
 
-        val actual = repository.read()
-        val expected = GamesDataState.Success(
-            listOf(
-                GameData.Base(0, "https://www.freetogame.com/g/1/thumbnail.jpg", "Dauntless"),
-                GameData.Base(1, "https://www.freetogame.com/g/2/thumbnail.jpg", "World of Tanks"),
-                GameData.Base(2, "https://www.freetogame.com/g/3/thumbnail.jpg", "Warframe")
-            )
-        )
-        Assert.assertEquals(expected, actual)
+        val actual = repository.fetchGames("mmorpg", "alphabetical")
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun test_no_connection_with_cache() = runBlocking {
-        val testCloudDataSource = TestGamesCloudDataSource(false)
-        val testCacheDataSource = TestGamesCacheDataSource(true)
-        val repository = BaseGamesRepository(
-            testCloudDataSource,
-            testCacheDataSource,
-            TestToGameMapper())
+    fun test_read_data_from_db() = runBlocking {
+        val expected = GamesDataState.Test(listOf(
+            GameData.Base(1,
+                "https://www.freetogame.com/g/1/thumbnail.jpg",
+                "Dauntless",
+                "A free-to-play, co-op ac…ilar to Monster Hunter."),
+            GameData.Base(2,
+                "https://www.freetogame.com/g/2/thumbnail.jpg",
+                "World of Tanks",
+                "If you like blowing up t…ou will love this game!"),
+            GameData.Base(3,
+                "https://www.freetogame.com/g/3/thumbnail.jpg",
+                "A cooperative free-to-pl…stunning sci-fi world. ",
+                "Warframe")
+        ))
 
-        val actual = repository.read()
-        val expected = GamesDataState.Success(
-            listOf(
-                GameData.Base(10, "https://www.freetogame.com/g/10/thumbnail.jpg", "ArcheAge"),
-                GameData.Base(11, "https://www.freetogame.com/g/11/thumbnail.jpg", "Neverwinter"),
-                GameData.Base(12, "https://www.freetogame.com/g/12/thumbnail.jpg", "War Thunder")
-            )
-        )
-
-        Assert.assertEquals(expected, actual)
+        val actual = repository.readDataFromDb()
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun test_cloud_success_with_cache() = runBlocking {
-        val testCloudDataSource = TestGamesCloudDataSource(true)
-        val testCacheDataSource = TestGamesCacheDataSource(true)
-        val repository = BaseGamesRepository(
-            testCloudDataSource,
-            testCacheDataSource,
-            TestToGameMapper())
-
-        val actual = repository.read()
-        val expected = GamesDataState.Success(
-            listOf(
-                GameData.Base(10, "https://www.freetogame.com/g/10/thumbnail.jpg", "ArcheAge"),
-                GameData.Base(11, "https://www.freetogame.com/g/11/thumbnail.jpg", "Neverwinter"),
-                GameData.Base(12, "https://www.freetogame.com/g/12/thumbnail.jpg", "War Thunder")
-            )
-        )
-
-        Assert.assertEquals(expected, actual)
-    }
-
-    private inner class TestGamesCloudDataSource(
-        private val returnSuccess: Boolean,
-    ) : GamesCloudDataSource {
-        override suspend fun read(): List<GameCloud> {
-            if (returnSuccess) {
-                return listOf(
-                    GameCloud.Base(0, "https://www.freetogame.com/g/1/thumbnail.jpg", "Dauntless"),
-                    GameCloud.Base(1, "https://www.freetogame.com/g/2/thumbnail.jpg", "World of Tanks"),
-                    GameCloud.Base(2, "https://www.freetogame.com/g/3/thumbnail.jpg", "Warframe")
-                )
-            } else {
-                throw unknownHostException
-            }
-        }
-    }
-
-    private inner class TestGamesCacheDataSource(
-        private val returnSuccess: Boolean,
-    ) : GamesCacheDataSource {
-        override suspend fun read(): List<GameCache> {
-            return if (returnSuccess) {
-                listOf(
-                    GameCache.Base(10, "https://www.freetogame.com/g/10/thumbnail.jpg", "ArcheAge"),
-                    GameCache.Base(11, "https://www.freetogame.com/g/11/thumbnail.jpg", "Neverwinter"),
-                    GameCache.Base(12, "https://www.freetogame.com/g/12/thumbnail.jpg", "War Thunder")
-                )
-            } else {
-                emptyList()
-            }
-
-        }
-
-        override suspend fun save(data: List<GameData>) {
-            // not used here
-        }
-
-        override fun searchGame(searchQuery: String): LiveData<List<GameCache.Base>> {
-            TODO("Not yet implemented")
-            // not used here
-        }
+    fun test_search_game() = runBlocking {
+        repository.searchGame("World of Tanks")
+        assertTrue("World of Tanks", true)
     }
 }
