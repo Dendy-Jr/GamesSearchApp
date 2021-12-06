@@ -9,6 +9,7 @@ import com.dendi.android.gamessearchapp.core.Abstract
 abstract class BaseGamesRepositoryTest {
 
     protected class TestToGameMapper : Abstract.ToGameMapper<GameData> {
-        override fun map(id: Int, thumbnail: String, title: String) = GameData.Base(id, thumbnail, title)
+        override fun map(id: Int, thumbnail: String, title: String, shortDescription: String) =
+            GameData.Base(id, thumbnail, title, shortDescription)
     }
 }
