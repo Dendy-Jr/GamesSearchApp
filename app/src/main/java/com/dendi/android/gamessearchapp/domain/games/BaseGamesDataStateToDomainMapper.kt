@@ -10,9 +10,9 @@ import com.dendi.android.gamessearchapp.domain.core.BaseDataToDomainMapper
  * olehvynnytskyi@gmail.com
  */
 class BaseGamesDataStateToDomainMapper(
-    private val mapper: Abstract.ToGameMapper<GameDomain>,
+    private val mapper: Abstract.GameMapper<GameDomain>,
 ) : BaseDataToDomainMapper<List<GameData>, GamesDomainState>(),
-    GamesDataStateToDomainMapper<GamesDomainState> {
+    GamesDataStateToDomainStateMapper<GamesDomainState> {
     override fun map(data: List<GameData>) =
         GamesDomainState.Success(data.map { it.map(mapper) })
 

@@ -13,5 +13,5 @@ interface GameService {
     suspend fun fetchGames(
         @Query("category") category: String,
         @Query("sort-by") sort: String
-    ): Response<List<GameCloud.Base>>
+    ): Response<List<GameCloud>>
 }

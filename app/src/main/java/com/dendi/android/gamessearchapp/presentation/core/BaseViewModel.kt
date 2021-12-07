@@ -1,7 +1,6 @@
 package com.dendi.android.gamessearchapp.presentation.core
 
 
-import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -18,15 +17,13 @@ import com.dendi.android.gamessearchapp.core.ResourceProvider
  */
 abstract class BaseViewModel<E : Communication<T>, T>(
     protected val communication: E,
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
 ) : ViewModel(), ScrollPosition, Observe<T> {
 
     override fun observe(owner: LifecycleOwner, observe: Observer<T>) =
         communication.observe(owner, observe)
 
-    protected fun checkForInternet(): Boolean {
-        val connectivityManager = resourceProvider.provideContext()
-            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    protected fun checkInternetConnection(connectivityManager: ConnectivityManager): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             val network = connectivityManager.activeNetwork ?: return false

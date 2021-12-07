@@ -3,7 +3,7 @@ package com.dendi.android.gamessearchapp.presentation.detail
 import com.dendi.android.gamessearchapp.core.ResourceProvider
 import com.dendi.android.gamessearchapp.domain.detail.DetailDomain
 import com.dendi.android.gamessearchapp.core.ErrorType
-import com.dendi.android.gamessearchapp.domain.detail.DetailDomainStateToUiMapper
+import com.dendi.android.gamessearchapp.domain.detail.DetailDomainStateToUiStateMapper
 import com.dendi.android.gamessearchapp.domain.detail.DetailDomainToUiMapper
 import com.dendi.android.gamessearchapp.presentation.core.BaseDomainToUiMapper
 
@@ -13,12 +13,12 @@ import com.dendi.android.gamessearchapp.presentation.core.BaseDomainToUiMapper
  */
 class BaseDetailDomainStateToUiMapper(
     resourceProvider: ResourceProvider,
-    private val mapper: DetailDomainToUiMapper<DetailUi.Base>,
+    private val mapper: DetailDomainToUiMapper<DetailUi>,
 ) : BaseDomainToUiMapper<DetailDomain, DetailUiState>(resourceProvider),
-    DetailDomainStateToUiMapper<DetailUiState> {
-    override fun map(data: DetailDomain) = DetailUiState.Base(data.map(mapper))
+    DetailDomainStateToUiStateMapper<DetailUiState> {
+    override fun map(data: DetailDomain) = DetailUiState(data.map(mapper))
 
     override fun map(errorType: ErrorType) =
-        DetailUiState.Base(DetailUi.Fail(errorMessage(errorType)))
+        DetailUiState(DetailUi.Fail(errorMessage(errorType)))
 
 }

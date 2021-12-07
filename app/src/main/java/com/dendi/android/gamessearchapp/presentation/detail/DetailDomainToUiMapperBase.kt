@@ -6,7 +6,7 @@ import com.dendi.android.gamessearchapp.domain.detail.DetailDomainToUiMapper
  * @author Dendy-Jr on 05.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DetailDomainToUiMapperBase : DetailDomainToUiMapper<DetailUi.Base> {
+class DetailDomainToUiMapperBase : DetailDomainToUiMapper<DetailUi> {
     override fun map(
         description: String,
         developer: String,
@@ -14,11 +14,11 @@ class DetailDomainToUiMapperBase : DetailDomainToUiMapper<DetailUi.Base> {
         gameUrl: String,
         genre: String,
         id: Int,
-        systemRequirements: SystemRequirementsUi.Base,
+        systemRequirements: SystemRequirementsUi,
         platform: String,
         publisher: String,
         releaseDate: String,
-        screenshots: List<ScreenshotUi.Base>,
+        screenshots: List<ScreenshotUi>,
         shortDescription: String,
         status: String,
         thumbnail: String,

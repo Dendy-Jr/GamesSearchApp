@@ -2,6 +2,7 @@ package com.dendi.android.gamessearchapp.core
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
 import androidx.annotation.StringRes
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -28,7 +29,8 @@ interface ResourceProvider : PreferenceProvide {
             return context.dataStore
         }
 
-        override fun provideContext() = context
+        override fun getSystemService() =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         private companion object {
             const val PREFERENCES_NAME = "PREFERENCES_NAME"

@@ -10,34 +10,33 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 
-interface SystemRequirementsCache : Abstract.CacheObject {
+@Entity(tableName = "system_requirements_table")
+data class SystemRequirementsCache(
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: Int,
+    @ColumnInfo(name = "graphics")
+    val graphics: String,
+    @ColumnInfo(name = "memory")
+    val memory: String,
+    @ColumnInfo(name = "os")
+    val os: String,
+    @ColumnInfo(name = "processor")
+    val processor: String,
+    @ColumnInfo(name = "storage")
+    val storage: String,
+) : Abstract.Mapper.SystemRequirementsObject {
+    override fun <T> map(mapper: Abstract.SystemRequirementsMapper<T>) =
+        mapper.map(
+            id = id,
+            graphics = graphics,
+            memory = memory,
+            os = os,
+            processor = processor,
+            storage = storage)
 
-    fun <T> map(mapper: Abstract.SystemRequirementsMapper<T>): T
-
-    @Entity(tableName = "system_requirements_table")
-    data class Base(
-        @PrimaryKey
-        @ColumnInfo(name = "id")
-        val id: Int,
-        @ColumnInfo(name = "graphics")
-        val graphics: String,
-        @ColumnInfo(name = "memory")
-        val memory: String,
-        @ColumnInfo(name = "os")
-        val os: String,
-        @ColumnInfo(name = "processor")
-        val processor: String,
-        @ColumnInfo(name = "storage")
-        val storage: String,
-    ) : SystemRequirementsCache {
-        override fun <T> map(mapper: Abstract.SystemRequirementsMapper<T>) =
-            mapper.map(
-                id = id,
-                graphics = graphics,
-                memory = memory,
-                os = os,
-                processor = processor,
-                storage = storage)
+    companion object {
+        val EMPTY = SystemRequirementsCache(0, "", "", "", "", "")
     }
 }
 

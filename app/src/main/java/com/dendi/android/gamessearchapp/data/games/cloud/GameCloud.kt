@@ -8,27 +8,21 @@ import com.google.gson.annotations.SerializedName
  * olehvynnytskyi@gmail.com
  */
 
-
-interface GameCloud : Abstract.CloudObject {
-
-    fun <T> map(mapper: Abstract.ToGameMapper<T>): T
-
-    data class Base(
-        @SerializedName("id")
-        private val id: Int,
-        @SerializedName("thumbnail")
-        private val thumbnail: String,
-        @SerializedName("title")
-        private val title: String,
-        @SerializedName("short_description")
-        private val shortDescription: String,
-    ) : GameCloud {
-        override fun <T> map(mapper: Abstract.ToGameMapper<T>) =
-            mapper.map(
-                id,
-                thumbnail = thumbnail,
-                title = title,
-                shortDescription = shortDescription
-            )
-    }
+data class GameCloud(
+    @SerializedName("id")
+    private val id: Int,
+    @SerializedName("thumbnail")
+    private val thumbnail: String,
+    @SerializedName("title")
+    private val title: String,
+    @SerializedName("short_description")
+    private val shortDescription: String,
+) : Abstract.Mapper.GamesObject {
+    override fun <T> map(mapper: Abstract.GameMapper<T>) =
+        mapper.map(
+            id,
+            thumbnail = thumbnail,
+            title = title,
+            shortDescription = shortDescription
+        )
 }

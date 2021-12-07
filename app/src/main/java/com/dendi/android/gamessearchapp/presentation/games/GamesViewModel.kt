@@ -2,7 +2,7 @@ package com.dendi.android.gamessearchapp.presentation.games
 
 import androidx.lifecycle.*
 import com.dendi.android.gamessearchapp.core.ResourceProvider
-import com.dendi.android.gamessearchapp.domain.games.GamesDomainStateToUiMapper
+import com.dendi.android.gamessearchapp.domain.games.GamesDomainStateToUiStateMapper
 import com.dendi.android.gamessearchapp.domain.games.GamesInteractor
 import com.dendi.android.gamessearchapp.presentation.core.BaseViewModel
 import com.dendi.android.gamessearchapp.presentation.games.filter.DataStoreRepository
@@ -18,16 +18,16 @@ import kotlinx.coroutines.withContext
  */
 class GamesViewModel(
     private val interactor: GamesInteractor,
-    private val mapper: GamesDomainStateToUiMapper<GamesUiState>,
+    private val mapper: GamesDomainStateToUiStateMapper<GamesUiState>,
     communication: GamesCommunication,
     private val dataStoreFilter: DataStoreRepository,
-    resourceProvider: ResourceProvider,
+    private val resourceProvider: ResourceProvider,
 ) : BaseViewModel<GamesCommunication, GamesUiState>(communication, resourceProvider) {
 
     var hasConnect = true
 
     fun fetchGames(category: String, sort: String) {
-        if (checkForInternet()) {
+        if (checkInternetConnection(resourceProvider.getSystemService())) {
             hasConnect = true
             readDataFromNetwork(category = category, sort = sort)
         } else {
@@ -37,7 +37,7 @@ class GamesViewModel(
     }
 
     private fun readDataFromNetwork(category: String, sort: String) {
-        communication.map(GamesUiState.Base(listOf(GameUi.Progress)))
+        communication.map(GamesUiState(listOf(GameUi.Progress)))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.fetchGames(category = category, sort)
             val resultUi = resultDomain.map(mapper)
@@ -48,7 +48,7 @@ class GamesViewModel(
     }
 
     private fun readDataFromDb() {
-        communication.map(GamesUiState.Base(listOf(GameUi.Progress)))
+        communication.map(GamesUiState(listOf(GameUi.Progress)))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.readDataFromDb()
             val resultUi = resultDomain.map(mapper)

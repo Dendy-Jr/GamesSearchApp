@@ -17,18 +17,18 @@ interface DetailDataToDomainMapper<T> : Abstract.Mapper {
         gameUrl: String,
         genre: String,
         id: Int,
-        systemRequirements: SystemRequirementsDomain.Base,
+        systemRequirements: SystemRequirementsDomain,
         platform: String,
         publisher: String,
         releaseDate: String,
-        screenshots: List<ScreenshotDomain.Base>,
+        screenshots: List<ScreenshotDomain>,
         shortDescription: String,
         status: String,
         thumbnail: String,
         title: String,
     ): T
 
-    class Base : DetailDataToDomainMapper<DetailDomain.Base> {
+    class Base : DetailDataToDomainMapper<DetailDomain> {
 
         override fun map(
             description: String,
@@ -37,16 +37,16 @@ interface DetailDataToDomainMapper<T> : Abstract.Mapper {
             gameUrl: String,
             genre: String,
             id: Int,
-            systemRequirements: SystemRequirementsDomain.Base,
+            systemRequirements: SystemRequirementsDomain,
             platform: String,
             publisher: String,
             releaseDate: String,
-            screenshots: List<ScreenshotDomain.Base>,
+            screenshots: List<ScreenshotDomain>,
             shortDescription: String,
             status: String,
             thumbnail: String,
             title: String,
-        ) = DetailDomain.Base(
+        ) = DetailDomain(
             description = description,
             developer = developer,
             freetogameProfileUrl = freetogameProfileUrl,

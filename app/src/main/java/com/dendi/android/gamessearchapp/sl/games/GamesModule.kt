@@ -30,9 +30,9 @@ class GamesModule(
                     coreModule.networkService(GameService::class.java)
                 ),
                 GamesCacheDataSource.Base(
-                    coreModule.gameDao,
-                    BaseToGameCacheMapper()
+                    coreModule.gameDao
                 ),
+                BaseToGameCacheMapper(),
                 BaseToGameDataMapper()
             ),
             BaseGamesDataStateToDomainMapper(BaseToGameDomainMapper()),
@@ -43,7 +43,7 @@ class GamesModule(
 
         return GamesViewModel(
             gamesInterceptor,
-            BaseGamesDomainStateToUiMapper(coreModule.resourceProvider,BaseToGameUiMapper()
+            BaseGamesDomainStateToUiMapper(coreModule.resourceProvider, BaseToGameUiMapper()
             ),
             communication,
             coreModule.dataStoreFilter,

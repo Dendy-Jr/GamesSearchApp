@@ -9,20 +9,16 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * @author Dendy-Jr on 02.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface ScreenshotCache : Abstract.CacheObject {
 
-    fun <T> map(mapper: Abstract.ScreenshotMapper<T>): T
-
-    @Entity(tableName = "screenshot_table")
-    data class Base(
-        @PrimaryKey
-        @ColumnInfo(name = "id")
-        val id: Int,
-        @ColumnInfo(name = "image")
-        val image: String,
-    ) : ScreenshotCache {
-        override fun <T> map(mapper: Abstract.ScreenshotMapper<T>) =
-            mapper.map(id = id, image = image)
-    }
+@Entity(tableName = "screenshot_table")
+data class ScreenshotCache(
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: Int,
+    @ColumnInfo(name = "image")
+    val image: String,
+) : Abstract.Mapper.ScreenshotObject {
+    override fun <T> map(mapper: Abstract.ScreenshotMapper<T>) =
+        mapper.map(id = id, image = image)
 }
 

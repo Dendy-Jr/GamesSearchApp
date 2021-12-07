@@ -4,7 +4,7 @@ package com.dendi.android.gamessearchapp.presentation.detail
 import androidx.lifecycle.viewModelScope
 import com.dendi.android.gamessearchapp.core.Abstract
 import com.dendi.android.gamessearchapp.core.ResourceProvider
-import com.dendi.android.gamessearchapp.domain.detail.DetailDomainStateToUiMapper
+import com.dendi.android.gamessearchapp.domain.detail.DetailDomainStateToUiStateMapper
 import com.dendi.android.gamessearchapp.domain.detail.DetailInteractor
 import com.dendi.android.gamessearchapp.domain.favorites.FavoriteDomain
 import com.dendi.android.gamessearchapp.presentation.core.BaseViewModel
@@ -20,17 +20,17 @@ import kotlinx.coroutines.withContext
 class DetailViewModel(
     private val detailInteractor: DetailInteractor,
     communication: DetailCommunication,
-    private val mapper: DetailDomainStateToUiMapper<DetailUiState>,
-    private val favoriteMapper: Abstract.FavoriteMapper<FavoriteDomain.Base>,
+    private val mapper: DetailDomainStateToUiStateMapper<DetailUiState>,
+    private val favoriteMapper: Abstract.FavoriteMapper<FavoriteDomain>,
     resourceProvider: ResourceProvider
 ) : BaseViewModel<DetailCommunication, DetailUi>(communication, resourceProvider) {
 
-    fun saveToFavorite(game: FavoriteUi.Base) =
+    fun saveToFavorite(game: FavoriteUi) =
         viewModelScope.launch(Dispatchers.IO) {
             detailInteractor.saveToFavorite(game.map(favoriteMapper))
         }
 
-    fun deleteFromFavorite(game: FavoriteUi.Base) =
+    fun deleteFromFavorite(game: FavoriteUi) =
         viewModelScope.launch(Dispatchers.IO) {
             detailInteractor.deleteFromFavorite(game.map(favoriteMapper))
         }

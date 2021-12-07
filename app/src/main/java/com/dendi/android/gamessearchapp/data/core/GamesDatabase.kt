@@ -16,11 +16,11 @@ import com.dendi.android.gamessearchapp.data.games.cache.GameCache
  * olehvynnytskyi@gmail.com
  */
 @Database(
-    entities = [GameCache.Base::class,
-        DetailCache.Base::class,
-        ScreenshotCache.Base::class,
-        SystemRequirementsCache.Base::class,
-        FavoriteCache.Base::class],
+    entities = [GameCache::class,
+        DetailCache::class,
+        ScreenshotCache::class,
+        SystemRequirementsCache::class,
+        FavoriteCache::class],
     version = 1,
     exportSchema = false
 )

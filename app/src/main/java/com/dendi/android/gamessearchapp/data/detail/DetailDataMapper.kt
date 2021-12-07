@@ -14,18 +14,18 @@ interface DetailDataMapper<T> : Abstract.Mapper {
         gameUrl: String,
         genre: String,
         id: Int,
-        systemRequirements: SystemRequirementsData.Base,
+        systemRequirements: SystemRequirementsData,
         platform: String,
         publisher: String,
         releaseDate: String,
-        screenshots: List<ScreenshotData.Base>,
+        screenshots: List<ScreenshotData>,
         shortDescription: String,
         status: String,
         thumbnail: String,
         title: String,
     ): T
 
-    class Base : DetailDataMapper<DetailData.Base> {
+    class Base : DetailDataMapper<DetailData> {
         override fun map(
             description: String,
             developer: String,
@@ -33,16 +33,16 @@ interface DetailDataMapper<T> : Abstract.Mapper {
             gameUrl: String,
             genre: String,
             id: Int,
-            systemRequirements: SystemRequirementsData.Base,
+            systemRequirements: SystemRequirementsData,
             platform: String,
             publisher: String,
             releaseDate: String,
-            screenshots: List<ScreenshotData.Base>,
+            screenshots: List<ScreenshotData>,
             shortDescription: String,
             status: String,
             thumbnail: String,
             title: String,
-        ) = DetailData.Base(
+        ) = DetailData(
             description = description,
             developer = developer,
             freetogameProfileUrl = freetogameProfileUrl,

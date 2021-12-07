@@ -15,7 +15,7 @@ class BaseSystemRequirementsDomainMapper :
         os: String,
         processor: String,
         storage: String,
-    ) = SystemRequirementsDomain.Base(
+    ) = SystemRequirementsDomain(
         id = id,
         graphics = graphics,
         memory = memory,

@@ -87,11 +87,11 @@ class DetailFragment :
                     gameUrl: String,
                     genre: String,
                     id: Int,
-                    systemRequirements: SystemRequirementsUi.Base,
+                    systemRequirements: SystemRequirementsUi,
                     platform: String,
                     publisher: String,
                     releaseDate: String,
-                    screenshots: List<ScreenshotUi.Base>,
+                    screenshots: List<ScreenshotUi>,
                     shortDescription: String,
                     status: String,
                     thumbnail: String,
@@ -99,7 +99,7 @@ class DetailFragment :
                 ) {
 
                     setAdapter(screenshotAdapter)
-                    ScreenshotsUi.Base(screenshots).map(screenshotAdapter)
+                    ScreenshotsUi(screenshots).map(screenshotAdapter)
                     checkProgressState(detail)
 
                     with(viewBinding) {
@@ -172,7 +172,7 @@ class DetailFragment :
         }
     }
 
-    private fun addGameToFavorite(game: FavoriteUi.Base, title: String) {
+    private fun addGameToFavorite(game: FavoriteUi, title: String) {
         with(viewBinding) {
             fabAddFavorite.setOnClickListener {
                 viewModel.saveToFavorite(game)
@@ -181,7 +181,7 @@ class DetailFragment :
         }
     }
 
-    private fun deleteGameFromFavorite(game: FavoriteUi.Base, title: String) {
+    private fun deleteGameFromFavorite(game: FavoriteUi, title: String) {
         with(viewBinding) {
             fabDeleteFavorite.setOnClickListener {
                 viewModel.deleteFromFavorite(game)

@@ -10,7 +10,7 @@ import com.dendi.android.gamessearchapp.data.favorites.FavoriteCache
  * olehvynnytskyi@gmail.com
  */
 interface DetailRepository : BaseRepository ,ReadById<DataDetailState>{
-    suspend fun saveToFavorite(game: FavoriteCache.Base)
+    suspend fun saveToFavorite(game: FavoriteCache)
 
-    suspend fun deleteFromFavorite(game: FavoriteCache.Base)
+    suspend fun deleteFromFavorite(game: FavoriteCache)
 }

@@ -1,7 +1,7 @@
 package com.dendi.android.gamessearchapp.core
 
-import android.content.Context
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 
@@ -15,5 +15,5 @@ interface PreferenceProvide {
 
     fun provideDataStore(name: String): DataStore<Preferences>
 
-    fun provideContext(): Context
+    fun getSystemService(): ConnectivityManager
 }

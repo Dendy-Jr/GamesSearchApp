@@ -15,7 +15,7 @@ interface FavoritesInteractor : ScrollPosition, Show<List<FavoriteDomain>> {
     class Base(
         private val favoritesRepository: BaseFavoritesRepository,
         private val scrollPosition: FavoritesScrollPositionCache,
-        private val mapperDomain: Abstract.FavoriteMapper<FavoriteDomain.Base>,
+        private val mapperDomain: Abstract.FavoriteMapper<FavoriteDomain>,
     ) : FavoritesInteractor {
 
         override fun saveScrollPosition(position: Int) =

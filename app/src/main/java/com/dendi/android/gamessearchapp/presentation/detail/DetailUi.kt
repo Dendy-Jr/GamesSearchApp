@@ -1,5 +1,6 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
+import com.dendi.android.gamessearchapp.core.Abstract
 
 
 /**
@@ -7,9 +8,9 @@ package com.dendi.android.gamessearchapp.presentation.detail
  * olehvynnytskyi@gmail.com
  */
 
-interface DetailUi {
+sealed class DetailUi : Abstract.Mapper.DetailUiObject {
 
-    fun <T> map(mapper: DetailUiMapper<T>): T =
+    override fun <T> map(mapper: DetailUiMapper<T>) =
         mapper.map(
             "",
             "",
@@ -17,7 +18,7 @@ interface DetailUi {
             "",
             "",
             0,
-            SystemRequirementsUi.Base.EMPTY,
+            SystemRequirementsUi.EMPTY,
             "",
             "",
             "",
@@ -28,7 +29,8 @@ interface DetailUi {
             ""
         )
 
-    object Progress : DetailUi
+
+    object Progress : DetailUi()
 
     data class Base(
         private val description: String,
@@ -37,16 +39,16 @@ interface DetailUi {
         private val gameUrl: String,
         private val genre: String,
         private val id: Int,
-        private val systemRequirements: SystemRequirementsUi.Base,
+        private val systemRequirements: SystemRequirementsUi,
         private val platform: String,
         private val publisher: String,
         private val releaseDate: String,
-        private val screenshots: List<ScreenshotUi.Base>,
+        private val screenshots: List<ScreenshotUi>,
         private val shortDescription: String,
         private val status: String,
         private val thumbnail: String,
         private val title: String,
-    ) : DetailUi {
+    ) : DetailUi() {
         override fun <T> map(mapper: DetailUiMapper<T>) = mapper.map(
             description = description,
             developer = developer,
@@ -66,7 +68,7 @@ interface DetailUi {
         )
     }
 
-    data class Fail(private val message: String) : DetailUi {
+    data class Fail(private val message: String) : DetailUi() {
         override fun <T> map(mapper: DetailUiMapper<T>) = mapper.map(message)
 
     }

@@ -11,11 +11,11 @@ import androidx.room.*
 interface FavoriteDao{
 
     @Query("select * from favorite_table")
-    suspend fun fetchFavorites(): List<FavoriteCache.Base>
+    suspend fun fetchFavorites(): List<FavoriteCache>
 
-    @Insert(entity = FavoriteCache.Base::class, onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveToFavorite(game: FavoriteCache.Base)
+    @Insert(entity = FavoriteCache::class, onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveToFavorite(game: FavoriteCache)
 
     @Delete
-    suspend fun deleteFromFavorite(game: FavoriteCache.Base)
+    suspend fun deleteFromFavorite(game: FavoriteCache)
 }

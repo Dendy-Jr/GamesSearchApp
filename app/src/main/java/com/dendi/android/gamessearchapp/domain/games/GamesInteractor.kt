@@ -20,8 +20,8 @@ interface GamesInteractor : ScrollPosition {
 
     class Base(
         private val gamesRepository: GamesRepository,
-        private val gamesDomainMapper: GamesDataStateToDomainMapper<GamesDomainState>,
-        private val gameDomainMapper: Abstract.ToGameMapper<GameDomain>,
+        private val gamesDomainMapper: GamesDataStateToDomainStateMapper<GamesDomainState>,
+        private val gameDomainMapper: Abstract.GameMapper<GameDomain>,
         private val scrollPosition: GamesScrollPositionCache,
     ) : GamesInteractor {
 

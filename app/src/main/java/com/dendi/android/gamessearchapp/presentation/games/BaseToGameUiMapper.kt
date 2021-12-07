@@ -6,7 +6,7 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * @author Dendy-Jr on 03.11.2021
  * olehvynnytskyi@gmail.com
  */
-class BaseToGameUiMapper : Abstract.ToGameMapper<GameUi> {
+class BaseToGameUiMapper : Abstract.GameMapper<GameUi> {
     override fun map(
         id: Int,
         thumbnail: String,

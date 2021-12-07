@@ -11,5 +11,5 @@ import retrofit2.http.Query
 interface DetailService {
 
     @GET("game")
-    suspend fun fetchDetail(@Query("id") id: Int): Response<DetailCloud.Base>
+    suspend fun fetchDetail(@Query("id") id: Int): Response<DetailCloud>
 }

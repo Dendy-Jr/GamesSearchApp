@@ -1,5 +1,6 @@
 package com.dendi.android.gamessearchapp.presentation.games
 
+import com.dendi.android.gamessearchapp.core.Abstract
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
 
 /**
@@ -7,21 +8,20 @@ import com.dendi.android.gamessearchapp.presentation.core.ClickListener
  * olehvynnytskyi@gmail.com
  */
 
-interface GameUi {
+sealed class GameUi : Abstract.Mapper.GamesUiObject {
 
-    fun <T> map(mapper: GameUiMapper<T>) =
-        mapper.map(0, "", "", "")
+    override fun <T> map(mapper: GameUiMapper<T>) = mapper.map(0, "", "", "")
 
-    fun map(listener: ClickListener<Int>) = Unit
+    open fun map(listener: ClickListener<Int>) = Unit
 
-    object Progress : GameUi
+    object Progress : GameUi()
 
     data class Base(
         private var id: Int,
         private val thumbnail: String,
         private val title: String,
         private val shortDescription: String,
-    ) : GameUi {
+    ) : GameUi() {
         override fun <T> map(mapper: GameUiMapper<T>) =
             mapper.map(
                 id = id,
@@ -33,7 +33,7 @@ interface GameUi {
         override fun map(listener: ClickListener<Int>) = listener.click(id)
     }
 
-    data class Fail(private val message: String) : GameUi {
+    data class Fail(private val message: String) : GameUi() {
         override fun <T> map(mapper: GameUiMapper<T>) =
             mapper.map(message)
     }

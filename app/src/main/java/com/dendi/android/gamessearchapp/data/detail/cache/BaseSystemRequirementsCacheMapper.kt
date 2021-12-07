@@ -15,7 +15,7 @@ class BaseSystemRequirementsCacheMapper :
         os: String,
         processor: String,
         storage: String,
-    ) = SystemRequirementsCache.Base(id,
+    ) = SystemRequirementsCache(id,
         graphics = graphics,
         memory = memory,
         os = os,

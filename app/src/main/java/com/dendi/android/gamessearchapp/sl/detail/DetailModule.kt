@@ -4,7 +4,7 @@ import com.dendi.android.gamessearchapp.data.detail.BaseDetailRepository
 import com.dendi.android.gamessearchapp.data.detail.DetailDataMapper
 import com.dendi.android.gamessearchapp.data.detail.DetailDataToDomainMapper
 import com.dendi.android.gamessearchapp.data.detail.cache.DetailCacheDataSource
-import com.dendi.android.gamessearchapp.data.detail.cache.DetailDataToCacheMapper
+import com.dendi.android.gamessearchapp.data.detail.cache.DetailCacheMapper
 import com.dendi.android.gamessearchapp.data.detail.cloud.DetailCloudDataSource
 import com.dendi.android.gamessearchapp.data.detail.cloud.DetailService
 import com.dendi.android.gamessearchapp.data.favorites.BaseFavoriteCacheMapper
@@ -33,9 +33,9 @@ class DetailModule(private val coreModule: CoreModule) : BaseModule<DetailViewMo
                 DetailCacheDataSource.Base(
                     coreModule.detailDao,
                     coreModule.favoriteDao,
-                    DetailDataToCacheMapper.Base()
                 ),
-                DetailDataMapper.Base()
+                DetailDataMapper.Base(),
+                DetailCacheMapper.Base()
             ),
             BaseDetailDataToDomainMapper(
                 DetailDataToDomainMapper.Base()

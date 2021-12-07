@@ -21,7 +21,6 @@ class FavoritesViewModel(
 ) : BaseViewModel<FavoritesCommunication, List<FavoriteUi>>(communication, resourceProvider) {
 
     fun fetchFavorites() {
-//        communication.map(listOf(FavoriteUi.Progress))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.show()
             withContext(Dispatchers.Main) {

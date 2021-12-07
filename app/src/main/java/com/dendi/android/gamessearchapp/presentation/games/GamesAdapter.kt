@@ -21,7 +21,6 @@ class GamesAdapter(
         is GameUi.Base -> 0
         is GameUi.Fail -> 1
         is GameUi.Progress ->2
-        else -> 3
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {

@@ -7,7 +7,7 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 class BaseSystemRequirementsDataMapper :
-    Abstract.SystemRequirementsMapper<SystemRequirementsData.Base> {
+    Abstract.SystemRequirementsMapper<SystemRequirementsData> {
     override fun map(
         id: Int,
         graphics: String,
@@ -15,7 +15,7 @@ class BaseSystemRequirementsDataMapper :
         os: String,
         processor: String,
         storage: String,
-    ) = SystemRequirementsData.Base(
+    ) = SystemRequirementsData(
         id = id,
         graphics = graphics,
         memory = memory,

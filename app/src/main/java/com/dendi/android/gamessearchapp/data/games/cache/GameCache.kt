@@ -11,28 +11,23 @@ import com.dendi.android.gamessearchapp.core.Abstract
  * olehvynnytskyi@gmail.com
  */
 
-interface GameCache : Abstract.CacheObject {
-
-    fun <T> map(mapper: Abstract.ToGameMapper<T>): T
-
-    @Entity(tableName = "game_table")
-    data class Base(
-        @ColumnInfo(name = "id")
-        @PrimaryKey
-        val id: Int,
-        @ColumnInfo(name = "thumbnail")
-        val thumbnail: String,
-        @ColumnInfo(name = "title")
-        val title: String,
-        @ColumnInfo(name = "short_description")
-        val shortDescription: String,
-    ) : GameCache {
-        override fun <T> map(mapper: Abstract.ToGameMapper<T>) =
-            mapper.map(
-                id = id,
-                thumbnail = thumbnail,
-                title = title,
-                shortDescription = shortDescription
-            )
-    }
+@Entity(tableName = "game_table")
+data class GameCache(
+    @ColumnInfo(name = "id")
+    @PrimaryKey
+    val id: Int,
+    @ColumnInfo(name = "thumbnail")
+    val thumbnail: String,
+    @ColumnInfo(name = "title")
+    val title: String,
+    @ColumnInfo(name = "short_description")
+    val shortDescription: String,
+) : Abstract.Mapper.GamesObject {
+    override fun <T> map(mapper: Abstract.GameMapper<T>) =
+        mapper.map(
+            id = id,
+            thumbnail = thumbnail,
+            title = title,
+            shortDescription = shortDescription
+        )
 }

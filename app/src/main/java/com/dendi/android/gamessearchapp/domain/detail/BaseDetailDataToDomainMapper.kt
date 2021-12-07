@@ -1,7 +1,7 @@
 package com.dendi.android.gamessearchapp.domain.detail
 
 import com.dendi.android.gamessearchapp.data.detail.DetailData
-import com.dendi.android.gamessearchapp.data.detail.DetailDataStateToDomainMapper
+import com.dendi.android.gamessearchapp.data.detail.DetailDataStateToDomainStateMapper
 import com.dendi.android.gamessearchapp.data.detail.DetailDataToDomainMapper
 import com.dendi.android.gamessearchapp.domain.core.BaseDataToDomainMapper
 
@@ -10,9 +10,9 @@ import com.dendi.android.gamessearchapp.domain.core.BaseDataToDomainMapper
  * olehvynnytskyi@gmail.com
  */
 class BaseDetailDataToDomainMapper(
-    private val mapper: DetailDataToDomainMapper<DetailDomain.Base>,
+    private val mapper: DetailDataToDomainMapper<DetailDomain>,
 ) : BaseDataToDomainMapper<DetailData, DetailDomainState>(),
-    DetailDataStateToDomainMapper<DetailDomainState> {
+    DetailDataStateToDomainStateMapper<DetailDomainState> {
     override fun map(data: DetailData) = DetailDomainState.Success(data.map(mapper)
     )
 
