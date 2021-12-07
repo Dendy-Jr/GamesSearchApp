@@ -1,23 +1,24 @@
 # GamesSearchApp
-Додаток здатний знайти будь-яку гру з сайту www.freetogame.com, показати список з  відсортованими іграми. Також є можливість переглянути деталі ігри, зберегти зацікавлену гру в улюблені, поділитись грою.
+The application is capable of finding any game from www.freetogame.com, showing a list with sorted games. Also, it is possible to view the details of the games, save the interesting game in your favorite, share a game.
 
-Коли у користувача пропадає зв'язок з інтернетом, додаток переходить в offline режим. Всі попередньо переглянуті ігри виводяться на екран з допомогою бази даних.
+In the absence of communication with the Internet, the application goes into offline mode. All previewed games are displayed on the database assistance screen.
 
-Якщо користувач випадково вийшов з додатку або android система при малій кількості оперативної пам'яті "вбила" додаток, при поверненні користувач повернеться на ту позицію, до якої проскролив контент.
+If the user accidentally left the application or Android system with a small number of RAM "killed" applications, when returning the user will return to that position on the screen
 
-Додаток створено за допомогою api -> https://www.freetogame.com/api-doc на базі чистої архітектури (Clean Architecture), дотримуючись принципів ООП, а також SOLID.
-На початку створення цього додатку, деяка частина функціоналу була покрита  unit-тестами. У майбутньому планується повне покриття додатку unit та ui тестами. Також написано user story.
+The application is created using API -> https://www.freetogame.com/api-Doc based on clean architecture (Clean Architecture), following the principles of OOP and Solid.
+Also written by User Story.
 
-У цьому додатку було використано:
+This application has been used:
 
-1. Мапінг даних через прошарки data, domain і presentation.
-2. Архітектурний патерн MVVM
-3. Retrofit для запитів до мережі
-4. LiveData, Coroutines, Flow для асинхронної роботи
-5. Room для локального зберігання даних
-6. Glide для завантаження та кешування картинок
-7. Патерн "Service locator" для надання залежностей ззовні
-8. Navigation component для навігації між фрагментами
+1. Map data through DATA, DOMAIN, and PRESENTATION.
+2. Architectural MVVM Pattern
+3. Retrofit for network requests
+4. LiveData, Coroutines, Flow for asynchronous work
+5. Room for local data storage
+6. GLIDE to download and cache pictures
+7. Pattern "Service Locator" to provide dependencies from the outside
+8. Navigation component to navigate between fragments
+9. Unit Test
 
 
 
