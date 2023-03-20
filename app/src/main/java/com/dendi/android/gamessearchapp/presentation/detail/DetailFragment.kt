@@ -1,6 +1,5 @@
 package com.dendi.android.gamessearchapp.presentation.detail
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -17,12 +16,7 @@ import com.dendi.android.gamessearchapp.databinding.FragmentDetailBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.favorites.FavoriteUi
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_detail.*
 
-/**
- * @author Dendy-Jr on 04.11.2021
- * olehvynnytskyi@gmail.com
- */
 class DetailFragment :
     BaseFragment<DetailViewModel, FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
@@ -78,7 +72,7 @@ class DetailFragment :
     }
 
     private fun setupObserve() {
-        viewModel.observe(this, { detail ->
+        viewModel.observe(this) { detail ->
             detail.map(object : DetailUiMapper<Unit> {
                 override fun map(
                     description: String,
@@ -146,14 +140,14 @@ class DetailFragment :
 
                 override fun map(message: String) = Unit
             })
-        })
+        }
     }
 
-    private fun checkProgressState(detail: DetailUi) {
+    private fun checkProgressState(detail: DetailUi) = with(viewBinding) {
         if (detail is DetailUi.Progress) {
-            progress_detail.visibility = View.VISIBLE
+            progressDetail.root.visibility = View.VISIBLE
         } else {
-            progress_detail.visibility = View.GONE
+            progressDetail.root.visibility = View.GONE
         }
     }
 

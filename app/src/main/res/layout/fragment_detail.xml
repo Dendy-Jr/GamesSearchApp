@@ -384,7 +384,7 @@
         app:tint="@color/white" />
 
     <include
-        android:id="@+id/progress_detail"
+        android:id="@+id/progressDetail"
         layout="@layout/progress_fullscreen"
         android:visibility="gone" />
 

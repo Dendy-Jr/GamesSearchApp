@@ -7,12 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.dendi.android.gamessearchapp.databinding.FragmentFavoritesBinding
 import com.dendi.android.gamessearchapp.presentation.core.BaseFragment
 import com.dendi.android.gamessearchapp.presentation.core.ClickListener
-import kotlinx.android.synthetic.main.fragment_favorites.*
 
-/**
- * @author Dendy-Jr on 14.11.2021
- * olehvynnytskyi@gmail.com
- */
 class FavoritesFragment :
     BaseFragment<FavoritesViewModel, FragmentFavoritesBinding>(FragmentFavoritesBinding::inflate) {
 
@@ -39,21 +34,21 @@ class FavoritesFragment :
     }
 
     private fun setupObserver() {
-        viewModel.observe(this, { games ->
+        viewModel.observe(this) { games ->
             favoritesList = games
             checkProgress()
             favoritesAdapter.map(games)
             scrollTo()
-        })
+        }
         viewModel.fetchFavorites()
     }
 
-    private fun checkProgress() {
+    private fun checkProgress() = with(viewBinding) {
         favoritesList.map { game ->
             if (game is FavoriteUi.Progress) {
-                progress_favorites.visibility = View.VISIBLE
+                progressFavorites.root.visibility = View.VISIBLE
             } else {
-                progress_favorites.visibility = View.GONE
+                progressFavorites.root.visibility = View.GONE
             }
         }
     }
